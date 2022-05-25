@@ -7,7 +7,7 @@ import "../SearchBar/DatePicker.css";
 
 // import "react-date-range/dist/styles.css";
 // import "react-date-range/dist/theme/default.css"; 
-import { DateRange } from "react-date-range";
+// import { DateRange } from "react-date-range";
 
 const Hero2 = () => {
   const history = useHistory();
@@ -44,12 +44,12 @@ const Hero2 = () => {
           </div>
           <div className="checkin-container">
             <label htmlFor="checkin">Check In</label>
-            <DateRange
+            {/* <DateRange
               editableDateInputs={false}
               onChange={(item) => setState([item.selection])}
               moveRangeOnFirstSelection={false}
               ranges={state}
-            />
+            /> */}
           </div>
           {/* <div className="checkin-container">
             <label htmlFor="checkin">Check In</label>
