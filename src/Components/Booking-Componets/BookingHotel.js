@@ -113,7 +113,7 @@ const BookingHotel = () => {
       });
 
       const response = await fetch(
-        "http://localhost:5001/api/v1/anonymous/roomBook",
+        "http://15.206.116.126:5001/api/v1/anonymous/roomBook",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -144,7 +144,7 @@ const BookingHotel = () => {
     ) {
       alert("Please enter all the details");
     } else {
-      const orderId = await fetch("http://localhost:5001/razorpay", {
+      const orderId = await fetch("http://15.206.116.126:5001/razorpay", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -37,7 +37,7 @@ const SingleHotel = () => {
   async function getSingleHotel(id) {
     const response = await fetch(
       // `http://localhost:5001/anonymous/api/v1/hotels?checkIn=2022-04-16T00:00:00.000z&checkOut=2022-04-17T00:00:00.000z&hotelId=${id}`,
-      `http://localhost:5001/api/v1/anonymous/hotels?checkIn=${checkIn}&checkOut=${checkOut}&hotelId=${id}`,
+      `http://15.206.116.126:5001/api/v1/anonymous/hotels?checkIn=${checkIn}&checkOut=${checkOut}&hotelId=${id}`,
       {
         method: "GET",
       }

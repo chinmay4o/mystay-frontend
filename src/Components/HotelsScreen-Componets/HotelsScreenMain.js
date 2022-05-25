@@ -14,7 +14,7 @@ const HotelsScreenMain = () => {
 
   async function getAllHotels() {
     const response = await fetch(
-      `http://localhost:5001/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
+      `http://15.206.116.126:5001/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
       {
         method: "GET",
       }
