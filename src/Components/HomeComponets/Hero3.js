@@ -5,8 +5,8 @@ import { HotelContext } from "../../context/hotelsContext.js";
 import { useHistory } from "react-router-dom";
 import "../SearchBar/DatePicker.css";
 
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
+// import "react-date-range/dist/styles.css";
+// import "react-date-range/dist/theme/default.css"; 
 import { DateRange } from "react-date-range";
 
 const Hero2 = () => {
