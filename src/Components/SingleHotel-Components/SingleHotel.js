@@ -263,15 +263,7 @@ const SingleHotel = () => {
                         (prev, curr) => prev + curr.qty * curr.roomPrice,
                         0
                       )
-                      .toFixed(2) +
-                      +(
-                        (selectedRooms.reduce(
-                          (prev, curr) => prev + curr.qty * curr.roomPrice,
-                          0
-                        ) *
-                          18) /
-                        (100).toFixed(2)
-                      )}{" "}
+                      .toFixed(2)}{" "}
                   </span>
                 </p>
                 {/* <div className="mobile-btn">View Summary</div> */}
