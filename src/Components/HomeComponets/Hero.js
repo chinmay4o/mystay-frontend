@@ -7,7 +7,8 @@ import "../SearchBar/DatePicker.css";
 
 const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut}) => {
   const history = useHistory();
-  let today = new Date();
+  let yesterday = new Date();
+  let today = new Date(yesterday.getTime() + 24 * 60 * 60 * 1000);
   var tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000);
 
   let currentDateValue = today.toISOString().substring(0, 10);
