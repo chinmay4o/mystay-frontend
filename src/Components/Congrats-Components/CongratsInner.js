@@ -3,7 +3,7 @@ import React from "react";
 const CongratsInner = () => {
   return (
     <div className="congrats-inner">
-      <div className="b-box1">
+      {/* <div className="b-box1">
         <p className="confirm-title">
           <lord-icon
             src="https://cdn.lordicon.com/lupuorrc.json"
@@ -112,13 +112,12 @@ const CongratsInner = () => {
               </div>
 
               <div className="pay-btn" onClick={(e) => bookRooms(e)}>
-                {/* <div className="pay-btn" onClick={(e) => displayRazorpay(e)}> */}
                 Pay & Reserve
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
