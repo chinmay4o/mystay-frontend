@@ -3,6 +3,9 @@ import { useParams, useHistory, useLocation } from "react-router-dom";
 import { SelectedRoomsContext } from "../../context/hotelsContext.js";
 import RoomCard from "../RoomCard/RoomCard";
 import Slider from "../ReactSlider/Slider";
+import Modal from "../Modal/Modal";
+import { configData } from "../../Config/config.js";
+
 
 const SingleHotel = () => {
   const history = useHistory();
@@ -25,6 +28,7 @@ const SingleHotel = () => {
 
   const [singleHotel, setSingleHotel] = useState({ success: false });
   const [sliderShow, setSliderShow] = useState("none");
+  const [modalDisplay, setModalDisplay] = useState("none");
 
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
 
@@ -37,7 +41,12 @@ const SingleHotel = () => {
   async function getSingleHotel(id) {
     const response = await fetch(
       // `http://localhost:5001/anonymous/api/v1/hotels?checkIn=2022-04-16T00:00:00.000z&checkOut=2022-04-17T00:00:00.000z&hotelId=${id}`,
-      `http://15.206.116.126:5001/api/v1/anonymous/hotels?checkIn=${checkIn}&checkOut=${checkOut}&hotelId=${id}`,
+      // `http://15.206.116.126:5001/api/v1/anonymous/hotels?checkIn=${JSON.stringify(new Date(checkIn))}&checkOut=${JSON.stringify(new Date(checkOut))}&hotelId=${id}`,
+      `${configData.SERVER_URL}/api/v1/anonymous/hotels?checkIn=${new Date(
+        checkIn
+      ).toISOString()}&checkOut=${new Date(
+        checkOut
+      ).toISOString()}&hotelId=${id}`,
       {
         method: "GET",
       }
@@ -63,13 +72,22 @@ const SingleHotel = () => {
   } else {
     return (
       <>
-        <Slider sliderShow={sliderShow} setSliderShow={setSliderShow} sliderImagesNew={singleHotel.data[0].images}/>
+        <Modal
+          content="Please add any room"
+          modalDisplay={modalDisplay}
+          setModalDisplay={setModalDisplay}
+        />
+        <Slider
+          sliderShow={sliderShow}
+          setSliderShow={setSliderShow}
+          sliderImagesNew={singleHotel.data[0].images}
+        />
         <div className="single-hotel-images">
           {singleHotel.data[0].images.map((ele, index) => {
             return (
               <div
                 className={imgClasses[index]}
-                style={{ backgroundImage: `url(${ele})`, cursor: 'pointer' }}
+                style={{ backgroundImage: `url(${ele})`, cursor: "pointer" }}
                 onClick={() =>
                   sliderShow === "none"
                     ? setSliderShow("grid")
@@ -224,7 +242,7 @@ const SingleHotel = () => {
                         onClick={() =>
                           selectedRooms.length > 0
                             ? history.push("/booking")
-                            : alert("please select min rooms")
+                            : setModalDisplay("grid")
                         }
                       >
                         Book Now
@@ -262,7 +280,7 @@ const SingleHotel = () => {
                   onClick={() =>
                     selectedRooms.length > 0
                       ? history.push("/booking")
-                      : alert("please select min rooms")
+                      : setModalDisplay("grid")
                   }
                 >
                   Book Now

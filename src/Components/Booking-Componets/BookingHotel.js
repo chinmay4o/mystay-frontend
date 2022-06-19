@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams, useHistory, useLocation } from "react-router-dom";
 import { SelectedRoomsContext } from "../../context/hotelsContext.js";
+import Modal from "../Modal/Modal"
+import { configData } from "../../Config/config.js";
 
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
@@ -22,6 +23,10 @@ const BookingHotel = () => {
 
   //saving success payment id by razorpay_payment_id
   const [successPaymentId, setSuccessPaymentId] = useState("");
+
+  //Modal Display
+  const [modalDisplay, setModalDisplay] = useState("none");
+  const [modalContent, setModalContent] = useState("Please Fill all the details");
 
   // saving form info here
   const [userInfo, setUserInfo] = useState({
@@ -47,9 +52,9 @@ const BookingHotel = () => {
       roomId: ele.roomId,
       hotelId: ele.hotelId,
       bookingNoOfRoom: ele.qty,
-      checkIn: JSON.stringify(new Date(localStorage.getItem("checkIn"))),
+      checkIn: JSON.stringify(new Date(localStorage.getItem("checkIn"))).slice(1, 23),
       // checkIn: new Date(localStorage.getItem("checkIn")),
-      checkOut: JSON.stringify(new Date(localStorage.getItem("checkOut"))),
+      checkOut: JSON.stringify(new Date(localStorage.getItem("checkOut"))).slice(1, 23),
       // checkOut: new Date(localStorage.getItem("checkOut")),
       night: diffDays,
     };
@@ -100,7 +105,7 @@ const BookingHotel = () => {
       !userInfo.email ||
       !userInfo.mobile
     ) {
-      alert("Please enter all the details");
+      setModalDisplay("grid");
     } else {
       setBookingDetails({
         guestDetails: {
@@ -113,7 +118,7 @@ const BookingHotel = () => {
       });
 
       const response = await fetch(
-        "http://15.206.116.126:5001/api/v1/anonymous/roomBook",
+        `${configData.SERVER_URL}/api/v1/anonymous/roomBook`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -130,7 +135,18 @@ const BookingHotel = () => {
       );
 
       const data = await response.json();
-      console.log("FinalData", data);
+
+      if (data.success === false) {
+        setModalContent("Booking Failure");
+        setModalDisplay("grid");
+        console.log("Booking Failure");
+        console.log("FinalData", data);
+      } else {
+        setModalContent("Booking Success");
+        setModalDisplay("grid");
+        console.log("Booking Success");
+        console.log("FinalData", data);
+      }
     }
   }
 
@@ -142,9 +158,9 @@ const BookingHotel = () => {
       !userInfo.email ||
       !userInfo.mobile
     ) {
-      alert("Please enter all the details");
+      setModalDisplay("grid");
     } else {
-      const orderId = await fetch("http://15.206.116.126:5001/razorpay", {
+      const orderId = await fetch(`${configData.SERVER_URL}/razorpay`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -167,7 +183,7 @@ const BookingHotel = () => {
       const dataR = await orderId.json();
 
       var options = {
-        key: "rzp_live_lxY2tA1zavDjig", // Enter the Key ID generated from the Dashboard
+        key: "rzp_test_28IqL0gh4iu9ot", // Enter the Key ID generated from the Dashboard
         amount: dataR.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
         name: "MyStay Rooms",
@@ -215,6 +231,13 @@ const BookingHotel = () => {
   }, []);
 
   return (
+    <>
+        <Modal
+          content={modalContent}
+          modalDisplay={modalDisplay}
+          setModalDisplay={setModalDisplay}
+        />
+  
     <div className="booking-inner">
       <div className="b-box1">
         <p className="confirm-title">
@@ -403,6 +426,7 @@ const BookingHotel = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

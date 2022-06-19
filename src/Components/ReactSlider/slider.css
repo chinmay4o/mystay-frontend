@@ -183,11 +183,11 @@
 
   .closeslider-btn {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.704);
+    background-color: rgba(0, 0, 0, 0.504);
     padding: 6px;
     top: 10px;
     right: 10px;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     cursor: pointer;
     color: #fff;
@@ -195,7 +195,7 @@
   }
 
   .closeslider-btn:hover {
-    font-size: 35px;
+    font-size: 28px;
   }
 
   .slider-container {
@@ -250,7 +250,7 @@
   .prev,
   .next {
     color: white;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.3);
     cursor: pointer;
     z-index: 100;
     position: absolute;
@@ -258,14 +258,14 @@
     width: auto;
     padding: 1rem;
     margin-top: -3rem;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     border-radius: 0px 5px 5px 0px;
   }
 
   .slider-container:hover .prev,
   .slider-container:hover .next {
-    color: black;
+    color: white;
   }
 
   .slider-container:hover .prev:hover,

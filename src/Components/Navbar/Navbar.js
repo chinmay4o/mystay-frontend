@@ -11,10 +11,13 @@ const Navbar = () => {
           My<span>Stay</span>{" "}
         </div>
 
+<div className="spacer">
+
+</div>
         <input type="checkbox" id="click" />
         <label for="click" class="menu-btn">
-          {/* <i class="fa fa-bars" aria-hidden="true" ></i> */}
-          <i class="fas fa-basketball-ball" onclick="ulClose()"></i>
+      <i class="fas fa-bars"></i>
+          {/* <i class="fas fa-basketball-ball" onclick="ulClose()"></i> */}
         </label>
 
         <ul class="menu_ul">

@@ -40,7 +40,7 @@ body {
   #nav-parent {
     width: 100vw;
     position: relative;
-    padding: 0 20px 0 20px;
+    padding: 0;
     top: 0;
     height: 70px;
     display: -webkit-box;
@@ -54,21 +54,22 @@ body {
     z-index: 10;
   }
   #nav-parent .navbar {
+    width: 100vw;
+    padding: 0 5px 0 10px;
+    top: 0;
+    height: 70px;
     display: -ms-grid;
     display: grid;
-    height: 70px;
-    width: 100%;
-    margin: 0 auto;
-    background-color: #ffffff;
-    color: #fff;
-    font-weight: 700;
-    -ms-grid-columns: 120px 1fr;
-        grid-template-columns: 120px 1fr;
-    z-index: 10;
+    -ms-grid-columns: 0.6fr 1fr 0.4fr;
+        grid-template-columns: 0.6fr 1fr 0.4fr;
+    place-items: center;
+    background-color: #fff;
+    border-bottom: none;
+    z-index: 1000;
   }
   #nav-parent .navbar .logo {
     color: #ff5500;
-    font-size: 37px;
+    font-size: 33px;
     font-weight: 700;
     text-shadow: 1px 1px 1px rgba(255, 66, 37, 0.187);
     cursor: pointer;
@@ -83,35 +84,56 @@ body {
     width: 280px;
     height: 120px;
   }
-  #nav-parent .navbar ul {
-    display: -ms-grid;
-    display: grid;
-    position: fixed;
-    right: -100%;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    list-style: none;
+  #nav-parent .navbar .spacer {
+    display: block;
   }
-  #nav-parent .navbar ul li {
-    margin: 0 7px;
-    padding: 11px 0px;
-  }
-  #nav-parent .navbar ul li a {
-    color: #000;
-    text-decoration: none;
+  #nav-parent .navbar .menu-btn {
+    display: block;
     font-size: 20px;
-    font-weight: 600;
-    width: 120%;
-    padding: 11px 28px 11px 15px;
-    padding: 11px 15px 11px 15px;
-    letter-spacing: 1px;
+  }
+  #nav-parent .navbar .menu-btn i {
+    display: block;
+    font-size: 20px;
+    color: #ff5200 !important;
+  }
+  #nav-parent .navbar #click:checked ~ ul {
+    right: 0;
+  }
+  #nav-parent .navbar #click:checked ~ ul li a {
+    margin-right: 0px;
+  }
+  #nav-parent .navbar ul {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    background-color: #1f202c;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    display: block;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    font-family: "League Spartan";
+    z-index: 1000;
   }
-  #nav-parent .navbar ul li a i {
-    font-size: 20px;
-    padding: 0 0 0 0px;
+  #nav-parent .navbar ul li {
+    width: 100%;
+    margin: 12px 0;
+  }
+  #nav-parent .navbar ul li a {
+    width: 100%;
+    text-align: left;
+    margin-right: -100%;
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding-left: 31px;
+    color: #efefef;
+    -webkit-transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  #nav-parent .navbar ul li a:hover {
+    text-decoration: underline;
+    color: #fff;
   }
   #nav-parent .navbar ul li a:hover {
     color: #ffffff;
@@ -121,7 +143,6 @@ body {
     color: #fff;
     font-size: 2rem;
     cursor: pointer;
-    display: none;
   }
   #nav-parent .navbar input[type="checkbox"] {
     display: none;
@@ -154,7 +175,7 @@ body {
     background-size: cover;
   }
   .homeScreen-container .hero-container .hero-box1 .explore-title {
-    font-size: 29px;
+    font-size: 26px;
     text-align: center;
     line-height: 1.2;
     color: #fff;
@@ -169,8 +190,8 @@ body {
     place-items: center;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-    -ms-grid-rows: 120px 100px 100px 120px;
-        grid-template-rows: 120px 100px 100px 120px;
+    -ms-grid-rows: 120px 100px 100px 100px;
+        grid-template-rows: 120px 100px 100px 100px;
     border-radius: 10px;
   }
   .homeScreen-container .hero-container .hero-box1 .search-box .input-container {
@@ -182,7 +203,7 @@ body {
     width: 250px;
   }
   .homeScreen-container .hero-container .hero-box1 .search-box .input-container label {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 600;
     font-family: montserrat;
   }
@@ -204,7 +225,7 @@ body {
     place-items: center;
   }
   .homeScreen-container .hero-container .hero-box1 .search-box .checkin-container label {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
     font-family: montserrat;
   }
@@ -225,7 +246,7 @@ body {
     place-items: center;
   }
   .homeScreen-container .hero-container .hero-box1 .search-box .checkout-container label {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
     font-family: montserrat;
   }
@@ -242,8 +263,8 @@ body {
     background-color: #ff5700;
     height: 50px;
     border-radius: 9px;
-    width: 230px;
-    font-size: 24px;
+    width: 270px;
+    font-size: 20px;
     font-weight: 600;
     display: -ms-grid;
     display: grid;
@@ -385,13 +406,13 @@ body {
     color: #fff;
   }
   .homeScreen-container .locations-container {
-    padding: 50px 20px;
+    padding: 80px 20px 70px 20px;
     width: 100%;
     min-height: 670px;
     background-color: #f5f5f5;
   }
   .homeScreen-container .locations-container .location-box1 {
-    width: 95%;
+    width: 90%;
     margin: 0 auto;
     display: -ms-grid;
     display: grid;
@@ -404,7 +425,7 @@ body {
   }
   .homeScreen-container .locations-container .location-box1 .ec2 {
     height: 250px;
-    width: 285px;
+    width: 265px;
     border-radius: 10px;
     position: relative;
     overflow: hidden;
@@ -466,7 +487,7 @@ body {
   }
   .hotels-container .city-picture {
     width: 100%;
-    height: calc(100vh - 70px);
+    height: calc(80vh - 70px);
     background-image: url("https://img.cdn.zostel.com/zostel/gallery/images/VFvd-Qq7Q92zkhbjE2ufYA/karnatakas-metropolitan-city-with-its-grand_3lJVBIb.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -483,7 +504,7 @@ body {
     display: grid;
     place-items: center;
     color: #fff;
-    font-size: 50px;
+    font-size: 43px;
     font-weight: 600;
     text-decoration: underline;
     font-family: montserrat;
@@ -498,7 +519,7 @@ body {
   }
   .hotels-container .about-city .cityName-h1 {
     text-align: center;
-    font-size: 47px;
+    font-size: 44px;
     color: #004e53;
     color: #000;
     text-transform: capitalize;
@@ -518,20 +539,20 @@ body {
   }
   .hotels-container .hotels-available .title-available-hotels {
     text-align: center;
-    font-size: 35px;
+    font-size: 32px;
     color: #ff5700;
     text-transform: capitalize;
     margin-top: 25px;
   }
   .hotels-container .hotels-available .available-hotels {
-    padding: 50px 0;
+    padding: 30px 0 50px 0;
   }
   .hotels-container .hotels-available .available-hotels .one-hotel {
     cursor: pointer;
     margin: 0px auto;
     margin-bottom: 50px;
-    width: 95%;
-    height: 650px;
+    width: 92%;
+    height: 600px;
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr;
@@ -543,30 +564,30 @@ body {
   .hotels-container .hotels-available .available-hotels .one-hotel .img {
     background-size: cover;
     border-radius: 10px;
-    height: 300px;
+    height: 270px;
   }
   .hotels-container .hotels-available .available-hotels .one-hotel .img img {
     width: 100%;
-    height: 300px;
+    height: 270px;
     border-radius: 10px;
   }
   .hotels-container .hotels-available .available-hotels .one-hotel .hotel-description {
-    margin-top: 30px;
+    margin-top: 20px;
   }
   .hotels-container .hotels-available .available-hotels .one-hotel .hotel-description .brand-name {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 12px;
     font-weight: 700;
     color: #6d6d6d;
   }
   .hotels-container .hotels-available .available-hotels .one-hotel .hotel-description .hotel-title {
-    font-size: 29px;
-    margin-bottom: 10px;
+    font-size: 25px;
+    margin-bottom: 14px;
     font-weight: 700;
   }
   .hotels-container .hotels-available .available-hotels .one-hotel .hotel-description .hotel-moreinfo {
-    font-size: 19px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 15px;
     font-weight: 600;
     line-height: 1.2;
     color: #6d6d6d;
@@ -575,10 +596,11 @@ body {
     width: 150px;
     background-color: #ff5100;
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    padding: 13px 27px;
+    padding: 12px 27px;
     border-radius: 8px;
+    margin-top: 10px;
   }
   .hotels-container .hotels-available .available-hotels .one-hotel .hotel-description .view-btn i {
     margin-left: 8px;
@@ -666,12 +688,12 @@ body {
     padding: 20px;
   }
   .single-hotel-container .hotel-details .hotel-info .hotel-title {
-    font-size: 29px;
+    font-size: 25px;
     margin-bottom: 14px;
     font-weight: 700;
   }
   .single-hotel-container .hotel-details .hotel-info .hotel-description {
-    font-size: 19px;
+    font-size: 17px;
     margin-bottom: 10px;
     font-weight: 600;
     line-height: 1.2;
@@ -681,7 +703,7 @@ body {
     margin-left: 0px;
   }
   .single-hotel-container .hotel-details .hotel-amenities .sub-title {
-    font-size: 27px;
+    font-size: 23px;
     margin-bottom: 14px;
     font-weight: 700;
   }
@@ -703,7 +725,7 @@ body {
     background-color: #f9f7f1;
   }
   .single-hotel-container .hotel-room-details {
-    padding: 20px;
+    padding: 50px 20px;
     margin: 0 auto;
     width: 100%;
     min-height: 400px;
@@ -727,7 +749,7 @@ body {
     padding: 10px 20px;
   }
   .single-hotel-container .hotel-room-details .box1 .date-grid .static-details .sub-title {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 700;
     margin-bottom: 10px;
   }
@@ -738,7 +760,7 @@ body {
     margin-bottom: 14px;
   }
   .single-hotel-container .hotel-room-details .box1 .date-grid .date-select {
-    width: 90%;
+    width: 95%;
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr 20px 1fr;
@@ -1038,7 +1060,7 @@ body {
   }
   .booking-container .booking-inner .b-box1 .confirm-title {
     color: black;
-    font-size: 30px;
+    font-size: 27px;
     font-weight: 700;
   }
   .booking-container .booking-inner .b-box1 .form {
@@ -1108,9 +1130,9 @@ body {
     display: grid;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-    -ms-grid-rows: 55px;
-        grid-template-rows: 55px;
-    margin-bottom: 15px;
+    -ms-grid-rows: 52px;
+        grid-template-rows: 52px;
+    margin-bottom: 10px;
   }
   .booking-container .booking-inner .b-box1 .form .form-grid .b2 p,
   .booking-container .booking-inner .b-box1 .form .form-grid .b3 p,
@@ -1273,10 +1295,44 @@ body {
     -webkit-box-shadow: 2px 3px 5px #aaaaaa;
             box-shadow: 2px 3px 5px #aaaaaa;
   }
+  .modal-backdrop {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    z-index: 2000;
+  }
+  .modal-backdrop .modal-content {
+    width: 80%;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #fff;
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+    position: relative;
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+  .modal-backdrop .modal-content i {
+    font-size: 20px;
+    position: absolute;
+    right: 15px;
+    top: 13px;
+    cursor: pointer;
+  }
+  .modal-backdrop .modal-content h3 {
+    font-size: 19px;
+    font-weight: 600;
+  }
   .footer_container {
     padding: 30px;
     width: 100%;
-    height: 620px;
+    height: 550px;
     display: -ms-grid;
     display: grid;
     background-color: #ff6f00;
@@ -1284,8 +1340,8 @@ body {
     place-items: center;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-    -ms-grid-rows: 120px 1fr 80px;
-        grid-template-rows: 120px 1fr 80px;
+    -ms-grid-rows: 80px 1fr 80px;
+        grid-template-rows: 80px 1fr 80px;
     font-size: 1.3rem;
     color: #efefef;
     font-weight: 600;
@@ -1293,19 +1349,19 @@ body {
   .footer_container h5 {
     padding-top: 10px;
     margin-left: 0px;
-    font-size: 55px;
+    font-size: 40px;
     font-weight: 600;
     color: #efefef;
   }
   .footer_container .more-info {
     padding-top: 10px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 1.3;
     color: #efefef;
   }
   .footer_container .more-info .email {
-    font-size: 21px;
+    font-size: 19px;
     margin-top: 17px;
     color: #fff;
     text-decoration: underline;

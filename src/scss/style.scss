@@ -92,6 +92,10 @@ body {
       height: 120px;
     }
 
+    .spacer {
+      display: none;
+    }
+
     ul {
       display: flex;
       flex-wrap: wrap;
@@ -118,7 +122,6 @@ body {
             font-size: 20px;
             // position: absolute;
             padding: 0 0 0 0px;
-
           }
         }
       }
@@ -283,7 +286,6 @@ body {
               place-items: center;
               top: 63px;
             }
-       
           }
         }
       }
@@ -468,7 +470,7 @@ body {
       place-items: center;
 
       .ec2 {
-        height: 300px;
+        height: 280px;
         width: 285px;
         border-radius: 10px;
         position: relative;
@@ -536,6 +538,13 @@ body {
 .hotels-container {
   width: 100%;
   min-height: 700px;
+
+  .coming_soon-box {
+    width: 100%;
+    height: 80vh;
+    display: grid;
+    place-items: center;
+  }
 
   .city-picture {
     width: 100%;
@@ -1071,7 +1080,7 @@ body {
   background-color: #fff;
 
   .booking-inner {
-    padding: 10px 10px 70px 10px ;
+    padding: 10px 10px 70px 10px;
     width: 1280px;
     margin: 0 auto;
     margin-top: 30px;
@@ -1339,9 +1348,63 @@ body {
   width: 100%;
   background-color: #fff;
 
-  
+  .congrats-inner {
+    padding: 10px 10px 70px 10px;
+    width: 1280px;
+    margin: 0 auto;
+    margin-top: 30px;
+    min-height: 400px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 853px 1fr;
+    grid-template-areas: "b-box1" "b-box2";
+    grid-gap: 20px;
+    // border: 2px solid #919191;
+    border-radius: 12px;
+
+
+  }
 }
 
+// MOdal container
+.modal-backdrop {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 50px;
+  // grid-template-columns: 1fr;
+  // grid-template-rows: 1fr 1fr;
+  // place-items: center;
+  z-index: 2000;
+
+  .modal-content {
+    width: 380px;
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #fff;
+    display: grid;
+    place-items: center;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+    i {
+      font-size: 25px;
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      cursor: pointer;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+}
 
 // ======== footer section =========
 .footer_container {

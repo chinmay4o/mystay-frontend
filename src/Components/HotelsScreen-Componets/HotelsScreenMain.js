@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import {HotelContext} from "../../context/hotelsContext.js";
+import { configData } from "../../Config/config.js";
 
 const HotelsScreenMain = () => {
   const history = useHistory();
@@ -14,7 +15,9 @@ const HotelsScreenMain = () => {
 
   async function getAllHotels() {
     const response = await fetch(
-      `http://15.206.116.126:5001/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
+      `${configData.SERVER_URL}/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
+
+      // `http://localhost:5001/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
       {
         method: "GET",
       }
@@ -32,6 +35,8 @@ const HotelsScreenMain = () => {
 
   if (allSearchedHotels.success === false) {
     return <h2> Loading ...</h2>;
+  } else if (allSearchedHotels.data.length <= 0) {
+    return <div className="coming_soon-box"> <h1>Coming Soon ...</h1> </div>;
   } else {
     return (
       <>
