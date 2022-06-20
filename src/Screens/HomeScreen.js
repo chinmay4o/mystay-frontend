@@ -9,7 +9,7 @@ import Footer from "./Footer";
 const HomeScreen = () => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
-
+  const [destination, setDestination] = useState("bangalore");
   //Adding razorpay script to boilerplate
   function loadRazorpay() {
     const script = document.createElement("script");
@@ -24,7 +24,7 @@ const HomeScreen = () => {
 
   return (
     <div className="homeScreen-container">
-      <Navbar />
+      <Navbar destination={destination} setDestination={setDestination}/>
       {/* <Hero3 /> */}
       {/* <Hero2 /> */}
       <Hero
@@ -32,6 +32,8 @@ const HomeScreen = () => {
         setCheckIn={setCheckIn}
         checkOut={checkOut}
         setCheckOut={setCheckOut}
+        destination={destination}
+        setDestination={setDestination}
       />
       <Locations 
         checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut}

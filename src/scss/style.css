@@ -86,18 +86,18 @@ body {
   font-weight: 700;
   text-shadow: 1px 1px 1px rgba(255, 66, 37, 0.187);
   cursor: pointer;
+  position: relative;
 }
 
 #nav-parent .navbar .logo span {
   color: #ff5200;
 }
 
-#nav-parent .navbar .logo-img {
+#nav-parent .navbar .logo img {
+  width: 160px;
   position: absolute;
-  top: 0;
-  left: 40px;
-  width: 280px;
-  height: 120px;
+  top: -27px;
+  left: 0px;
 }
 
 #nav-parent .navbar .spacer {
@@ -111,6 +111,77 @@ body {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   list-style: none;
+}
+
+#nav-parent .navbar ul .Destination-box {
+  cursor: pointer;
+}
+
+#nav-parent .navbar ul .Destination-box .Destination-dataResult {
+  position: absolute;
+  /* left: 180px; */
+  margin-top: 18px;
+  min-width: 210px;
+  max-width: 430px;
+  min-height: 30px;
+  max-height: 320px;
+  /* height: 300px; */
+  background-color: white;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+  border-radius: 4px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  place-items: center;
+}
+
+#nav-parent .navbar ul .Destination-box .dataItem {
+  width: 100%;
+  /* height: 40px; */
+  /* display: flex; */
+  /* align-items: center; */
+  color: black;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#nav-parent .navbar ul .Destination-box .dataItem p:hover {
+  background-color: #c7c7c7;
+  color: #000;
+}
+
+#nav-parent .navbar ul .Destination-box .dataItem p {
+  margin-left: 0px;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 7px;
+  padding-left: 20px;
+  cursor: pointer;
+  color: grey;
+  width: 100%;
+  margin-top: 0;
+}
+
+#nav-parent .navbar ul .Destination-box .dataItem img {
+  width: 120px;
+  height: 100px;
+  border-radius: 6px;
+  display: none;
+}
+
+#nav-parent .navbar ul .Destination-box .dataItem p {
+  text-decoration: none;
+}
+
+#nav-parent .navbar ul .Destination-box .dataItem p:hover {
+  background-color: #c7c7c7;
+  color: #000;
 }
 
 #nav-parent .navbar ul li {

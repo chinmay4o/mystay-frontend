@@ -77,12 +77,12 @@ body {
   #nav-parent .navbar .logo span {
     color: #ff5200;
   }
-  #nav-parent .navbar .logo-img {
+  #nav-parent .navbar .logo img {
+    width: 130px;
+    height: 45px;
     position: absolute;
-    top: 0;
-    left: 40px;
-    width: 280px;
-    height: 120px;
+    top: -20px;
+    left: -50px;
   }
   #nav-parent .navbar .spacer {
     display: block;

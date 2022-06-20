@@ -1,4 +1,4 @@
-const cities = ["Banglore", "Mumbai", "Jaipur", "Noida", "Gurugram", "Kota", "Indore"];
+const cities = ["Bangalore", "Mumbai", "Jaipur", "Noida", "Gurugram", "Kota", "Indore"];
 
 
 const citiesD = [

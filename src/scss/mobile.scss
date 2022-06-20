@@ -74,14 +74,14 @@ body {
         span {
           color: #ff5200;
         }
-      }
 
-      .logo-img {
-        position: absolute;
-        top: 0;
-        left: 40px;
-        width: 280px;
-        height: 120px;
+        img {
+          width: 130px;
+          height: 45px; 
+          position: absolute;
+          top: -20px;
+          left: -50px;
+        }
       }
 
       .spacer {

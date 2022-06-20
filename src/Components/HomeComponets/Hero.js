@@ -5,7 +5,7 @@ import { HotelContext } from "../../context/hotelsContext.js";
 import { useHistory } from "react-router-dom";
 import "../SearchBar/DatePicker.css";
 
-const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut}) => {
+const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestination }) => {
   const history = useHistory();
   let yesterday = new Date();
   let today = new Date(yesterday.getTime() + 24 * 60 * 60 * 1000);
@@ -17,7 +17,7 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut}) => {
   const hotels = useContext(HotelContext);
 
   const [tooltip, setTooltip] = useState("none");
-  const [destination, setDestination] = useState("bangalore");
+  // const [destination, setDestination] = useState("bangalore");
   // const [destination, setDestination] = useState("");
   // const [checkIn, setCheckIn] = useState(JSON.stringify(new Date()));
   // const [checkIn, setCheckIn] = useState(currentDateValue);
