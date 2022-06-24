@@ -48,7 +48,10 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
               id="datepicker"
               autocomplete="off"
               value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
+              onChange={(e) => {
+                setCheckIn(e.target.value)
+                console.log(e.target.value)
+                }}
             />
           </div>
           <div className="checkout-container">

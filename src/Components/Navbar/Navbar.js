@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import citiesD from "../HomeComponets/citiesData.js";
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 
-const Navbar = ({setDestination}) => {
+const Navbar = ({ setDestination }) => {
   const history = useHistory();
   const [show, setShow] = useState("none");
 
@@ -14,7 +14,7 @@ const Navbar = ({setDestination}) => {
           <img
             src="https://ik.imagekit.io/k3m4pqzpmlr/Logo/mystay-logo-removebg-preview_s7Qj1Ibh3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655707681416"
             alt="mystay"
-           className="logo-img"
+            className="logo-img"
           />
           {/* My<span>Stay</span>{" "} */}
         </div>
@@ -36,7 +36,7 @@ const Navbar = ({setDestination}) => {
               {" "}
               {/* <i class="fas fa-home"></i> */}
               Search Destination <i class="fas fa-angle-down"></i>
-              {citiesD.length != 0 && (
+              {citiesD.length !== 0 && (
                 <div
                   className="Destination-dataResult"
                   style={{ display: show }}
@@ -48,8 +48,9 @@ const Navbar = ({setDestination}) => {
                         onClick={() => {
                           // setDestination(ele.city.toLowerCase());
                           history.push(
-                            `/hotels?city=${ele.city.toLowerCase()}&checkIn=${localStorage.getItem("checkIn")
-                            }&checkOut=${localStorage.getItem("checkOut")}`
+                            `/hotels?city=${ele.city.toLowerCase()}&checkIn=${localStorage.getItem(
+                              "checkIn"
+                            )}&checkOut=${localStorage.getItem("checkOut")}`
                           );
                         }}
                         key={nanoid()}
@@ -65,14 +66,18 @@ const Navbar = ({setDestination}) => {
             </a>
           </li>
           <li class="nav_about">
-            <a href="#about">
+            <a onClick={() => history.push(`/longstays`)}>
               {" "}
               {/* <i class="fas fa-people-carry"></i> */}
               Longstays <i class="fas fa-angle-down"></i>
             </a>
           </li>
           <li class="nav_work">
-            <a href="#work">
+            <a
+              href="https://master.d3mfetjd9ywif7.amplifyapp.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               {" "}
               {/* <i class="fas fa-globe-americas"></i>  */}
               Invest with us

@@ -1477,6 +1477,134 @@ body {
           box-shadow: 2px 3px 5px #aaaaaa;
 }
 
+.longstays-container {
+  width: 100%;
+  background-color: #fff;
+}
+
+.longstays-container .longstays-inner {
+  padding: 10px 10px 70px 10px;
+  width: 1280px;
+  margin: 0 auto;
+  margin-top: 30px;
+  min-height: 400px;
+}
+
+.longstays-container .longstays-inner .head {
+  font-size: 35px;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.longstays-container .longstays-inner .subhead {
+  font-size: 25px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.longstays-container .longstays-inner .img-cover {
+  display: block;
+  width: 90%;
+  height: 500px;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.longstays-container .longstays-inner .hotels-available {
+  width: 100%;
+  min-height: 354px;
+  padding: 50px 50px;
+  background-color: #f9f7f1;
+  background-color: #ffffff;
+}
+
+.longstays-container .longstays-inner .hotels-available .title-available-hotels {
+  text-align: center;
+  font-size: 45px;
+  color: #ff5700;
+  text-transform: capitalize;
+  margin-top: 25px;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels {
+  padding: 50px 0;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel {
+  cursor: pointer;
+  margin: 0px auto;
+  margin-bottom: 50px;
+  width: 930px;
+  height: 300px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1.2fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+  grid-gap: 45px;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .img {
+  background-size: cover;
+  border-radius: 10px;
+  height: 300px;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .img img {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .hotel-description {
+  margin-top: 30px;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .hotel-description .brand-name {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #6d6d6d;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .hotel-description .hotel-title {
+  font-size: 29px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .hotel-description .hotel-moreinfo {
+  font-size: 19px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #6d6d6d;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .hotel-description .view-btn {
+  width: 150px;
+  background-color: #ff5100;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 13px 27px;
+  border-radius: 8px;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .hotel-description .view-btn i {
+  margin-left: 8px;
+}
+
+.longstays-container .longstays-inner .hotels-available .available-hotels .one-hotel .hotel-description .view-btn:hover {
+  text-decoration: underline;
+  -webkit-box-shadow: 2px 3px 5px #aaaaaa;
+          box-shadow: 2px 3px 5px #aaaaaa;
+}
+
 .congratsScreen-container {
   width: 100%;
   background-color: #fff;

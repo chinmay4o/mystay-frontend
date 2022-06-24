@@ -38,6 +38,14 @@ const SingleHotel = () => {
   const checkIn = new URLSearchParams(search).get("checkIn");
   const checkOut = new URLSearchParams(search).get("checkOut");
 
+    //Calculating differecebetween Days/nights
+    const date1 = new Date(localStorage.getItem("checkIn"));
+    const date2 = new Date(localStorage.getItem("checkOut"));
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    console.log(diffTime + " milliseconds");
+    console.log(diffDays + " days");
+
   async function getSingleHotel(id) {
     const response = await fetch(
       // `http://localhost:5001/anonymous/api/v1/hotels?checkIn=2022-04-16T00:00:00.000z&checkOut=2022-04-17T00:00:00.000z&hotelId=${id}`,
@@ -174,7 +182,7 @@ const SingleHotel = () => {
 
                   <p className="dynamic-date-box">
                     Starting from {new Date(checkIn).getDate()}th{" "}
-                    {monthNames[new Date(checkIn).getMonth()]}
+                    {monthNames[new Date(checkIn).getMonth()]} for {diffDays} days
                     {/* {checkIn} */}
                   </p>
 
@@ -192,7 +200,7 @@ const SingleHotel = () => {
                             <p className="dynamic-room-tprice">
                               {" "}
                               <i class="fas fa-rupee-sign"></i>{" "}
-                              {ele.roomPrice * ele.qty}
+                              {ele.roomPrice * ele.qty * diffDays}
                             </p>
                           </div>
                         );
@@ -209,7 +217,7 @@ const SingleHotel = () => {
                           {(selectedRooms.reduce(
                             (prev, curr) => prev + curr.qty * curr.roomPrice,
                             0
-                          ) *
+                          ) * diffDays *
                             18) /
                             (100).toFixed(2)}
                         </p>
@@ -223,14 +231,14 @@ const SingleHotel = () => {
                             .reduce(
                               (prev, curr) => prev + curr.qty * curr.roomPrice,
                               0
-                            )
+                            ) * diffDays
                             .toFixed(2) +
                             +(
                               (selectedRooms.reduce(
                                 (prev, curr) =>
                                   prev + curr.qty * curr.roomPrice,
                                 0
-                              ) *
+                              ) * diffDays *
                                 18) /
                               (100).toFixed(2)
                             )}{" "}
@@ -262,7 +270,7 @@ const SingleHotel = () => {
                       .reduce(
                         (prev, curr) => prev + curr.qty * curr.roomPrice,
                         0
-                      )
+                      ) * diffDays
                       .toFixed(2)}{" "}
                   </span>
                 </p>

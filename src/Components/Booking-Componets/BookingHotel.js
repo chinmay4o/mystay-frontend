@@ -166,13 +166,13 @@ const BookingHotel = () => {
         body: JSON.stringify({
           amount:
             +selectedRooms
-              .reduce((prev, curr) => prev + curr.qty * curr.roomPrice, 0)
+              .reduce((prev, curr) => prev + curr.qty * curr.roomPrice, 0)  * diffDays
               .toFixed(2) +
             +(
               (selectedRooms.reduce(
                 (prev, curr) => prev + curr.qty * curr.roomPrice,
                 0
-              ) *
+              )  * diffDays *
                 18) /
               (100).toFixed(2)
             ),
@@ -183,7 +183,8 @@ const BookingHotel = () => {
       const dataR = await orderId.json();
 
       var options = {
-        key: "rzp_test_28IqL0gh4iu9ot", // Enter the Key ID generated from the Dashboard
+        // key: "rzp_test_28IqL0gh4iu9ot", // Enter the Key ID generated from the Dashboard
+        key: "rzp_live_0tYxpyabQlGWRc", // Enter the Key ID generated from the Dashboard
         amount: dataR.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
         name: "MyStay Rooms",
@@ -376,7 +377,7 @@ const BookingHotel = () => {
                     <p className="dynamic-room-tprice">
                       {" "}
                       <i class="fas fa-rupee-sign"></i>{" "}
-                      {ele.roomPrice * ele.qty}
+                      {ele.roomPrice * ele.qty * diffDays}
                     </p>
                   </div>
                 );
@@ -393,7 +394,7 @@ const BookingHotel = () => {
                   {(selectedRooms.reduce(
                     (prev, curr) => prev + curr.qty * curr.roomPrice,
                     0
-                  ) *
+                  )  * diffDays *
                     18) /
                     (100).toFixed(2)}
                 </p>
@@ -404,21 +405,21 @@ const BookingHotel = () => {
                 <p className="dynamic">
                   <i class="fas fa-rupee-sign"></i>{" "}
                   {+selectedRooms
-                    .reduce((prev, curr) => prev + curr.qty * curr.roomPrice, 0)
+                    .reduce((prev, curr) => prev + curr.qty * curr.roomPrice, 0) * diffDays
                     .toFixed(2) +
                     +(
                       (selectedRooms.reduce(
                         (prev, curr) => prev + curr.qty * curr.roomPrice,
                         0
-                      ) *
+                      )  * diffDays *
                         18) /
                       (100).toFixed(2)
                     )}{" "}
                 </p>
               </div>
 
-              <div className="pay-btn" onClick={(e) => bookRooms(e)}>
-              {/* <div className="pay-btn" onClick={(e) => displayRazorpay(e)}> */}
+              {/* <div className="pay-btn" onClick={(e) => bookRooms(e)}> */}
+              <div className="pay-btn" onClick={(e) => displayRazorpay(e)}>
                 Pay & Reserve
               </div>
             </div>

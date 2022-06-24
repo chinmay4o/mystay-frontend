@@ -77,7 +77,7 @@ body {
 
         img {
           width: 130px;
-          height: 45px; 
+          height: 45px;
           position: absolute;
           top: -20px;
           left: -50px;
@@ -804,10 +804,12 @@ body {
         }
       }
     }
+
     .hotel-room-details-outer {
       width: 100%;
       background-color: #f9f7f1;
     }
+
     .hotel-room-details {
       padding: 50px 20px;
       margin: 0 auto;
@@ -1391,6 +1393,131 @@ body {
                 margin-top: 28px;
                 cursor: pointer;
                 box-shadow: 0px 0px 10px rgba(255, 194, 108, 0.3);
+
+                &:hover {
+                  text-decoration: underline;
+                  box-shadow: 2px 3px 5px rgb(170, 170, 170);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ======== LogStays Container =========
+  .longstays-container {
+    width: 100%;
+    background-color: #fff;
+
+    .longstays-inner {
+      padding: 4px 4px 50px 4px;
+      width: 100%;
+      margin: 0 auto;
+      margin-top: 30px;
+      min-height: 400px;
+
+      .head {
+        font-size: 27px;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 20px;
+      }
+
+      .subhead {
+        font-size: 22px;
+        text-align: center;
+        font-weight: 600;
+        margin-top: 20px;
+      }
+
+      .img-cover {
+        display: block;
+        width: 90%;
+        height: 260px;
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-top: 40px;
+      }
+
+      .hotels-available {
+        margin-top: 30px;
+        width: 100%;
+        min-height: 354px;
+        padding: 15px;
+        background-color: #fff;
+
+        .title-available-hotels {
+          text-align: center;
+          font-size: 32px;
+          color: #ff5700;
+          text-transform: capitalize;
+          margin-top: 25px;
+        }
+
+        .available-hotels {
+          padding: 30px 0 50px 0;
+
+          .one-hotel {
+            cursor: pointer;
+            margin: 0px auto;
+            margin-bottom: 50px;
+            width: 92%;
+            height: 600px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            grid-gap: 15px;
+
+            .img {
+              background-size: cover;
+              border-radius: 10px;
+              height: 270px;
+              img {
+                width: 100%;
+                height: 270px;
+                border-radius: 10px;
+              }
+            }
+
+            .hotel-description {
+              margin-top: 20px;
+
+              .brand-name {
+                font-size: 18px;
+                margin-bottom: 12px;
+                font-weight: 700;
+                color: #6d6d6d;
+              }
+
+              .hotel-title {
+                font-size: 25px;
+                margin-bottom: 14px;
+                font-weight: 700;
+              }
+
+              .hotel-moreinfo {
+                font-size: 18px;
+                margin-bottom: 15px;
+                font-weight: 600;
+                line-height: 1.2;
+                color: #6d6d6d;
+              }
+
+              .view-btn {
+                width: 150px;
+                background-color: #ff5100;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 600;
+                padding: 12px 27px;
+                border-radius: 8px;
+                margin-top: 10px;
+
+                i {
+                  margin-left: 8px;
+                }
 
                 &:hover {
                   text-decoration: underline;

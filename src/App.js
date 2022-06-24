@@ -6,6 +6,7 @@ import HotelsCityScreen from "./Screens/HotelsCityScreen";
 import SingleHotelScreen from "./Screens/SingleHotelScreen";
 import BookingScreen from "./Screens/BookingScreen";
 import CongratsScreen from "./Screens/CongratsScreen";
+import LongStaysScreen from "./Screens/LongStaysScreen";
 import HotelState from "./context/HotelSate.js";
 import BookedRoomsState from "./context/BookedRoomsState.js";
 import SliderImageState from "./context/SliderImageState.js";
@@ -34,6 +35,10 @@ function App() {
 
                 <Route path="/booking">
                   <BookingScreen />
+                </Route>
+
+                <Route path="/longstays">
+                  <LongStaysScreen />
                 </Route>
 
                 <Route path="/congrats">

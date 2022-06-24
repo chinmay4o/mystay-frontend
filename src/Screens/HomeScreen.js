@@ -11,16 +11,16 @@ const HomeScreen = () => {
   const [checkOut, setCheckOut] = useState("");
   const [destination, setDestination] = useState("bangalore");
   //Adding razorpay script to boilerplate
-  function loadRazorpay() {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    document.body.appendChild(script);
-    return;
-  }
+  // function loadRazorpay() {
+  //   const script = document.createElement("script");
+  //   script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  //   document.body.appendChild(script);
+  //   return;
+  // }
 
-  useEffect(() => {
-    loadRazorpay();
-  }, []);
+  // useEffect(() => {
+  //   loadRazorpay();
+  // }, []);
 
   return (
     <div className="homeScreen-container">
