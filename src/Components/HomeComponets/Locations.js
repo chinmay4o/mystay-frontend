@@ -5,11 +5,11 @@ const Locations = ({checkIn, checkOut}) => {
 
   const history = useHistory();
 
-  const cities = ["Jaipur", "Indore","Gurugram", "Bangalore", "Ooty", "Pune", "Dehradun" ];
+  const cities = ["Jaipur", "Indore","Gurugram", "Bangalore"];
 
   const backgroundImages = [
     "https://ik.imagekit.io/k3m4pqzpmlr/coupons/karnatakas-metropolitan-city-with-its-grand_3lJVBIb_N6NpaQyJH.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187835",
-    "https://upload.wikimedia.org/wikipedia/commons/e/e1/Indore_Rajwada01.jpg",
+    "https://media.istockphoto.com/photos/mahatma-gandhi-hall-picture-id515708494?k=20&m=515708494&s=612x612&w=0&h=UrV-fBKwOLDdxYhey3ge-j4-Ksgb6hq-Kf0GCwDWgQQ=",
     "https://ik.imagekit.io/k3m4pqzpmlr/desktop_coupons/topimg_20060_gurgaon_fa7WFfrTL.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1655708054965",
     "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Lalbagh_Glasshouse_night_panorama.jpg/1920px-Lalbagh_Glasshouse_night_panorama.jpg",
     "https://ik.imagekit.io/k3m4pqzpmlr/coupons/himachals-treasure-trove-of-adventure-scene_qi6U78o_vb6_FtLP_.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732185700",

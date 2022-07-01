@@ -12,7 +12,8 @@ const Navbar = ({ setDestination }) => {
       <nav class="navbar">
         <div class="logo" onClick={() => history.push("/")}>
           <img
-            src="https://ik.imagekit.io/k3m4pqzpmlr/Logo/mystay-logo-removebg-preview_s7Qj1Ibh3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655707681416"
+            // src="https://ik.imagekit.io/k3m4pqzpmlr/Logo/mystay-logo-removebg-preview_s7Qj1Ibh3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655707681416"
+            src="https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/mystay-logo-removebg-preview_Gu-jhBpNX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656660679160"
             alt="mystay"
             className="logo-img"
           />
@@ -83,13 +84,17 @@ const Navbar = ({ setDestination }) => {
               Invest with us
             </a>
           </li>
-          {/* <li class="nav_contact">
-            <a href="#contact">
+          <li class="nav_contact">
+            <a href="#contact" className="contact">
               {" "}
-              <i class="fas fa-mobile-alt"></i>
-              Blog
+            
+              <p className="text-muted">
+              <i className="fas fa-mobile-alt"></i>
+                Customer Support 
+              </p>
+              +91 8952093209
             </a>
-          </li> */}
+          </li>
         </ul>
       </nav>
     </div>

@@ -76,8 +76,8 @@ body {
         }
 
         img {
-          width: 130px;
-          height: 45px;
+          width: 40px;
+          height: 50px;
           position: absolute;
           top: -20px;
           left: -50px;
@@ -553,6 +553,257 @@ body {
         }
       }
     }
+
+    .trust-container {
+      padding: 50px 15px;
+      width: 100%;
+      min-height: 220px;
+  
+      .trust-inner {
+        width: 100%;
+        margin: 0 auto;
+  
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr;
+        grid-gap: 25px;
+  
+        .b1 {
+          background-color: #a7ffcc;
+          padding: 25px;
+          border-radius: 10px;
+  
+          h3 {
+            font-size: 24px;
+            font-weight: 700;
+          }
+  
+          .b1-inner {
+            margin-top: 20px;
+  
+            .point {
+              margin-bottom: 4px;
+              span {
+                font-size: 18px;
+                font-weight: 600;
+                margin-left: 20px;
+              }
+            }
+          }
+        }
+  
+        .b2 {
+          background-color: #8ffbff;
+          // background: url("https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/hiking_zro9gna99.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1656655885340");
+          padding: 20px;
+          border-radius: 10px;
+          position: relative;
+          overflow: hidden;
+  
+          h3 {
+            font-size: 25px;
+            font-weight: 700;
+            text-align: center;
+            padding-right: 20px;
+            position: absolute;
+            right: 35px;
+          }
+  
+          img {
+            position: absolute;
+            bottom: -10px;
+            left: -55px;
+            height: 250px;
+            width: 80%;
+          }
+  
+          .input {
+            position: absolute;
+            right: 15px;
+            top: 115px;
+  
+            input {
+              border: none;
+              border: 2px solid grey solid;
+              border-radius: 3px;
+              width: 230px;
+              height: 35px;
+              padding: 6px 7px;
+              font-size: 16px;
+              font-weight: 600;
+              font-family: "montserrat";
+            }
+  
+            .btn {
+              background-color: #ef653f;
+              color: #fff;
+              height: 35px;
+              width: 140px;
+              display: grid;
+              place-items: center;
+              border-radius: 3px;
+              font-size: 18px;
+              font-weight: 600;
+              margin: 0 auto;
+              margin-top: 14px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+    .review-container {
+      width: 100%;
+      min-height: 470px;
+      background-color: #fff;
+      display: grid;
+      grid-template-rows: 0.3fr 1fr;
+      place-items: center;
+      padding: 20px;
+      position: relative;
+
+      .title {
+          width: 100%;
+          text-align: left;
+          font-weight: 600;
+          font-size: 26px;
+          padding-left: 30px;
+
+          i {
+              padding-left: 10px;
+          }
+      }
+
+      .pre {
+          background-color: #fff;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          position: absolute;
+          top: 22%;
+          left: 195px;
+          cursor: pointer;
+          z-index: 3;
+
+          i {
+              position: absolute;
+              top: 22%;
+              left: 9px;
+              font-size: 1.5rem;
+              color: #242424;
+
+          }
+      }
+
+      .nxt {
+          background-color: #fff;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          position: absolute;
+          top: 22%;
+          right: 65px;
+          cursor: pointer;
+          z-index: 3;
+
+          i {
+              position: absolute;
+              top: 22%;
+              right: 9px;
+              font-size: 1.5rem;
+              color: #242424;
+
+          }
+      }
+
+
+      .reviews-outer {
+          width: 95%;
+          margin: 0 auto;
+          height: 280px;
+          border-radius: 15px;
+          padding: 0 20px;
+          overflow-x: hidden;
+
+          .reviews-inner {
+              min-width: 100%;
+              height: 100%;
+              padding: 0 20px;
+              // margin: 0 50px;
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+              grid-gap: 20px;
+              place-items: center;
+              animation: none;
+              // animation: scr 19s infinite ease-in-out;
+
+              @keyframes scr {
+                  0% {
+                      transform: translateX(0%);
+                  }
+
+                  100% {
+                      transform: translateX(-100%);
+                  }
+              }
+
+              .one,
+              .two,
+              .three,
+              .four,
+              .five {
+                  height: 240px;
+                  width: 320px;
+                  background-color: #fff;
+                  border-radius: 20px;
+                  overflow: hidden;
+                  display: grid;
+                  grid-template-rows: 0.3fr 1fr;
+
+                  .name {
+                      background-color: #e3e2e2;
+                      width: 100%;
+                      height: 100%;
+                      display: grid;
+                      place-items: center;
+
+                      span {
+                          font-weight: 600;
+                          font-size: 20px;
+                          color: rgb(96, 96, 96);
+                      }
+                  }
+
+                  .review {
+                      background-color: #b9fdff;
+                      overflow-y: auto;
+                      padding: 14px;
+
+                      &::-webkit-scrollbar {
+                          width: 4px;
+                          // height: 8px;
+                          background-color: #fff;
+                      }
+
+                      &::-webkit-scrollbar-thumb {
+                          height: 8px;
+                          background: rgb(208, 208, 208);
+                      }
+
+
+                      span {
+                          font-weight: 500;
+                          font-size: 15px;
+                          color: rgb(96, 96, 96);
+                      }
+                  }
+
+              }
+          }
+      }
+  }
+
   }
 
   // ======== Hotels Container =========
@@ -1572,16 +1823,19 @@ body {
   }
 
   // ======== footer section =========
+  .footer-parent {
+    width: 100%;
+    background-color: #3b4a5b;
+  }
   .footer_container {
     padding: 30px;
     width: 100%;
-    height: 550px;
+    height: 1000px;
     display: grid;
-    background-color: #ff6f00;
     background-color: #3b4a5b;
     place-items: center;
     grid-template-columns: 1fr;
-    grid-template-rows: 80px 1fr 80px;
+    grid-template-rows: 80px 300px 300px 150px;
     font-size: 1.3rem;
     color: #efefef;
     font-weight: 600;
@@ -1611,20 +1865,49 @@ body {
       }
     }
 
+    .mailing-address {
+      padding-top: 10px;
+      font-size: 18px;
+  
+      .head-address {
+        margin-bottom: 24px;
+        font-size: 23px;
+        margin-left: 5px;
+        // font-family: poppins;
+      }
+  
+      p {
+        margin-bottom: 10px;
+        line-height: 1.3;
+        font-weight: 500;
+      }
+    }
+  
     .footer-social {
       margin-top: 15px;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
       grid-gap: 28px;
       place-items: center;
-
-      a {
-        text-decoration: none;
-        color: #efefef;
-        font-size: 30px;
-        i {
+  
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+  
+      .links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 28px;
+        a {
+          text-decoration: none;
           color: #efefef;
           font-size: 30px;
+          i {
+            color: #efefef;
+            font-size: 30px;
+          }
         }
       }
     }
