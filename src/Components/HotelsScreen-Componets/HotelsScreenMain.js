@@ -75,7 +75,7 @@ const HotelsScreenMain = () => {
                          <h2 className="hotel-title">{ele.hotelName}</h2>
 
                          <p className="hotel-moreinfo">
-                           {ele.description}
+                           {ele.description.slice(0, 200)}...
                          </p>
 
                          <div className="view-btn">

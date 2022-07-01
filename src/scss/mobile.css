@@ -481,6 +481,49 @@ body {
   .homeScreen-container .locations-container .location-box1 .ec2 .cir1 i {
     color: darkcyan;
   }
+  .homeScreen-container .features-container {
+    padding: 20px;
+    width: 100%;
+    min-height: 390px;
+    background-color: #fff;
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+  }
+  .homeScreen-container .features-container .features-inner {
+    width: 100%;
+    margin: 0 auto;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    grid-gap: 30px;
+  }
+  .homeScreen-container .features-container .features-inner .usp-column {
+    width: 100%;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 70px 1fr;
+        grid-template-columns: 70px 1fr;
+  }
+  .homeScreen-container .features-container .features-inner .usp-column .icon-container img {
+    width: 55px;
+    height: 55px;
+  }
+  .homeScreen-container .features-container .features-inner .usp-column .usp-content {
+    margin-left: 8px;
+    font-family: "League Spartan";
+    font-weight: 600;
+    font-size: 19px;
+  }
+  .homeScreen-container .features-container .features-inner .usp-column .usp-content .caption {
+    margin-top: 7px;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 17px;
+  }
   .homeScreen-container .trust-container {
     padding: 50px 15px;
     width: 100%;

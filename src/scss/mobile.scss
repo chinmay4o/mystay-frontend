@@ -554,6 +554,52 @@ body {
       }
     }
 
+    .features-container {
+      padding: 20px;
+      width: 100%;
+      min-height: 390px;
+      background-color: #fff;
+      display: grid;
+      place-items: center;
+  
+      .features-inner {
+        width: 100%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+  
+        .usp-column {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 70px 1fr;
+
+          .icon-container {
+            img {
+              width: 55px;
+              height: 55px;
+            }
+          }
+  
+          .usp-content {
+            margin-left: 8px;
+            font-family: "League Spartan";
+            font-weight: 600;
+            font-size: 19px;
+
+            .caption {
+              margin-top: 7px;
+              font-weight: 500;
+              line-height: 1.2;
+  
+              font-size: 17px;
+            }
+          }
+        }
+      }
+    }
+
     .trust-container {
       padding: 50px 15px;
       width: 100%;
