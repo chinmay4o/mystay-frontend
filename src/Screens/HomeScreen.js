@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar/Navbar";
 import Hero from "../Components/HomeComponets/Hero";
 // import Hero2 from "../Components/HomeComponets/Hero2";
-// import Hero3 from "../Components/HomeComponets/Hero3";
+import Hero3 from "../Components/HomeComponets/Hero3";
 import Locations from "../Components/HomeComponets/Locations";
 import Trust from "../Components/HomeComponets/Trust";
 import Reviews from "../Components/HomeComponets/Reviews";
@@ -17,16 +17,23 @@ const HomeScreen = () => {
   return (
     <div className="homeScreen-container">
       <Navbar destination={destination} setDestination={setDestination} />
-      {/* <Hero3 /> */}
-      {/* <Hero2 /> */}
-      <Hero
-        checkIn={checkIn}
+      <Hero3 
+         checkIn={checkIn}
         setCheckIn={setCheckIn}
         checkOut={checkOut}
         setCheckOut={setCheckOut}
         destination={destination}
         setDestination={setDestination}
       />
+      {/* <Hero2 /> */}
+      {/* <Hero
+        checkIn={checkIn}
+        setCheckIn={setCheckIn}
+        checkOut={checkOut}
+        setCheckOut={setCheckOut}
+        destination={destination}
+        setDestination={setDestination}
+      /> */}
       <Features />
       <Locations
         checkIn={checkIn}

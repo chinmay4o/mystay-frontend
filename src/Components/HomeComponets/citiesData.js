@@ -1,29 +1,19 @@
-const cities = ["Bangalore", "Mumbai", "Jaipur", "Noida", "Gurugram", "Kota", "Indore"];
-
+const cities = ["Jaipur", "Indore", "Gurugram"];
 
 const citiesD = [
     {
-        city : "Bangalore",
+        city : "Jaipur",
         img:  "https://ik.imagekit.io/k3m4pqzpmlr/coupons/karnatakas-metropolitan-city-with-its-grand_3lJVBIb_N6NpaQyJH.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187835",
     },
 
     {
-        city: "Mumbai",
+        city: "Indore",
         img: "https://ik.imagekit.io/k3m4pqzpmlr/coupons/theog-20220129083825_XqK_wo4Xl.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187815",
     },
     {
-        city: "Jaipur",
-        img: "https://ik.imagekit.io/k3m4pqzpmlr/coupons/theog-20220129083825_XqK_wo4Xl.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187815",
-    }, 
-     {
-        city: "Noida",
-        img: "https://ik.imagekit.io/k3m4pqzpmlr/coupons/theog-20220129083825_XqK_wo4Xl.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187815",
-    },  
-    {
         city: "Gurugram",
-        img:    "https://ik.imagekit.io/k3m4pqzpmlr/coupons/the-blue-city-charms-travellers-with-rich-h_AT52qza_ndYKLog-j.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187875",
+        img: "https://ik.imagekit.io/k3m4pqzpmlr/coupons/theog-20220129083825_XqK_wo4Xl.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187815",
     }
-
 ];
 
 const backgroundImages = [
