@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./scss/style.css";
 import "./scss/mobile.css";
 import HomeScreen from "./Screens/HomeScreen";
+import Aboutus from "./Screens/Aboutus";
 import HotelsCityScreen from "./Screens/HotelsCityScreen";
 import SingleHotelScreen from "./Screens/SingleHotelScreen";
 import BookingScreen from "./Screens/BookingScreen";
@@ -23,6 +24,10 @@ function App() {
               <div className="layout-container">
                 <Route exact path="/">
                   <HomeScreen />
+                </Route>
+
+                <Route path="/aboutus">
+                  <Aboutus />
                 </Route>
 
                 <Route path="/hotels">

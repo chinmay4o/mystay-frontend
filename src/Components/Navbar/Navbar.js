@@ -84,13 +84,16 @@ const Navbar = ({ setDestination }) => {
               Invest with us
             </a>
           </li>
+          <li class="nav_work" style={{cursor: "pointer"}} onClick={() => history.push(`/aboutus`)}>
+            {" "}
+            <a>About Us</a>
+          </li>
           <li class="nav_contact">
             <a href="#contact" className="contact">
               {" "}
-            
               <p className="text-muted">
-              <i className="fas fa-mobile-alt"></i>
-                Customer Support 
+                <i className="fas fa-mobile-alt"></i>
+                Customer Support
               </p>
               +91 8952093209
             </a>

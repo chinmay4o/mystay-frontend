@@ -38,7 +38,7 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
         <div className="search-box">
           <div className="input-container">
             <label htmlFor="destination">Select Your Destination</label>
-            <SearchBar data={cities} placeholder="Jaipur, Gurugram, Indore" setDestination={setDestination}/>
+            <SearchBar data={cities} placeholder="Search Destination..." setDestination={setDestination}/>
             {/* <input type="text" placeholder="eg. Jaipur, Gurugram, Indore" id="destination"/> */}
           </div>
           <div className="checkin-container">

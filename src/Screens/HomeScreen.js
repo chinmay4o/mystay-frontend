@@ -17,23 +17,23 @@ const HomeScreen = () => {
   return (
     <div className="homeScreen-container">
       <Navbar destination={destination} setDestination={setDestination} />
-      <Hero3 
+      {/* <Hero3 
          checkIn={checkIn}
         setCheckIn={setCheckIn}
         checkOut={checkOut}
         setCheckOut={setCheckOut}
         destination={destination}
         setDestination={setDestination}
-      />
+      /> */}
       {/* <Hero2 /> */}
-      {/* <Hero
+      <Hero
         checkIn={checkIn}
         setCheckIn={setCheckIn}
         checkOut={checkOut}
         setCheckOut={setCheckOut}
         destination={destination}
         setDestination={setDestination}
-      /> */}
+      />
       <Features />
       <Locations
         checkIn={checkIn}
