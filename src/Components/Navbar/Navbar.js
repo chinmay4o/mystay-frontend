@@ -81,10 +81,14 @@ const Navbar = ({ setDestination }) => {
             >
               {" "}
               {/* <i class="fas fa-globe-americas"></i>  */}
-              Invest with us
+              Coworking
             </a>
           </li>
-          <li class="nav_work" style={{cursor: "pointer"}} onClick={() => history.push(`/aboutus`)}>
+          <li
+            class="nav_work"
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push(`/aboutus`)}
+          >
             {" "}
             <a>About Us</a>
           </li>
