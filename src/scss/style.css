@@ -938,8 +938,11 @@ body {
 
 .aboutus-container {
   width: 100%;
+  height: 1200px;
+  overflow-y: hidden;
   padding-bottom: 50px;
   background-color: #efefef;
+  background-color: #fff;
 }
 
 .aboutus-container .aboutus-inner {
@@ -948,8 +951,31 @@ body {
   margin: 60px auto;
   padding: 40px 40px;
   background-color: #fff;
-  -webkit-box-shadow: 0px 0px 10px 5px rgba(203, 203, 203, 0.4);
-          box-shadow: 0px 0px 10px 5px rgba(203, 203, 203, 0.4);
+  position: relative;
+}
+
+.aboutus-container .aboutus-inner .circle1 {
+  width: 440px;
+  height: 640px;
+  position: absolute;
+  background-color: #669bff8e;
+  z-index: 1;
+  top: 100px;
+  left: -450px;
+  -webkit-filter: blur(7px);
+          filter: blur(7px);
+}
+
+.aboutus-container .aboutus-inner .circle2 {
+  width: 440px;
+  height: 1140px;
+  position: absolute;
+  background-color: #8b8bff8e;
+  z-index: 1;
+  top: 300px;
+  right: -450px;
+  -webkit-filter: blur(9px);
+          filter: blur(9px);
 }
 
 .aboutus-container .aboutus-inner .title {
@@ -964,6 +990,7 @@ body {
   line-height: 1.3;
   margin-bottom: 7px;
   padding: 10px 30px;
+  z-index: 3;
 }
 
 .hotels-container {

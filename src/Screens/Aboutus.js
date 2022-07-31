@@ -6,7 +6,21 @@ const Aboutus = () => {
     <div className="aboutus-container">
       <Navbar />
       <div className="aboutus-inner">
+      <div className="circle1"></div>
+      <div className="circle2"></div>
         <h1 className="title">MY STAY Group of Hotels and WB Events</h1>
+
+        <img
+          src="https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/mystay-logo-removebg-preview_Gu-jhBpNX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656660679160"
+          alt="mystay"
+          style={{
+            display: "grid",
+            width: "170px",
+            margin: "35px auto 20px auto",
+
+          }}
+        />
+
         <p>
           Walter &amp; Bruke’s Events and Exhibition along with ARN group of
           hotels had initiated their hotel business in 2018. After having 18
@@ -20,18 +34,20 @@ const Aboutus = () => {
           60 Mn by FY 2022. Aiming to close 250 mn by FY 23. After gaining
           enough confidence and experience (almost 8 years and 100+ events) in
           events field we have grown a beneficial business preposition in Hotel
-          Business also. With this decent confidence Promoters of the company
-          decided to expand the business across major commercial and Tourist
-          places in the country. WB Events has executed some of the major events
-          across country which consists of Garments Expo 2020 at Labhganga
-          Convention, Indore, Bonnarro Vastra Utsav 2018 2019 2020 in Jaipur
-          Indore and Goa, Jems &amp; Jewelry Show- JECC Jaipur, DB Education
-          fair-Jaipur, major Lifestyle exhibitions across country were also
-          executed by us. We are empanelled vendor of Dainik Bhasker Group,
-          JECC-Jaipur, Girdhar Banquets Indore, TGI Group of hotels. We are into
-          execution of industrial expo, corporate events, business conferences,
-          trade shows or weddings under Walter &amp; Bruke’s Events and
-          Exhibitions.
+          Business also.
+        </p>
+        <p>
+          With this decent confidence Promoters of the company decided to expand
+          the business across major commercial and Tourist places in the
+          country. WB Events has executed some of the major events across
+          country which consists of Garments Expo 2020 at Labhganga Convention,
+          Indore, Bonnarro Vastra Utsav 2018 2019 2020 in Jaipur Indore and Goa,
+          Jems &amp; Jewelry Show- JECC Jaipur, DB Education fair-Jaipur, major
+          Lifestyle exhibitions across country were also executed by us. We are
+          empanelled vendor of Dainik Bhasker Group, JECC-Jaipur, Girdhar
+          Banquets Indore, TGI Group of hotels. We are into execution of
+          industrial expo, corporate events, business conferences, trade shows
+          or weddings under Walter &amp; Bruke’s Events and Exhibitions.
         </p>
         <p>
           We are enjoying a good repo with all our investors, Property owners
