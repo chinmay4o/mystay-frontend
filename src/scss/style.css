@@ -954,6 +954,13 @@ body {
   position: relative;
 }
 
+.aboutus-container .aboutus-inner img {
+  display: -ms-grid;
+  display: grid;
+  width: 150px;
+  margin: 35px auto 20px auto;
+}
+
 .aboutus-container .aboutus-inner .circle1 {
   width: 440px;
   height: 640px;

@@ -13,12 +13,6 @@ const Aboutus = () => {
         <img
           src="https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/mystay-logo-removebg-preview_Gu-jhBpNX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656660679160"
           alt="mystay"
-          style={{
-            display: "grid",
-            width: "170px",
-            margin: "35px auto 20px auto",
-
-          }}
         />
 
         <p>
