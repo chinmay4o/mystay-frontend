@@ -11,6 +11,7 @@ import LongStaysScreen from "./Screens/LongStaysScreen";
 import HotelState from "./context/HotelSate.js";
 import BookedRoomsState from "./context/BookedRoomsState.js";
 import SliderImageState from "./context/SliderImageState.js";
+import "./App.css"
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

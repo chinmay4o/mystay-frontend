@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import {HotelContext} from "../../context/hotelsContext.js";
 import { configData } from "../../Config/config.js";
+import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 
 const HotelsScreenMain = () => {
   const history = useHistory();
@@ -38,49 +39,33 @@ const HotelsScreenMain = () => {
   } else {
     return (
       <>
-        <div className="city-picture">
-          {/* <img src="" alt="" /> */}
-          <h1 className="cityName">{allSearchedHotels.data[0].city.toLowerCase()}</h1>
+        <div className="h-screen w-screen relative ">
+          <img src="https://img.cdn.zostel.com/zostel/gallery/images/VFvd-Qq7Q92zkhbjE2ufYA/karnatakas-metropolitan-city-with-its-grand_3lJVBIb.jpg" alt="" className=" brightness-75 h-full w-full object-cover"/>
         </div>
+          <h1 className="absolute text-6xl -translate-x-1/2 -translate-y-1/2 font-bold top-1/2 left-1/2 text-white">{allSearchedHotels.data[0].city.toUpperCase()}</h1>
 
-        {/* <div className="about-city">
-          <h1 className="cityName-h1">{allSearchedHotels.data[0].city}</h1>
-
-          <p className="cityInfo-p">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-            maiores, dolore id adipisci illum officia pariatur vitae voluptatum
-            vel quo similique totam ad nam odio, modi distinctio quod tenetur
-            inventore?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-            maiores, dolore id adipisci illum officia pariatur vitae voluptatum
-            vel quo similique totam ad nam odio, modi distinctio quod tenetur
-            inventore?
-          </p>
-        </div> */}
-
-        <div className="hotels-available">
-          <h1 className="title-available-hotels">Stays At {allSearchedHotels.data[0].city}</h1>
+        
+        <div className="w-full min-h-[354px] p-5 bg-[#f9f7f1]">
+          <h1 className="text-center text-3xl text-primary capitalize mt-6">Stays At {allSearchedHotels.data[0].city}</h1>
 
           {/* array.map Hotels in City */}
-           <div className="available-hotels">
+           <div className="flex flex-col w-full p-8 items-center justify-center gap-12 ">
                 {allSearchedHotels.data.map((ele, index) => {
                     return (
-                      <div className="one-hotel" onClick={() => history.push(`/hotel/${ele.hotelId}?checkIn=${checkIn}&checkOut=${checkOut}`)}> 
-                      <div className="img" style={{"backgroundImage" : `url(${ele.images[0]})`}}>
-                        {/* <img src={ele.images[0]} alt="" /> */}
+                      <div className="cursor-pointer flex flex-col md:flex-row gap-6 w-full md:w-4/6 lg:w-1/2" onClick={() => history.push(`/hotel/${ele.hotelId}?checkIn=${checkIn}&checkOut=${checkOut}`)}> 
+                      <div className="bg-cover rounded-xl h-[270px] xl:h-96 lg:h-[420px] w-full md:w-1/2" >
+                        <img src={ele.images[0]} alt="" className="rounded-xl h-full w-full object-cover"/>
                       </div>
 
-                      <div className="hotel-description">
-                         <p className="brand-name">Mystay Townhouse</p>
-                         <h2 className="hotel-title">{ele.hotelName}</h2>
+                      <div className="md:w-1/2">
+                         <p className="text-lg mb-4 font-bold text-[#6d6d6d]">Mystay Townhouse</p>
+                         <h2 className="mb-4 text-2xl font-bold">{ele.hotelName}</h2>
 
-                         <p className="hotel-moreinfo">
+                         <p className="text-lg mb-4 font-semibold text-[#6d6d6d]">
                            {ele.description.slice(0, 200)}...
                          </p>
 
-                         <div className="view-btn">
-                           View <i class="fas fa-long-arrow-alt-right"></i>
-                         </div>
+                        <PrimaryButton text="Book Now" />
                       </div>
                       </div>
                     )

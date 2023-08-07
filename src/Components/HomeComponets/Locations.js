@@ -19,10 +19,10 @@ const Locations = ({checkIn, checkOut}) => {
 
 
   return (
-    <div className="locations-container" id="location">
-      <div className="location-box1">
+    <div className="w-screen py-24">
+      <div className="flex gap-6 xl:gap-8 justify-center flex-wrap items-center">
      { cities.map((ele, index) => {
-       return <div className="ec2" 
+       return <div className="ec2 flex-grow-0 relative h-72 w-72 group" 
         onClick={() => {
                   localStorage.setItem("destination", ele.toLocaleLowerCase());
                   localStorage.setItem("checkIn", JSON.stringify(checkIn));
@@ -36,14 +36,10 @@ const Locations = ({checkIn, checkOut}) => {
                     )}&checkOut=${JSON.stringify(checkOut)}`
                   );
               }}>
-         <img src={backgroundImages[index]} alt="normal" />
-         <p className="city-title">
+         <img src={backgroundImages[index]} alt="normal" className="h-full w-full rounded-xl group-hover:brightness-[0.25]" />
+         <p className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-semibold group-hover:text-primary">
            {ele}
          </p>
-
-         {/* <div className="cir1">
-         <i class="fas fa-plus"></i>
-         </div> */}
        </div>
      })}
       </div>

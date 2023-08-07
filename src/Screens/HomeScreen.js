@@ -15,7 +15,7 @@ const HomeScreen = () => {
   const [destination, setDestination] = useState("bangalore");
 
   return (
-    <div className="homeScreen-container">
+    <div className="h-screen w-screen homeScreen-container">
       <Navbar destination={destination} setDestination={setDestination} />
       {/* <Hero3 
          checkIn={checkIn}
@@ -26,6 +26,8 @@ const HomeScreen = () => {
         setDestination={setDestination}
       /> */}
       {/* <Hero2 /> */}
+      <div className="bg-[#c7c7c7]/10 py-10">
+
       <Hero
         checkIn={checkIn}
         setCheckIn={setCheckIn}
@@ -33,7 +35,8 @@ const HomeScreen = () => {
         setCheckOut={setCheckOut}
         destination={destination}
         setDestination={setDestination}
-      />
+        />
+        </div>
       <Features />
       <Locations
         checkIn={checkIn}

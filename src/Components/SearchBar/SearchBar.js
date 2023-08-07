@@ -27,8 +27,8 @@ const SearchBar = ({ placeholder, data, setDestination }) => {
   };
 
   return (
-    <div className="search">
-      <div className="searchInputs">
+    <div className="w-full relative">
+      <div className="border-b-2 border-gray-400">
         <input
           type="text"
           placeholder={placeholder}
@@ -44,7 +44,7 @@ const SearchBar = ({ placeholder, data, setDestination }) => {
           </div> */}
       </div>
       {filteredData.length != 0 && (
-        <div className="dataResult">
+        <div className="absolute left-0 mt-4 min-w-[150px] max-w-[320px] min-h-[120px] z-[10] p-2 bg-white max-h-[320px] result-shadow rounded-xl">
           {filteredData.slice(0, 15).map((ele, index) => {
             return (
               <p
