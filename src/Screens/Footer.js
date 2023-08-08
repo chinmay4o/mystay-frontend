@@ -2,22 +2,25 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="footer-parent ">
-      <footer className="footer_container">
-        <h5>MyStay</h5>
+    <div className="w-screen bg-[#3b4a5b] text-white px-20">
+      <div className="w-full flex flex-col md:flex-row gap-8 lg:gap-20 items-center justify-center py-12 px-4 text-[18px] md:text-sm lg:text-base xl:text-[18px]">
+        <div className="text-3xl font-semibold lg:text-6xl md:hidden lg:block">MyStay</div>
 
-        <div className="more-info">
+        <div className="flex flex-col gap-4 justify-center items-left">
+        <div className="text-3xl lg:hidden">MyStay</div>
+          <div className="text-lg">
           Explore with MyStay - We provide ultra Luxurious Hotel Rooms for long
           accommodations, at Best Price, We are couple friendly, Great interiors
           and mesmerizing location in Jaipur, Gurugram, Indore and Banglore
-          <br></br>
-          <br></br>
+          </div>
+          <div>
           We are a chain of 30+ hotels offering hotel rooms, longstays, pg's and
           corporate bookings
-          <p className="email">Mail us - infomystay@gmail.com</p>
+          </div>
+          <a href= "mailto:infomystay@gmail.com" className="text-left">Mail us - infomystay@gmail.com</a>
         </div>
 
-        <div className="mailing-address">
+        <div className="flex flex-col gap-2">
           <p className="head-address"> Contact Us - </p>
 
           <p>
@@ -34,12 +37,11 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="footer-social">
+        <div className="flex flex-col gap-4 items-center justify-center ">
           {/* <p className="head-address"> Follow Us on - </p> */}
           <p>Customer Support - +91 89520 93209</p>
-          <p>Email - infomystay@gmail.com</p>
-
-          <div className="links">
+          <a  href= "mailto:infomystay@gmail.com">Email - infomystay@gmail.com</a>
+          <div className="flex gap-4 items-center justify-center">
             <a
               href="https://www.instagram.com/mystayrooms/"
               className="home_social-icon"
@@ -62,8 +64,11 @@ const Footer = () => {
               <i class="fab fa-facebook"></i>
             </a>
           </div>
+          
         </div>
-      </footer>
+
+        
+      </div>
     </div>
   );
 };

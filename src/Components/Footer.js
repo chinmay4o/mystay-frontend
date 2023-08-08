@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <section class="footer-container">
-      <div class="logo-box">
+    <section className="footer-container">
+      <div className="logo-box">
         <h1>MyStay</h1>
 
         <p>

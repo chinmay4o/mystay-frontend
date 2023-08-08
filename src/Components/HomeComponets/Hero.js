@@ -4,6 +4,7 @@ import cities from "./citiesData.js";
 import { HotelContext } from "../../context/hotelsContext.js";
 import { useHistory } from "react-router-dom";
 import "../SearchBar/DatePicker.css";
+import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 
 const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestination }) => {
   const history = useHistory();
@@ -29,20 +30,18 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
   });
   
   return (
-    <div className="hero-container">
+    <div className="hero-image w-full md:w-5/6 md:rounded-3xl md:mt-8 md:mx-auto h-screen md:h-max md:py-24 lg:py-32 md:bg-cover flex flex-col gap-4 items-center p-6 justify-center text-white">
       {/* {hotels.state.name} */}
-      <div className="hero-box1">
-       {/* empty div to adjust center positioning */}
-      <div></div>
-      <h2 className="explore-title">Ready to explore with MyStay?</h2>
-        <div className="search-box">
-          <div className="input-container">
-            <label htmlFor="destination">Select Your Destination</label>
+      
+      <h2 className="font-bold text-3xl text-center text-shadow p-6 md:text-4xl lg:text-5xl">Ready to explore with MyStay?</h2>
+        <div className="w-full h-4/6 md:h-max xl:w-max bg-white rounded-xl flex  flex-col md:flex-wrap  md:gap-12 md:flex-row justify-between  p-12 text-black text-xl items-center">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <label htmlFor="destination" className="text-2xl  xl:text-3xl">Select Your Destination</label>
             <SearchBar data={cities} placeholder="Search Destination..." setDestination={setDestination}/>
             {/* <input type="text" placeholder="eg. Jaipur, Gurugram, Indore" id="destination"/> */}
           </div>
-          <div className="checkin-container">
-            <label htmlFor="checkin">Check In</label>
+          <div className="flex flex-col gap-2 font-mono items-center text-[18px] border-b-2 border-gray-400 font-medium">
+            <label htmlFor="checkin" className="font-montserrat xl:text-2xl">Check In</label>
             <input
               type="date"
               id="datepicker"
@@ -54,8 +53,8 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
                 }}
             />
           </div>
-          <div className="checkout-container">
-            <label htmlFor="checkout">Check Out</label>
+          <div className="flex flex-col gap-2 font-mono items-center text-[18px] border-b-2 border-gray-400 font-medium">
+            <label htmlFor="checkout" className="font-montserrat xl:text-2xl">Check Out</label>
             <input
               type="date"
               value={checkOut}
@@ -65,8 +64,8 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
           </div>
 
           <div className="book-container">
-            <div
-              className="btn-book"
+            <PrimaryButton
+              text="Book Now"
               onClick={() => {
                 if (!destination || !checkOut || !checkIn) {
                   setTooltip("grid");
@@ -84,18 +83,14 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
                   );
                 }
               }}
-            >
-              Book Now
-              <div className="tooltip" style={{ display: tooltip }}>
+            />
+              {/* <div className="tooltip" style={{ display: tooltip }}>
                 {" "}
                 Please fill all the details
-              </div>
-            </div>
+              </div> */}
           </div>
         </div>
         {/* empty div to adjust center positioning */}
-        <div></div>
-      </div>
     </div>
   );
 };
