@@ -702,13 +702,13 @@ body {
   right: 35px;
 }
 
-.homeScreen-container .trust-container .trust-inner .b2 img {
+/* .homeScreen-container .trust-container .trust-inner .b2 img {
   position: absolute;
   bottom: -10px;
   left: -55px;
   height: 250px;
   width: 60%;
-}
+} */
 
 .homeScreen-container .trust-container .trust-inner .b2 .input {
   position: absolute;
@@ -716,7 +716,7 @@ body {
   top: 115px;
 }
 
-.homeScreen-container .trust-container .trust-inner .b2 .input input {
+/* .homeScreen-container .trust-container .trust-inner .b2 .input input {
   border: none;
   border: 2px solid grey solid;
   border-radius: 3px;
@@ -726,7 +726,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   font-family: "montserrat";
-}
+} */
 
 .homeScreen-container .trust-container .trust-inner .b2 .input .btn {
   background-color: #ef653f;

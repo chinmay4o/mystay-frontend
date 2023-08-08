@@ -1,6 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const CongratsInner = () => {
+  const { id } = useParams();
+
+  useEffect(()=>{
+    fetch(`http://localhost:5001/api/v1/anonymous/payment/${id}`).then(res=>res.json()).then(data=>console.log(data))
+  },[id])
+
   return (
     <div className="congrats-inner">
       {/* <div className="b-box1">

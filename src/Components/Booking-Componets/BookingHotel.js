@@ -2,9 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { SelectedRoomsContext } from "../../context/hotelsContext.js";
 import Modal from "../Modal/Modal"
 import { configData } from "../../Config/config.js";
-
+import { useHistory } from "react-router-dom";
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
+  const history = useHistory();
 
   const monthNames = [
     "January",
@@ -160,7 +161,7 @@ const BookingHotel = () => {
     ) {
       setModalDisplay("grid");
     } else {
-      const orderId = await fetch(`${configData.SERVER_URL}/razorpay`, {
+      const orderId = await fetch(`${configData.SERVER_URL}/api/v1/anonymous/razorpay`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -182,25 +183,31 @@ const BookingHotel = () => {
 
       const dataR = await orderId.json();
 
+      setBookingDetails({...bookingDetails, guestDetails: userInfo})
+
+      
       var options = {
-        // key: "rzp_test_28IqL0gh4iu9ot", // Enter the Key ID generated from the Dashboard
-        key: "rzp_live_0tYxpyabQlGWRc", // Enter the Key ID generated from the Dashboard
-        amount: dataR.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        key: "rzp_test_vlPwuXtjFz1cq1", // Enter the Key ID generated from the Dashboard
+        // key: "rzp_live_0tYxpyabQlGWRc", // Enter the Key ID generated from the Dashboard
+        amount: dataR.message.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
         name: "MyStay Rooms",
         description: "Test-room Transaction",
         image:
           "https://ik.imagekit.io/k3m4pqzpmlr/coupons/1880-moon-outline_TBPed9a84.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1640773110779",
-        order_id: dataR.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        handler: function (response) {
-          setSuccessPaymentId(response.razorpay_payment_id);
-          if (response.razorpay_payment_id) {
-            bookRooms(e);
-          }
-          alert(response.razorpay_payment_id);
-          alert(response.razorpay_order_id);
-          alert(response.razorpay_signature);
-          console.log(response);
+        order_id: dataR.message.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        handler: async function (response) {
+         const data =  await fetch(`${configData.SERVER_URL}/api/v1/anonymous/roomBook`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ...response,
+              amount: dataR.message.amount,
+              bookingDetails: bookingDetails.bookingDetails,
+              guestDetails: userInfo,
+            })})
+            const data1 = await data.json()
+            history.push(`/payment/${data1.message.paymentVerified._id}`)
         },
         prefill: {
           name: userInfo.fname,
@@ -211,6 +218,20 @@ const BookingHotel = () => {
 
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
+
+      paymentObject.on('payment.failed', async function (response){
+        console.log(dataR.message.amount);
+        const data =  await fetch(`${configData.SERVER_URL}/api/v1/anonymous/payment/failure`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...response,
+            amount: dataR.message.amount,
+          })})
+          const data1 = await data.json();
+          paymentObject.close();
+          history.push(`/payment/${data1.message.payment._id}`)
+});
 
       // document.getElementById("rzp-button1").onclick = function (e) {
       //   rzp1.open();
@@ -432,3 +453,5 @@ const BookingHotel = () => {
 };
 
 export default BookingHotel;
+
+

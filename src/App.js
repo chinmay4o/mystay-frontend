@@ -46,7 +46,9 @@ function App() {
                   <LongStaysScreen />
                 </Route>
 
-                <Route path="/congrats">
+               
+
+                <Route path= "/payment/:id">
                   <CongratsScreen />
                 </Route>
               </div>
