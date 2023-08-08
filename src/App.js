@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import "./App.css";
 import "./scss/style.css";
 import "./scss/mobile.css";
 import HomeScreen from "./Screens/HomeScreen";
@@ -11,13 +12,22 @@ import LongStaysScreen from "./Screens/LongStaysScreen";
 import HotelState from "./context/HotelSate.js";
 import BookedRoomsState from "./context/BookedRoomsState.js";
 import SliderImageState from "./context/SliderImageState.js";
+import UserStateContext from "./context/UserContext.js";
 import "./App.css"
-
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import VerifyOtp from "./Screens/VerifyOtp";
+import Login from "./Screens/Login";
+import Signup from "./Screens/Signup";
+import React from "react";
+import UserBooking from "./Screens/UserBooking";
+
 
 function App() {
+
+
   return (
     <Router>
+      <UserStateContext>
       <HotelState>
         <BookedRoomsState>
           <SliderImageState>
@@ -47,16 +57,30 @@ function App() {
                   <LongStaysScreen />
                 </Route>
 
-               
+                <Route path="/verify">
+                  <VerifyOtp />
+                </Route>
 
                 <Route path= "/payment/:id">
                   <CongratsScreen />
+                </Route>
+                <Route path= "/login">
+                  <Login />
+                </Route>
+
+                <Route path = "/signup">
+                  <Signup />
+                </Route>
+
+                <Route path= "/bookings">
+                  <UserBooking />
                 </Route>
               </div>
             </div>
           </SliderImageState>
         </BookedRoomsState>
       </HotelState>
+      </UserStateContext>
     </Router>
   );
 }

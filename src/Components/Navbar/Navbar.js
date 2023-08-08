@@ -2,10 +2,33 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import citiesD from "../HomeComponets/citiesData.js";
 import { nanoid } from "nanoid";
+import { UserContext } from "../../context/hotelsContext.js";
+
 
 const Navbar = ({ setDestination }) => {
-  const history = useHistory();
-  const [show, setShow] = useState("none");
+  const {userData, setUserData} = React.useContext(UserContext);
+  console.log(userData);
+
+  React.useEffect(() => {
+    if(!userData){
+      const token = localStorage.getItem("accessToken");
+      if(token){
+        const getUser = async () => {
+          const response = await fetch(`http://localhost:5001/api/v1/customer/getUser`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": token,
+            },
+          });
+          const data = await response.json();
+          console.log(data);
+          setUserData(data.message.user);
+        };
+        getUser();
+      }
+    }
+  },[userData]);
   const [width, setWidth] = useState(window.innerWidth);
   React.useEffect(() => {
     const handleWindowResize = () => {
@@ -312,15 +335,11 @@ const DesktopComponent = () => {
             {" "}
             <a>About Us</a>
           </div>
-          <div class="hover:text-primary cursor-pointer">
-            <a className="flex flex-col-reverse">
-              {" "}
-              <p className="text-primary">
-                <i className="fas fa-mobile-alt"></i>
-                Customer Support
-              </p>
-              +91 8952093209
-            </a>
+          <div class="hover:text-primary cursor-pointer" onClick={()=> history.push('/login')}>
+           Login
+          </div>
+          <div class="hover:text-primary cursor-pointer" onClick={()=> history.push('/login')}>
+           See Bookings
           </div>
         </div>
     </div>

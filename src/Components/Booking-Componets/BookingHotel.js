@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { SelectedRoomsContext } from "../../context/hotelsContext.js";
+import { SelectedRoomsContext , UserContext } from "../../context/hotelsContext.js";
+
 import Modal from "../Modal/Modal"
 import { configData } from "../../Config/config.js";
 import { useHistory } from "react-router-dom";
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
+  const {userData, setUserData} = useContext(UserContext);
   const history = useHistory();
 
   const monthNames = [
@@ -30,14 +32,7 @@ const BookingHotel = () => {
   const [modalContent, setModalContent] = useState("Please Fill all the details");
 
   // saving form info here
-  const [userInfo, setUserInfo] = useState({
-    fname: "",
-    lname: "",
-    gender: "",
-    email: "",
-    mobile: "",
-    address: "",
-  });
+  const [userInfo, setUserInfo] = useState(userData);
 
   //Calculating differecebetween Days/nights
   const date1 = new Date(localStorage.getItem("checkIn"));
@@ -64,8 +59,8 @@ const BookingHotel = () => {
   //main object to pass in Backend
   const [bookingDetails, setBookingDetails] = useState({
     guestDetails: {
-      firstName: userInfo.fname,
-      lastName: userInfo.lname,
+      firstName: userInfo.firstName,
+      lastName: userInfo.lastName,
       email: userInfo.email,
       mobile: userInfo.mobile,
     },
@@ -79,8 +74,8 @@ const BookingHotel = () => {
 
     setBookingDetails({
       guestDetails: {
-        firstName: userInfo.fname,
-        lastName: userInfo.lname,
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
         email: userInfo.email,
         mobile: userInfo.mobile,
       },
@@ -90,8 +85,8 @@ const BookingHotel = () => {
     console.log(
       {
         guestDetails: {
-          firstName: userInfo.fname,
-          lastName: userInfo.lname,
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
           email: userInfo.email,
           mobile: userInfo.mobile,
         },
@@ -101,8 +96,8 @@ const BookingHotel = () => {
     );
 
     if (
-      !userInfo.fname ||
-      !userInfo.lname ||
+      !userInfo.firstName ||
+      !userInfo.lastName ||
       !userInfo.email ||
       !userInfo.mobile
     ) {
@@ -110,8 +105,8 @@ const BookingHotel = () => {
     } else {
       setBookingDetails({
         guestDetails: {
-          firstName: userInfo.fname,
-          lastName: userInfo.lname,
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
           email: userInfo.email,
           mobile: userInfo.mobile,
         },
@@ -125,8 +120,8 @@ const BookingHotel = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             guestDetails: {
-              firstName: userInfo.fname,
-              lastName: userInfo.lname,
+              firstName: userInfo.firstName,
+              lastName: userInfo.lastName,
               email: userInfo.email,
               mobile: userInfo.mobile,
             },
@@ -154,13 +149,16 @@ const BookingHotel = () => {
   //onclick of pay genrate oderId and open razorpay
   async function displayRazorpay(e) {
     if (
-      !userInfo.fname ||
-      !userInfo.lname ||
+      !userInfo.firstName ||
+      !userInfo.lastName ||
       !userInfo.email ||
       !userInfo.mobile
     ) {
       setModalDisplay("grid");
     } else {
+      setUserData({...userData, ...userInfo});
+
+      localStorage.setItem("bookingUserData", JSON.stringify(userInfo));
       const orderId = await fetch(`${configData.SERVER_URL}/api/v1/anonymous/razorpay`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -197,6 +195,7 @@ const BookingHotel = () => {
           "https://ik.imagekit.io/k3m4pqzpmlr/coupons/1880-moon-outline_TBPed9a84.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1640773110779",
         order_id: dataR.message.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         handler: async function (response) {
+          
          const data =  await fetch(`${configData.SERVER_URL}/api/v1/anonymous/roomBook`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -207,10 +206,25 @@ const BookingHotel = () => {
               guestDetails: userInfo,
             })})
             const data1 = await data.json()
-            history.push(`/payment/${data1.message.paymentVerified._id}`)
+            console.log(data1);
+            if(data1.success === false && data1.message.payment.status === "SUCCESS"){
+              if(data1.message.newUser === true){
+                localStorage.setItem("token", data1.message.token);
+                history.push(`/verify?redirect=/refund/${data1.message.payment._id}`)
+              }else{
+                history.push(`/refund/${data1.message.payment._id}`)
+              }
+            }else{
+              if(data1.message.newUser === true){
+                localStorage.setItem("token", data1.message.token);
+                history.push(`/verify?redirect=/payment/${data1.message.payment._id}`)
+              }else{
+                history.push(`/payment/${data1.message.payment._id}`)
+              }
+          }
         },
         prefill: {
-          name: userInfo.fname,
+          name: userInfo.firstName,
           email: userInfo.email,
           contact: userInfo.mobile,
         },
@@ -229,8 +243,11 @@ const BookingHotel = () => {
             amount: dataR.message.amount,
           })})
           const data1 = await data.json();
-          paymentObject.close();
-          history.push(`/payment/${data1.message.payment._id}`)
+          
+
+            paymentObject.close();
+            history.push(`/payment/${data1.message.payment._id}`)
+          
 });
 
       // document.getElementById("rzp-button1").onclick = function (e) {
@@ -279,17 +296,17 @@ const BookingHotel = () => {
                 <input
                   type="text"
                   placeholder="First Name"
-                  value={userInfo.fname}
+                  value={userInfo.firstName}
                   onChange={(e) =>
-                    setUserInfo({ ...userInfo, fname: e.target.value })
+                    setUserInfo({ ...userInfo, firstName: e.target.value })
                   }
                 />
                 <input
                   type="text"
                   placeholder="Last Name"
-                  value={userInfo.lname}
+                  value={userInfo.lastName}
                   onChange={(e) =>
-                    setUserInfo({ ...userInfo, lname: e.target.value })
+                    setUserInfo({ ...userInfo, lastName: e.target.value })
                   }
                 />
               </div>
