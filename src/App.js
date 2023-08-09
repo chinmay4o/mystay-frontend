@@ -20,6 +20,8 @@ import Login from "./Screens/Login";
 import Signup from "./Screens/Signup";
 import React from "react";
 import UserBooking from "./Screens/UserBooking";
+import Profile from "./Screens/Profile";
+import RefundScreen from "./Screens/RefundScreen";
 
 
 function App() {
@@ -64,6 +66,11 @@ function App() {
                 <Route path= "/payment/:id">
                   <CongratsScreen />
                 </Route>
+
+                <Route path = "/refund/:id">
+                  <RefundScreen />
+                </Route>
+
                 <Route path= "/login">
                   <Login />
                 </Route>
@@ -74,6 +81,9 @@ function App() {
 
                 <Route path= "/bookings">
                   <UserBooking />
+                </Route>
+                <Route path = "/profile">
+                  <Profile />
                 </Route>
               </div>
             </div>

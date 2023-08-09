@@ -95,7 +95,7 @@ const SingleHotel = () => {
               <div className="date-select">
                 <input type="date" />
                 <p className="arrow">
-                  <i class="fas fa-long-arrow-alt-right"></i>{" "}
+                  <i className="fas fa-long-arrow-alt-right"></i>{" "}
                 </p>
                 <input type="date" />
               </div>

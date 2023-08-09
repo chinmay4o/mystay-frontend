@@ -10,14 +10,14 @@ const Footer = () => {
           activity-led hotels.
         </p>
       </div>
-      <div class="links-box">
+      <div className="links-box">
         <h3> Usefull Links</h3>
 
         <div className="de2">
           
         </div>
       </div>
-      <div class="social-box"></div>
+      <div className="social-box"></div>
     </section>
   );
 };

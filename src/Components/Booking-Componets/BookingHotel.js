@@ -32,7 +32,13 @@ const BookingHotel = () => {
   const [modalContent, setModalContent] = useState("Please Fill all the details");
 
   // saving form info here
-  const [userInfo, setUserInfo] = useState(userData);
+  const [userInfo, setUserInfo] = useState({
+    firstName: userData?.firstName ? userData.firstName : "",
+    lastName: userData?.lastName ? userData.lastName : "",
+    email: userData?.email ? userData.email : "",
+    mobile: userData?.mobile ? userData.mobile : "",
+    address: ""
+  });
 
   //Calculating differecebetween Days/nights
   const date1 = new Date(localStorage.getItem("checkIn"));
@@ -226,7 +232,7 @@ const BookingHotel = () => {
         prefill: {
           name: userInfo.firstName,
           email: userInfo.email,
-          contact: userInfo.mobile,
+          contact: 9827485821,
         },
       };
 
@@ -281,7 +287,7 @@ const BookingHotel = () => {
       <div className="b-box1">
         <p className="confirm-title">
           {" "}
-          <i class="fas fa-long-arrow-alt-left"></i> Confirm your booking
+          <i className="fas fa-long-arrow-alt-left"></i> Confirm your booking
         </p>
 
         <form className="form">
@@ -414,7 +420,7 @@ const BookingHotel = () => {
                     </p>
                     <p className="dynamic-room-tprice">
                       {" "}
-                      <i class="fas fa-rupee-sign"></i>{" "}
+                      <i className="fas fa-rupee-sign"></i>{" "}
                       {ele.roomPrice * ele.qty * diffDays}
                     </p>
                   </div>
@@ -428,7 +434,7 @@ const BookingHotel = () => {
                 <p className="stable">Tax</p>{" "}
                 <p className="dynamic">
                   {" "}
-                  <i class="fas fa-rupee-sign"></i>{" "}
+                  <i className="fas fa-rupee-sign"></i>{" "}
                   {(selectedRooms.reduce(
                     (prev, curr) => prev + curr.qty * curr.roomPrice,
                     0
@@ -441,7 +447,7 @@ const BookingHotel = () => {
               <div className="payable">
                 <p className="stable">Total payable</p>{" "}
                 <p className="dynamic">
-                  <i class="fas fa-rupee-sign"></i>{" "}
+                  <i className="fas fa-rupee-sign"></i>{" "}
                   {+selectedRooms
                     .reduce((prev, curr) => prev + curr.qty * curr.roomPrice, 0) * diffDays
                     .toFixed(2) +

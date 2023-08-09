@@ -86,7 +86,7 @@ const LongStaysMain = () => {
                     <p className="hotel-moreinfo">{ele.description}</p>
 
                     <div className="view-btn">
-                      View <i class="fas fa-long-arrow-alt-right"></i>
+                      View <i className="fas fa-long-arrow-alt-right"></i>
                     </div>
                   </div>
                 </div>

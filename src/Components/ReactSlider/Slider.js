@@ -27,7 +27,7 @@ function Slider(props) {
           props.sliderShow === "none" ? props.setSliderShow("grid") : props.setSliderShow("none")
         }
       >
-        <i class="fas fa-window-close"></i>
+        <i className="fas fa-window-close"></i>
       </span>
         {/* <SliderContent activeIndex={activeIndex} sliderImage={sliderImage} /> */}
         <SliderContent

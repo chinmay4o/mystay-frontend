@@ -47,21 +47,21 @@ const Footer = () => {
               className="home_social-icon"
               target="_blank"
             >
-              <i class="fab fa-instagram"></i>
+              <i className="fab fa-instagram"></i>
             </a>
             {/* <a
           href="https://github.com/chinmay4o"
           className="home_social-icon"
           target="_blank"
         >
-          <i class="fab fa-github"></i>
+          <i className="fab fa-github"></i>
         </a> */}
             <a
               href="https://www.facebook.com/Mystayhotels/"
               className="home_social-icon"
               target="_blank"
             >
-              <i class="fab fa-facebook"></i>
+              <i className="fab fa-facebook"></i>
             </a>
           </div>
           

@@ -1,7 +1,7 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom'
-import {UserContext} from '../../App'
+// import {UserContext} from '../../App'
 
 
 const Login = () => {
@@ -30,10 +30,12 @@ const Login = () => {
     }
 
   return (
-    <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" placeholder="Email" {...register("email", {required: true})} className="w-96 h-12 px-3 rounded-lg border-2 border-gray-200 outline-none focus:border-primary" />
-            <button type="submit" className="w-40 h-12 mt-4 mb-4 rounded-lg bg-primary text-white font-bold">Submit</button>
+    <div className='w-full h-full flex  flex-col gap-16 pt-40 items-center'>
+        <div className='text-4xl font-bold text-primary'>Login</div>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 items-center'>
+            <label className="text-gray-700 text-xl font-normal">Enter Your email </label>
+            <input type="text" placeholder="Email" {...register("email", {required: true})} className="w-72 md:w-96 h-12 px-3 rounded-lg border-2 border-gray-200 outline-none focus:border-primary" />
+            <button type="submit" className="w-72 md:w-96 h-12 mt-4 mb-4 rounded-lg bg-primary text-white font-normal">Submit</button>
         </form>
     </div>
   )

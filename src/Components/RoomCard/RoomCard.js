@@ -64,7 +64,7 @@ const RoomCard = ({ ele }) => {
           </p>
           <p className="r1-price">
             {" "}
-            <i class="fas fa-rupee-sign"></i> {ele.roomPrice}
+            <i className="fas fa-rupee-sign"></i> {ele.roomPrice}
           </p>
         </div>
 
@@ -80,7 +80,7 @@ const RoomCard = ({ ele }) => {
 
           <div className="addition-unit-engine">
             <i
-              class="fas fa-minus"
+              className="fas fa-minus"
               onClick={() => {
                 removeRoomFromCartHandler(ele);
                 setCount(count <= 0 ? 0 : count - 1);
@@ -88,7 +88,7 @@ const RoomCard = ({ ele }) => {
             ></i>
             <p>{count}</p>
             <i
-              class="fas fa-plus"
+              className="fas fa-plus"
               onClick={() => {
                 addRoomToCartHandler(ele);
                 setCount(count >= ele.roomDetails.length ? count : count + 1);

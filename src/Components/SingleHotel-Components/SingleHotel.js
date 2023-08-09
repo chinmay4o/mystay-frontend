@@ -155,7 +155,7 @@ const SingleHotel = () => {
                   </p>
 
                   <p className="arrow">
-                    <i class="fas fa-long-arrow-alt-right"></i>{" "}
+                    <i className="fas fa-long-arrow-alt-right"></i>{" "}
                   </p>
                   {/* <input type="date" value={checkOut} /> */}
                   <p className="input">
@@ -199,7 +199,7 @@ const SingleHotel = () => {
                             </p>
                             <p className="dynamic-room-tprice">
                               {" "}
-                              <i class="fas fa-rupee-sign"></i>{" "}
+                              <i className="fas fa-rupee-sign"></i>{" "}
                               {ele.roomPrice * ele.qty * diffDays}
                             </p>
                           </div>
@@ -213,7 +213,7 @@ const SingleHotel = () => {
                         <p className="stable">Tax</p>{" "}
                         <p className="dynamic">
                           {" "}
-                          <i class="fas fa-rupee-sign"></i>{" "}
+                          <i className="fas fa-rupee-sign"></i>{" "}
                           {(selectedRooms.reduce(
                             (prev, curr) => prev + curr.qty * curr.roomPrice,
                             0
@@ -226,7 +226,7 @@ const SingleHotel = () => {
                       <div className="payable">
                         <p className="stable">Total payable</p>{" "}
                         <p className="dynamic">
-                          <i class="fas fa-rupee-sign"></i>{" "}
+                          <i className="fas fa-rupee-sign"></i>{" "}
                           {+selectedRooms
                             .reduce(
                               (prev, curr) => prev + curr.qty * curr.roomPrice,
@@ -265,7 +265,7 @@ const SingleHotel = () => {
                 <p className="mobile-payable">
                   Payable Now
                   <span>
-                    <i class="fas fa-rupee-sign"></i>{" "}
+                    <i className="fas fa-rupee-sign"></i>{" "}
                     {+selectedRooms
                       .reduce(
                         (prev, curr) => prev + curr.qty * curr.roomPrice,
@@ -308,7 +308,7 @@ const SingleHotel = () => {
                           </p>
                           <p className="dynamic-room-tprice">
                             {" "}
-                            <i class="fas fa-rupee-sign"></i>{" "}
+                            <i className="fas fa-rupee-sign"></i>{" "}
                             {ele.roomPrice * ele.qty}
                           </p>
                         </div>
@@ -322,7 +322,7 @@ const SingleHotel = () => {
                       <p className="stable">Tax</p>{" "}
                       <p className="dynamic">
                         {" "}
-                        <i class="fas fa-rupee-sign"></i>{" "}
+                        <i className="fas fa-rupee-sign"></i>{" "}
                         {(selectedRooms.reduce(
                           (prev, curr) => prev + curr.qty * curr.roomPrice,
                           0
@@ -335,7 +335,7 @@ const SingleHotel = () => {
                     <div className="payable">
                       <p className="stable">Total payable</p>{" "}
                       <p className="dynamic">
-                        <i class="fas fa-rupee-sign"></i>{" "}
+                        <i className="fas fa-rupee-sign"></i>{" "}
                         {+selectedRooms
                           .reduce(
                             (prev, curr) => prev + curr.qty * curr.roomPrice,

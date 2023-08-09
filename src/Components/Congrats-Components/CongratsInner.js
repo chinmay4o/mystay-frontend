@@ -1,16 +1,59 @@
 import React from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams, useHistory } from "react-router-dom";
 
 const CongratsInner = () => {
+  const history = useHistory();
   const { id } = useParams();
+  const [payment, setPayment] = React.useState({});
+  localStorage.removeItem("bookingUserData")
 
-  useEffect(()=>{
-    fetch(`http://localhost:5001/api/v1/anonymous/payment/${id}`).then(res=>res.json()).then(data=>console.log(data))
-  },[id])
+  useEffect(() => {
+    // setTimeout(4000);
+    fetch(`http://localhost:5001/api/v1/anonymous/payment/${id}`)
+      .then((res) => res.json())
+      .then((data) => setPayment(data.message.payment));
+  }, [id]);
 
   return (
-    <div className="congrats-inner">
+    <div className=" w-full flex justify-center pt-10 md:pt-20 lg:pt-32 p-8 ">
+      {payment && (
+        <div className="w-full md:w-1/2 flex  flex-col items-center gap-4 md:gap-8 p-4 rounded-lg shadow-2xl">
+          {payment?.status === "SUCCESS" ? (
+            <>
+              <img
+                src="/images/Checkcircle.svg"
+                alt="Success"
+                className="h-12 w-12"
+              />
+              <div className="text-xl md:text-3xl">Booking Successfull!</div>
+              <div className=" text-sm text-center md:text-xl text-gray-500">
+                Please check your email for booking information and receipts.
+              </div>
+              <div className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg" onClick={() => history.push("/")}>
+                  Go to Home
+              </div>
+            </>
+          ) : (
+            <>
+              <img
+                src="/images/Cancelled.svg"
+                alt="Failure"
+                className="h-12 w-12"
+              />
+              <div className="text-xl md:text-3xl">Booking Unsuccessfull!</div>
+              <div className="text-sm text-center md:text-xl text-gray-500">
+                Please check your email for more information.
+              </div>
+              <div className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg" onClick={() => history.push("/")}>
+                  Go to Home
+              </div>
+            </>
+          )}
+        </div>
+      )}
+      {!payment && <div className="text-primary text-4xl">Loading...</div>}
+
       {/* <div className="b-box1">
         <p className="confirm-title">
           <lord-icon
@@ -18,7 +61,7 @@ const CongratsInner = () => {
             trigger="loop"
             style={{ width: "250px", height: "250px" }}
           ></lord-icon>{" "}
-          <i class="fas fa-long-arrow-alt-left"></i> Confirm your booking
+          <i className="fas fa-long-arrow-alt-left"></i> Confirm your booking
         </p>
 
         <form className="form">
@@ -86,7 +129,7 @@ const CongratsInner = () => {
                     </p>
                     <p className="dynamic-room-tprice">
                       {" "}
-                      <i class="fas fa-rupee-sign"></i>{" "}
+                      <i className="fas fa-rupee-sign"></i>{" "}
                       {ele.roomPrice * ele.qty}
                     </p>
                   </div>
@@ -104,7 +147,7 @@ const CongratsInner = () => {
               <div className="payable">
                 <p className="stable">Total payable</p>{" "}
                 <p className="dynamic">
-                  <i class="fas fa-rupee-sign"></i>{" "}
+                  <i className="fas fa-rupee-sign"></i>{" "}
                   {+selectedRooms
                     .reduce((prev, curr) => prev + curr.qty * curr.roomPrice, 0)
                     .toFixed(2) +
