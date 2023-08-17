@@ -5,7 +5,7 @@ import RoomCard from "../RoomCard/RoomCard";
 import Slider from "../ReactSlider/Slider";
 import Modal from "../Modal/Modal";
 import { configData } from "../../Config/config.js";
-
+import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 
 const SingleHotel = () => {
   const history = useHistory();
@@ -32,19 +32,24 @@ const SingleHotel = () => {
 
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
 
-  let imgClasses = ["a1", "b1", "c1", "d1"];
+  let imgClasses = [
+    "col-span-3 row-span-3 bg-cover  rounded-xl",
+    "col-start-4 bg-cover rounded-xl hidden md:block",
+    "col-start-4 bg-cover rounded-xl hidden md:block",
+    "col-start-4 bg-cover rounded-xl hidden md:block",
+  ];
 
   const search = useLocation().search;
   const checkIn = new URLSearchParams(search).get("checkIn");
   const checkOut = new URLSearchParams(search).get("checkOut");
 
-    //Calculating differecebetween Days/nights
-    const date1 = new Date(localStorage.getItem("checkIn"));
-    const date2 = new Date(localStorage.getItem("checkOut"));
-    const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    console.log(diffTime + " milliseconds");
-    console.log(diffDays + " days");
+  //Calculating differecebetween Days/nights
+  const date1 = new Date(localStorage.getItem("checkIn"));
+  const date2 = new Date(localStorage.getItem("checkOut"));
+  const diffTime = Math.abs(date2 - date1);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  console.log(diffTime + " milliseconds");
+  console.log(diffDays + " days");
 
   async function getSingleHotel(id) {
     const response = await fetch(
@@ -90,7 +95,7 @@ const SingleHotel = () => {
           setSliderShow={setSliderShow}
           sliderImagesNew={singleHotel.data[0].images}
         />
-        <div className="single-hotel-images">
+        <div className="w-[96%] md:w-[96%] h-96 md:h-[600px] xl:w-[1280px] md:gap-2 mx-auto py-5 grid grid-cols-3 grid-rows-3 md:grid-cols-4">
           {singleHotel.data[0].images.map((ele, index) => {
             return (
               <div
@@ -115,40 +120,41 @@ const SingleHotel = () => {
           <div className="d1"></div> */}
         </div>
 
-        <div className="hotel-details">
-          <div className="hotel-info">
-            <p className="hotel-title">{singleHotel.data[0].hotelName}</p>
+        <div className="w-[96%] xl:w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 px-4">
+          <div className="flex flex-col gap-6 lg:w-4/6">
+            <p className="text-2xl font-bold">
+              {singleHotel.data[0].hotelName}
+            </p>
 
-            <p className="hotel-description">
+            <p className="font-semibold text-base text-[#6d6d6d]">
               {singleHotel.data[0].description}
             </p>
           </div>
-          <div className="hotel-amenities">
-            <p className="sub-title">Amenities</p>
+          <div className=" flex flex-col gap-6 lg:w-2/6">
+            <p className="text-2xl font-bold">Amenities</p>
 
-            <div className="amenities-grid">
+            <div className="grid grid-cols-2 grid-rows-4 gap-4 grid-flow-row md:grid-cols-3">
               {singleHotel.data[0].amenities.map((ele, index) => {
-                return <div className="one-amenity">{ele}</div>;
+                return <div className="">{ele}</div>;
               })}
             </div>
           </div>
         </div>
 
-        <div className="hotel-room-details-outer">
-          <div className="hotel-room-details">
+        <div className="w-full bg-[#f9f7f1]">
+          <div className=" py-12 px-5 flex flex-col lg:flex-row gap-12 mx-auto rounded-xl  max-w-[1280px]">
             {/* date grid */}
-            <div className="box1">
-              <div className="date-grid">
-                <div className="static-details">
-                  <p className="sub-title">Book Your Stay</p>
-                  <p className="sub-title-info">
-                    Select from a range of beautiful rooms
-                  </p>
-                </div>
 
-                <div className="date-select">
+            <div className="flex flex-col gap-6">
+              <p className="font-bold text-3xl">Book Your Stay</p>
+              <p className="font-semi-bold text-[#808080] text-xl">
+                Select from a range of beautiful rooms
+              </p>
+
+              <div className="grid place-items-center">
+                <div className="flex gap-4 items-center justify-center p-4 rounded-xl bg-white shadow-md w-max">
                   {/* <input type="date" value={checkIn} /> */}
-                  <p className="input">
+                  <p className="font-medium text-[#484848]">
                     {new Date(checkIn).getDate()}th{" "}
                     {monthNames[new Date(checkIn).getMonth()]}{" "}
                     {new Date(checkIn).getFullYear()}
@@ -158,216 +164,147 @@ const SingleHotel = () => {
                     <i className="fas fa-long-arrow-alt-right"></i>{" "}
                   </p>
                   {/* <input type="date" value={checkOut} /> */}
-                  <p className="input">
+                  <p className="font-medium text-[#484848]">
                     {new Date(checkOut).getDate()}th{" "}
                     {monthNames[new Date(checkOut).getMonth()]}{" "}
                     {new Date(checkOut).getFullYear()}
                   </p>
                 </div>
               </div>
+
               {/* end of date grid */}
 
               {/* hotel rooms mapping */}
-              <div className="room-booking-details">
+              <div className="w-full rounded-xl gap-6 flex-col flex">
                 {singleHotel.data[0].rooms.map((ele, index) => {
                   return <RoomCard ele={ele} />;
                 })}
               </div>
             </div>
 
-            {window.innerWidth > 600 ? (
-              <div className="box2">
-                <div className="order-box">
-                  <p className="order-title">Summary</p>
+              <div className="hidden md:flex max-lg:w-full max-lg:items-center justify-center">
 
-                  <p className="dynamic-date-box">
-                    Starting from {new Date(checkIn).getDate()}th{" "}
-                    {monthNames[new Date(checkIn).getMonth()]} for {diffDays} days
-                    {/* {checkIn} */}
-                  </p>
+             
+              <div className="hidden md:flex flex-col gap-4 lg:w-max w-96 ">
+                <p className="text-3xl font-bold ">Summary</p>
 
-                  <div className="dynamic-room-details">
-                    {selectedRooms.length === 0 ? (
-                      <p>No Rooms Selected</p>
-                    ) : (
-                      selectedRooms.map((ele, index) => {
-                        return (
-                          <div className="dynamic-room-pricing" key={index}>
-                            <p className="dynamic-room-type">
-                              {" "}
-                              {ele.roomName} <span> X {ele.qty}</span>
-                            </p>
-                            <p className="dynamic-room-tprice">
-                              {" "}
-                              <i className="fas fa-rupee-sign"></i>{" "}
-                              {ele.roomPrice * ele.qty * diffDays}
-                            </p>
-                          </div>
-                        );
-                      })
-                    )}
-
-                    <div className="dynamic-subtotal">
-                      <p className="bordered"></p>
-                      <div className="tax">
-                        <p className="stable">Tax</p>{" "}
-                        <p className="dynamic">
-                          {" "}
-                          <i className="fas fa-rupee-sign"></i>{" "}
-                          {(selectedRooms.reduce(
-                            (prev, curr) => prev + curr.qty * curr.roomPrice,
-                            0
-                          ) * diffDays *
-                            18) /
-                            (100).toFixed(2)}
-                        </p>
-                      </div>
-
-                      <div className="payable">
-                        <p className="stable">Total payable</p>{" "}
-                        <p className="dynamic">
-                          <i className="fas fa-rupee-sign"></i>{" "}
-                          {+selectedRooms
-                            .reduce(
-                              (prev, curr) => prev + curr.qty * curr.roomPrice,
-                              0
-                            ) * diffDays
-                            .toFixed(2) +
-                            +(
-                              (selectedRooms.reduce(
-                                (prev, curr) =>
-                                  prev + curr.qty * curr.roomPrice,
-                                0
-                              ) * diffDays *
-                                18) /
-                              (100).toFixed(2)
-                            )}{" "}
-                        </p>
-                      </div>
-
-                      <div
-                        className="pay-btn"
-                        onClick={() =>
-                          selectedRooms.length > 0
-                            ? history.push("/booking")
-                            : setModalDisplay("grid")
-                        }
-                      >
-                        Book Now
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              //else
-              <div className="mobile-box2">
-                <p className="mobile-payable">
-                  Payable Now
-                  <span>
-                    <i className="fas fa-rupee-sign"></i>{" "}
-                    {+selectedRooms
-                      .reduce(
-                        (prev, curr) => prev + curr.qty * curr.roomPrice,
-                        0
-                      ) * diffDays
-                      .toFixed(2)}{" "}
-                  </span>
-                </p>
-                {/* <div className="mobile-btn">View Summary</div> */}
-                <div
-                  className="mobile-btn"
-                  onClick={() =>
-                    selectedRooms.length > 0
-                      ? history.push("/booking")
-                      : setModalDisplay("grid")
-                  }
-                >
-                  Book Now
-                </div>
-
-                <div className="order-box">
-                  {/* <p className="order-title">Summary</p>
-
-                <p className="dynamic-date-box">
+                <p className="text-[#808080] font-semibold">
                   Starting from {new Date(checkIn).getDate()}th{" "}
-                  {monthNames[new Date(checkIn).getMonth()]}
-
+                  {monthNames[new Date(checkIn).getMonth()]} for {diffDays} days
+                  {/* {checkIn} */}
                 </p>
 
-                <div className="dynamic-room-details">
+                <div className="text-[18px] flex-col flex gap-4 w-full">
                   {selectedRooms.length === 0 ? (
                     <p>No Rooms Selected</p>
                   ) : (
                     selectedRooms.map((ele, index) => {
                       return (
-                        <div className="dynamic-room-pricing" key={index}>
-                          <p className="dynamic-room-type">
+                        <div
+                          className="flex justify-between items-center"
+                          key={index}
+                        >
+                          <p className="font-bold">
                             {" "}
-                            {ele.roomName} <span> X {ele.qty}</span>
+                            {ele.roomName}{" "}
+                            <span className="text-[#808080] text-base font-semibold">
+                              {" "}
+                              X {ele.qty}
+                            </span>
                           </p>
-                          <p className="dynamic-room-tprice">
+                          <p className="font-bold">
                             {" "}
                             <i className="fas fa-rupee-sign"></i>{" "}
-                            {ele.roomPrice * ele.qty}
+                            {ele.roomPrice * ele.qty * diffDays}
                           </p>
                         </div>
                       );
                     })
                   )}
 
-                  <div className="dynamic-subtotal">
-                    <p className="bordered"></p>
-                    <div className="tax">
-                      <p className="stable">Tax</p>{" "}
-                      <p className="dynamic">
-                        {" "}
-                        <i className="fas fa-rupee-sign"></i>{" "}
-                        {(selectedRooms.reduce(
-                          (prev, curr) => prev + curr.qty * curr.roomPrice,
-                          0
-                        ) *
-                          18) /
-                          (100).toFixed(2)}
-                      </p>
-                    </div>
+                  <div className="bg-primary h-1 w-full">&nbsp;</div>
+                  <div className="flex justify-between items-center font-bold">
+                    <p className="font-bold">Tax</p>{" "}
+                    <p className="dynamic">
+                      {" "}
+                      <i className="fas fa-rupee-sign"></i>{" "}
+                      {(selectedRooms.reduce(
+                        (prev, curr) => prev + curr.qty * curr.roomPrice,
+                        0
+                      ) *
+                        diffDays *
+                        18) /
+                        (100).toFixed(2)}
+                    </p>
+                  </div>
 
-                    <div className="payable">
-                      <p className="stable">Total payable</p>{" "}
-                      <p className="dynamic">
-                        <i className="fas fa-rupee-sign"></i>{" "}
-                        {+selectedRooms
-                          .reduce(
+                  <div className="flex justify-between items-center font-bold">
+                    <p className="font-bold ">Total payable</p>{" "}
+                    <p className="dynamic">
+                      <i className="fas fa-rupee-sign"></i>{" "}
+                      {+selectedRooms.reduce(
+                        (prev, curr) => prev + curr.qty * curr.roomPrice,
+                        0
+                      ) *
+                        diffDays.toFixed(2) +
+                        +(
+                          (selectedRooms.reduce(
                             (prev, curr) => prev + curr.qty * curr.roomPrice,
                             0
-                          )
-                          .toFixed(2) +
-                          +(
-                            (selectedRooms.reduce(
-                              (prev, curr) => prev + curr.qty * curr.roomPrice,
-                              0
-                            ) *
-                              18) /
-                            (100).toFixed(2)
-                          )}{" "}
-                      </p>
-                    </div>
-
-                    <div
-                      className="pay-btn"
-                      onClick={() =>
-                        selectedRooms.length > 0
-                          ? history.push("/booking")
-                          : alert("please select min rooms")
-                      }
-                    >
-                      Book Now
-                    </div>
+                          ) *
+                            diffDays *
+                            18) /
+                          (100).toFixed(2)
+                        )}{" "}
+                    </p>
                   </div>
-                </div> */}
+
+<div className="flex items-center justify-center">
+
+                  <PrimaryButton
+                    text="Book Now"
+                    onClick={() =>
+                      selectedRooms.length > 0
+                      ? history.push("/booking")
+                      : setModalDisplay("grid")
+                    }
+                    />
+                    </div>
                 </div>
               </div>
-            )}
+              </div>
+
+              <div className="md:hidden fixed bottom-0 border-t-[1px] border-[#808080/10] bg-white shadow-xl left-0 p-4 flex justify-between items-center w-full">
+                <div className="flex flex-col gap-2">
+                  <p className="text-xl font-bold text-[#808080]">Payable Now</p>
+                  <p className="text-xl font-semibold">
+                  <i className="fas fa-rupee-sign"></i>{" "}
+                      {+selectedRooms.reduce(
+                        (prev, curr) => prev + curr.qty * curr.roomPrice,
+                        0
+                      ) *
+                        diffDays.toFixed(2) +
+                        +(
+                          (selectedRooms.reduce(
+                            (prev, curr) => prev + curr.qty * curr.roomPrice,
+                            0
+                          ) *
+                            diffDays *
+                            18) /
+                          (100).toFixed(2)
+                        )}
+                  </p>
+                </div>
+                <PrimaryButton 
+                text="Book Now"
+                onClick={() =>
+                  selectedRooms.length > 0
+                    ? history.push("/booking")
+                    : setModalDisplay("grid")
+                }
+                />
+              </div>
+           
           </div>
         </div>
       </>

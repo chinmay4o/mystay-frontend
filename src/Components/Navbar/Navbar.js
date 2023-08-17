@@ -158,13 +158,13 @@ const MobileComponent = ({ userData }) => {
     <div className="w-screen max-h-screen relative">
       <div className="w-full  p-4 flex justify-between items-center">
         <div className="" onClick={() => history.push("/")}>
-          <img
+          {/* <img
             // src="https://ik.imagekit.io/k3m4pqzpmlr/Logo/mystay-logo-removebg-preview_s7Qj1Ibh3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655707681416"
             src="https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/mystay-logo-removebg-preview_Gu-jhBpNX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656660679160"
             alt="mystay"
             className="h-10 w-12 object-contain"
-          />
-          {/* My<span>Stay</span>{" "} */}
+          /> */}
+          My<span>Stay</span>{" "}
         </div>
         <div
           className="flex flex-col gap-1 cursor-pointer"
@@ -281,13 +281,13 @@ const DesktopComponent = ({ userData }) => {
     <div className="w-screen h-16 flex p-4 lg:p-8 xl:p-12 items-center lg:justify-between">
       <div className="w-full p-2 flex justify-between items-center">
         <div className="" onClick={() => history.push("/")}>
-          <img
+          {/* <img
             // src="https://ik.imagekit.io/k3m4pqzpmlr/Logo/mystay-logo-removebg-preview_s7Qj1Ibh3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655707681416"
             src="https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/mystay-logo-removebg-preview_Gu-jhBpNX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656660679160"
             alt="mystay"
             className="h-12 w-14 lg:h-14 lg:w-16 object-contain"
-          />
-          {/* My<span>Stay</span>{" "} */}
+          /> */}
+          My<span>Stay</span>{" "}
         </div>
       </div>
       <div
@@ -304,7 +304,7 @@ const DesktopComponent = ({ userData }) => {
             Search Destination <i className="fas fa-angle-down"></i>
             {citiesD.length !== 0 && (
               <div
-                className="absolute  max-w-[410px] grid mt-3 py-3 min-w-[210px] overflow-hidden overflow-y-auto shadow-lg gap-y-2 place-items-center grid-cols-1 grid-rows-2 rounded-lg bg-white "
+                className="absolute z-[100] max-w-[410px] grid mt-3 py-3 min-w-[210px] overflow-hidden overflow-y-auto shadow-lg gap-y-2 place-items-center grid-cols-1 grid-rows-2 rounded-lg bg-white "
                 style={{ display: show }}
               >
                 {citiesD.slice(0, 15).map((ele, index) => {

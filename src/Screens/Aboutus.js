@@ -1,21 +1,23 @@
 import React from "react";
 import Navbar from "../Components/Navbar/Navbar";
+import Footer from "./Footer";
 
 const Aboutus = () => {
   return (
-    <div className="aboutus-container">
+    <div className="w-screen  bg-white">
       <Navbar />
-      <div className="aboutus-inner">
-      <div className="circle1"></div>
-      <div className="circle2"></div>
-        <h1 className="title">MY STAY Group of Hotels and WB Events</h1>
+      <div className="my-14 p-4 sm:p-10 w-[95%] min-h-[800px] sm:w-4/5 rounded-xl relative  mx-auto">
+      <div className="w-[440px] h-[640px] absolute bg-[#669bff8e] top-[100px] -left-[440px] blur"></div>
+      <div className="w-[440px] h-[640px] absolute bg-[#669bff8e] top-[100px] -right-[450px] blur"></div>
+        <h1 className="text-4xl m-5 text-center">MY STAY Group of Hotels and WB Events</h1>
 
         <img
           src="https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/mystay-logo-removebg-preview_Gu-jhBpNX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656660679160"
           alt="mystay"
+          className="w-[200px] h-[200px] mx-auto"
         />
 
-        <p>
+        <p className="text-lg font-medium py-3 px-7 z-10">
           Walter &amp; Bruke’s Events and Exhibition along with ARN group of
           hotels had initiated their hotel business in 2018. After having 18
           hotel properties in Kota we as a group come up with our own
@@ -30,7 +32,7 @@ const Aboutus = () => {
           events field we have grown a beneficial business preposition in Hotel
           Business also.
         </p>
-        <p>
+        <p className="text-lg font-medium py-3 px-7 z-10">
           With this decent confidence Promoters of the company decided to expand
           the business across major commercial and Tourist places in the
           country. WB Events has executed some of the major events across
@@ -43,7 +45,7 @@ const Aboutus = () => {
           industrial expo, corporate events, business conferences, trade shows
           or weddings under Walter &amp; Bruke’s Events and Exhibitions.
         </p>
-        <p>
+        <p className="text-lg font-medium py-3 px-7 z-10">
           We are enjoying a good repo with all our investors, Property owners
           and OTA platforms. We have now created an eco-system around us which
           is now capable enough to attract business for us. We work on ethics
@@ -57,6 +59,8 @@ const Aboutus = () => {
           glimpse of our hotel properties and events.
         </p>
       </div>
+
+      <Footer />
     </div>
   );
 };

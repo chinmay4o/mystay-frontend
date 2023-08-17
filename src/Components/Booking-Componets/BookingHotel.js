@@ -1,12 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
-import { SelectedRoomsContext , UserContext } from "../../context/hotelsContext.js";
-
-import Modal from "../Modal/Modal"
+import {
+  SelectedRoomsContext,
+  UserContext,
+} from "../../context/hotelsContext.js";
+import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
+import Modal from "../Modal/Modal";
 import { configData } from "../../Config/config.js";
 import { useHistory } from "react-router-dom";
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
-  const {userData, setUserData} = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
 
   const monthNames = [
@@ -29,7 +32,9 @@ const BookingHotel = () => {
 
   //Modal Display
   const [modalDisplay, setModalDisplay] = useState("none");
-  const [modalContent, setModalContent] = useState("Please Fill all the details");
+  const [modalContent, setModalContent] = useState(
+    "Please Fill all the details"
+  );
 
   // saving form info here
   const [userInfo, setUserInfo] = useState({
@@ -37,7 +42,7 @@ const BookingHotel = () => {
     lastName: userData?.lastName ? userData.lastName : "",
     email: userData?.email ? userData.email : "",
     mobile: userData?.mobile ? userData.mobile : "",
-    address: ""
+    address: "",
   });
 
   //Calculating differecebetween Days/nights
@@ -54,9 +59,14 @@ const BookingHotel = () => {
       roomId: ele.roomId,
       hotelId: ele.hotelId,
       bookingNoOfRoom: ele.qty,
-      checkIn: JSON.stringify(new Date(localStorage.getItem("checkIn"))).slice(1, 23),
+      checkIn: JSON.stringify(new Date(localStorage.getItem("checkIn"))).slice(
+        1,
+        23
+      ),
       // checkIn: new Date(localStorage.getItem("checkIn")),
-      checkOut: JSON.stringify(new Date(localStorage.getItem("checkOut"))).slice(1, 23),
+      checkOut: JSON.stringify(
+        new Date(localStorage.getItem("checkOut"))
+      ).slice(1, 23),
       // checkOut: new Date(localStorage.getItem("checkOut")),
       night: diffDays,
     };
@@ -162,34 +172,39 @@ const BookingHotel = () => {
     ) {
       setModalDisplay("grid");
     } else {
-      setUserData({...userData, ...userInfo});
+      setUserData({ ...userData, ...userInfo });
 
       localStorage.setItem("bookingUserData", JSON.stringify(userInfo));
-      const orderId = await fetch(`${configData.SERVER_URL}/api/v1/anonymous/razorpay`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount:
-            +selectedRooms
-              .reduce((prev, curr) => prev + curr.qty * curr.roomPrice, 0)  * diffDays
-              .toFixed(2) +
-            +(
-              (selectedRooms.reduce(
+      const orderId = await fetch(
+        `${configData.SERVER_URL}/api/v1/anonymous/razorpay`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount:
+              +selectedRooms.reduce(
                 (prev, curr) => prev + curr.qty * curr.roomPrice,
                 0
-              )  * diffDays *
-                18) /
-              (100).toFixed(2)
-            ),
-          currency: "INR",
-        }),
-      });
+              ) *
+                diffDays.toFixed(2) +
+              +(
+                (selectedRooms.reduce(
+                  (prev, curr) => prev + curr.qty * curr.roomPrice,
+                  0
+                ) *
+                  diffDays *
+                  18) /
+                (100).toFixed(2)
+              ),
+            currency: "INR",
+          }),
+        }
+      );
 
       const dataR = await orderId.json();
 
-      setBookingDetails({...bookingDetails, guestDetails: userInfo})
+      setBookingDetails({ ...bookingDetails, guestDetails: userInfo });
 
-      
       var options = {
         key: "rzp_test_vlPwuXtjFz1cq1", // Enter the Key ID generated from the Dashboard
         // key: "rzp_live_0tYxpyabQlGWRc", // Enter the Key ID generated from the Dashboard
@@ -201,32 +216,42 @@ const BookingHotel = () => {
           "https://ik.imagekit.io/k3m4pqzpmlr/coupons/1880-moon-outline_TBPed9a84.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1640773110779",
         order_id: dataR.message.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         handler: async function (response) {
-          
-         const data =  await fetch(`${configData.SERVER_URL}/api/v1/anonymous/roomBook`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              ...response,
-              amount: dataR.message.amount,
-              bookingDetails: bookingDetails.bookingDetails,
-              guestDetails: userInfo,
-            })})
-            const data1 = await data.json()
-            console.log(data1);
-            if(data1.success === false && data1.message.payment.status === "SUCCESS"){
-              if(data1.message.newUser === true){
-                localStorage.setItem("token", data1.message.token);
-                history.push(`/verify?redirect=/refund/${data1.message.payment._id}`)
-              }else{
-                history.push(`/refund/${data1.message.payment._id}`)
-              }
-            }else{
-              if(data1.message.newUser === true){
-                localStorage.setItem("token", data1.message.token);
-                history.push(`/verify?redirect=/payment/${data1.message.payment._id}`)
-              }else{
-                history.push(`/payment/${data1.message.payment._id}`)
-              }
+          const data = await fetch(
+            `${configData.SERVER_URL}/api/v1/anonymous/roomBook`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                ...response,
+                amount: dataR.message.amount,
+                bookingDetails: bookingDetails.bookingDetails,
+                guestDetails: userInfo,
+              }),
+            }
+          );
+          const data1 = await data.json();
+          console.log(data1);
+          if (
+            data1.success === false &&
+            data1.message.payment.status === "SUCCESS"
+          ) {
+            if (data1.message.newUser === true) {
+              localStorage.setItem("token", data1.message.token);
+              history.push(
+                `/verify?redirect=/refund/${data1.message.payment._id}`
+              );
+            } else {
+              history.push(`/refund/${data1.message.payment._id}`);
+            }
+          } else {
+            if (data1.message.newUser === true) {
+              localStorage.setItem("token", data1.message.token);
+              history.push(
+                `/verify?redirect=/payment/${data1.message.payment._id}`
+              );
+            } else {
+              history.push(`/payment/${data1.message.payment._id}`);
+            }
           }
         },
         prefill: {
@@ -239,22 +264,24 @@ const BookingHotel = () => {
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
 
-      paymentObject.on('payment.failed', async function (response){
+      paymentObject.on("payment.failed", async function (response) {
         console.log(dataR.message.amount);
-        const data =  await fetch(`${configData.SERVER_URL}/api/v1/anonymous/payment/failure`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...response,
-            amount: dataR.message.amount,
-          })})
-          const data1 = await data.json();
-          
+        const data = await fetch(
+          `${configData.SERVER_URL}/api/v1/anonymous/payment/failure`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ...response,
+              amount: dataR.message.amount,
+            }),
+          }
+        );
+        const data1 = await data.json();
 
-            paymentObject.close();
-            history.push(`/payment/${data1.message.payment._id}`)
-          
-});
+        paymentObject.close();
+        history.push(`/payment/${data1.message.payment._id}`);
+      });
 
       // document.getElementById("rzp-button1").onclick = function (e) {
       //   rzp1.open();
@@ -277,204 +304,230 @@ const BookingHotel = () => {
 
   return (
     <>
-        <Modal
-          content={modalContent}
-          modalDisplay={modalDisplay}
-          setModalDisplay={setModalDisplay}
-        />
-  
-    <div className="booking-inner">
-      <div className="b-box1">
-        <p className="confirm-title">
-          {" "}
-          <i className="fas fa-long-arrow-alt-left"></i> Confirm your booking
-        </p>
+      <Modal
+        content={modalContent}
+        modalDisplay={modalDisplay}
+        setModalDisplay={setModalDisplay}
+      />
 
-        <form className="form">
-          <p className="guest-title"> Guest Information</p>
+      <div className="w-[90%] max-w-[1280px] bg-white flex flex-col lg:flex-row gap-6 justify-center items-center mx-auto p-3  pb-24">
+        <div className="">
+          <p className="text-3xl font-bold ">
+            {" "}
+            <i className="fas fa-long-arrow-alt-left"></i> Confirm your booking
+          </p>
 
-          <div className="form-grid">
-            <div className="b1">
-              <p>
-                Name <sup>*</sup>{" "}
-              </p>{" "}
-              <div>
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  value={userInfo.firstName}
-                  onChange={(e) =>
-                    setUserInfo({ ...userInfo, firstName: e.target.value })
-                  }
-                />
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  value={userInfo.lastName}
-                  onChange={(e) =>
-                    setUserInfo({ ...userInfo, lastName: e.target.value })
-                  }
-                />
+          <form className="border-[2px] border-[#f1f1f1] rounded-xl mt-6 overflow-hidden">
+            <p className="bg-[#def5ff] text-[#2b2b2b] p-5 text-2xl font-semibold"> Guest Information</p>
+
+            <div className="text-[#2b2b2b] py-[10px] px-5 mt-5">
+              <div className="flex flex-col sm:flex-row sm:items-center  sm:gap-10 w-full">
+                <p className="font-semibold text-[18px] p-4 flex items-center">
+                  Name{" "}
+                  <sup className="text-red-400 font-bold text-[16px]">*</sup>{" "}
+                </p>{" "}
+                <div className="grid grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 w-[90%] gap-4">
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    value={userInfo.firstName}
+                    onChange={(e) =>
+                      setUserInfo({ ...userInfo, firstName: e.target.value })
+                    }
+                    className="placeholder:text-[#808080/50] font-medium p-2  text-black text-[18px] border-[2px] border-[#f1f1f1] rounded-[5px]"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    value={userInfo.lastName}
+                    onChange={(e) =>
+                      setUserInfo({ ...userInfo, lastName: e.target.value })
+                    }
+                    className="placeholder:text-[#808080/50] font-medium p-2  text-black text-[18px] border-[2px] border-[#f1f1f1] rounded-[5px]"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="b2">
-              <p>
-                Gender <sup>*</sup>
-              </p>{" "}
-              <div>
-                <select
-                  name="gender"
-                  id="gender"
-                  placeholder="Gender"
-                  value={userInfo.gender}
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    setUserInfo({ ...userInfo, gender: e.target.value });
-                  }}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-                {/* <input
+              <div className="flex sm:items-center flex-col sm:flex-row sm:gap-7 w-full">
+                <p className="font-semibold text-[18px] p-4 flex items-center">
+                  Gender{" "}
+                  <sup className="text-red-400 font-bold text-[16px]">*</sup>
+                </p>{" "}
+                <div className="w-full">
+                  <select
+                    name="gender"
+                    id="gender"
+                    placeholder="Gender"
+                    value={userInfo.gender}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setUserInfo({ ...userInfo, gender: e.target.value });
+                    }}
+                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3 capitalize outline-none"
+                  >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                  {/* <input
                   type="text"
                   value={userInfo.gender}
                   onChange={(e) =>
                     setUserInfo({ ...userInfo, gender: e.target.value })
                   }
                 /> */}
+                </div>
+              </div>
+              <div className="flex sm:items-center flex-col sm:flex-row  sm:gap-10 w-full">
+                <p className="font-semibold text-[18px] p-4 flex items-center">
+                  Email{" "}
+                  <sup className="text-red-400 font-bold text-[16px]">*</sup>
+                </p>{" "}
+                <div className="w-full">
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    value={userInfo.email}
+                    onChange={(e) =>
+                      setUserInfo({ ...userInfo, email: e.target.value })
+                    }
+                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3 capitalize outline-none"
+                  />
+                </div>
+              </div>
+              <div className="flex sm:items-center flex-col sm:flex-row sm:gap-5 w-full">
+                <p className="font-semibold text-[18px] p-4 flex items-center">
+                  Number{" "}
+                  <sup className="text-red-400 font-bold text-[16px]">*</sup>
+                </p>{" "}
+                <div className="w-full">
+                  <input
+                    type="number"
+                    placeholder="Phone Number"
+                    value={userInfo.mobile}
+                    onChange={(e) =>
+                      setUserInfo({ ...userInfo, mobile: e.target.value })
+                    }
+                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3 capitalize outline-none"
+                  />
+                </div>
+              </div>
+              <div className="flex sm:items-center flex-col sm:flex-row sm:gap-5 w-full">
+                <p className="font-semibold text-[18px] p-4 flex items-center">
+                  Address{" "}
+                  <sup className="text-red-400 font-bold text-[16px]">*</sup>
+                </p>{" "}
+                <div className="w-full">
+                  <input
+                    type="text"
+                    placeholder="Address"
+                    value={userInfo.address}
+                    onChange={(e) =>
+                      setUserInfo({ ...userInfo, address: e.target.value })
+                    }
+                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3 capitalize outline-none"
+                  />
+                </div>
               </div>
             </div>
-            <div className="b3">
-              <p>
-                Email <sup>*</sup>
-              </p>{" "}
-              <div>
-                <input
-                  type="text"
-                  placeholder="Email"
-                  value={userInfo.email}
-                  onChange={(e) =>
-                    setUserInfo({ ...userInfo, email: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="b4">
-              <p>
-                Number <sup>*</sup>
-              </p>{" "}
-              <div>
-                <input
-                  type="number"
-                  placeholder="Phone Number"
-                  value={userInfo.mobile}
-                  onChange={(e) =>
-                    setUserInfo({ ...userInfo, mobile: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="b5">
-              <p>
-                Address <sup>*</sup>
-              </p>{" "}
-              <div>
-                <input
-                  type="text"
-                  placeholder="Address"
-                  value={userInfo.address}
-                  onChange={(e) =>
-                    setUserInfo({ ...userInfo, address: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-          </div>
 
-          <p className="b6">
-            Not Going Solo ? <span>Add another person</span>{" "}
-          </p>
-        </form>
-      </div>
+            <p className="w-full border-t-2 p-4 font-medium">
+              Not Going Solo ?{" "}
+              <span className="text-primary">Add another person</span>{" "}
+            </p>
+          </form>
+        </div>
 
-      <div className="b-box2">
-        <div className="booking-summary-box">
-          <p className="order-title">Summary</p>
+        <div className="flex max-lg:w-full max-lg:items-center justify-center">
+          <div className="p-8 border-[2px] rounded-2xl h-max flex flex-col gap-4 lg:w-max w-96 ">
+            <p className="text-3xl font-bold ">Summary</p>
 
-          <p className="dynamic-date-box">
-          Starting from {new Date(localStorage.getItem("checkIn")).getDate()}th{" "}
-                  {monthNames[new Date(localStorage.getItem("checkIn")).getMonth()]}
-          </p>
+            <p className="text-[#808080] font-semibold">
+              Starting from{" "}
+              {new Date(localStorage.getItem("checkIn")).getDate()}th{" "}
+              {monthNames[new Date(localStorage.getItem("checkIn")).getMonth()]}
+            </p>
 
-          <div className="dynamic-room-details">
-            {selectedRooms.length === 0 ? (
-              <p>No Rooms Selected</p>
-            ) : (
-              selectedRooms.map((ele, index) => {
-                return (
-                  <div className="dynamic-room-pricing" key={index}>
-                    <p className="dynamic-room-type">
-                      {" "}
-                      {ele.roomName} <span> X {ele.qty}</span>
-                    </p>
-                    <p className="dynamic-room-tprice">
-                      {" "}
-                      <i className="fas fa-rupee-sign"></i>{" "}
-                      {ele.roomPrice * ele.qty * diffDays}
-                    </p>
-                  </div>
-                );
-              })
-            )}
+            <div className="text-[18px] flex-col flex gap-4 w-full">
+              {selectedRooms.length === 0 ? (
+                <p>No Rooms Selected</p>
+              ) : (
+                selectedRooms.map((ele, index) => {
+                  return (
+                    <div
+                      className="flex justify-between items-center"
+                      key={index}
+                    >
+                      <p className="font-bold">
+                        {" "}
+                        {ele.roomName}{" "}
+                        <span className="text-[#808080] text-base font-semibold">
+                          {" "}
+                          X {ele.qty}
+                        </span>
+                      </p>
+                      <p className="font-bold">
+                        {" "}
+                        <i className="fas fa-rupee-sign"></i>{" "}
+                        {ele.roomPrice * ele.qty * diffDays}
+                      </p>
+                    </div>
+                  );
+                })
+              )}
 
-            <div className="dynamic-subtotal">
-              <p className="bordered"></p>
-              <div className="tax">
-                <p className="stable">Tax</p>{" "}
+              <div className="bg-primary h-1 w-full">&nbsp;</div>
+              <div className="flex justify-between items-center font-bold">
+                <p className="font-bold">Tax</p>{" "}
                 <p className="dynamic">
                   {" "}
                   <i className="fas fa-rupee-sign"></i>{" "}
                   {(selectedRooms.reduce(
                     (prev, curr) => prev + curr.qty * curr.roomPrice,
                     0
-                  )  * diffDays *
+                  ) *
+                    diffDays *
                     18) /
                     (100).toFixed(2)}
                 </p>
               </div>
 
-              <div className="payable">
-                <p className="stable">Total payable</p>{" "}
+              <div className="flex justify-between items-center font-bold">
+                <p className="font-bold ">Total payable</p>{" "}
                 <p className="dynamic">
                   <i className="fas fa-rupee-sign"></i>{" "}
-                  {+selectedRooms
-                    .reduce((prev, curr) => prev + curr.qty * curr.roomPrice, 0) * diffDays
-                    .toFixed(2) +
+                  {+selectedRooms.reduce(
+                    (prev, curr) => prev + curr.qty * curr.roomPrice,
+                    0
+                  ) *
+                    diffDays.toFixed(2) +
                     +(
                       (selectedRooms.reduce(
                         (prev, curr) => prev + curr.qty * curr.roomPrice,
                         0
-                      )  * diffDays *
+                      ) *
+                        diffDays *
                         18) /
                       (100).toFixed(2)
                     )}{" "}
                 </p>
               </div>
 
-              {/* <div className="pay-btn" onClick={(e) => bookRooms(e)}> */}
-              <div className="pay-btn" onClick={(e) => displayRazorpay(e)}>
-                Pay & Reserve
+              <div className="flex items-center justify-center">
+                <PrimaryButton
+                  text="Book Now"
+                  onClick={() =>
+                    selectedRooms.length > 0
+                      ? history.push("/booking")
+                      : setModalDisplay("grid")
+                  }
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
 
 export default BookingHotel;
-
-

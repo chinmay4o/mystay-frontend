@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 const BookingScreen = () => {
   return (
-    <div className="booking-container">
+    <div className="">
       <Navbar />
 
       <BookingHotel />

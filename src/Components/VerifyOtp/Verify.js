@@ -10,7 +10,7 @@ const Verify = () => {
     const [newUser , setNewUser] = React.useState(false);
     const params = new URLSearchParams(search).get("redirect");
     const history = useHistory();
-    const {register , handleSubmit,reset , formState: { errors }} = useForm();
+    const {register , handleSubmit, reset , formState: { errors }} = useForm();
     let token = localStorage.getItem("token");
     let user;
     console.log(user , "22");

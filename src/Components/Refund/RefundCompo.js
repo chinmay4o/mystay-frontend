@@ -15,22 +15,75 @@ const RefundCompo = () => {
 
       }, [id]);
     useEffect(() => {
-        if(payment && payment?.status === "SUCCESS"){
+        if(payment && (payment?.status === "REFUNDED" || payment?.status === "SUCCESS")){
             const roomBook = payment?.roomBookings[0];
             if(roomBook && (roomBook.status === "Failed" || roomBook.status === "FAILED")){
 
             }else{
-                history.push(`/payment/${id}`)
+              console.log(payment?.status);
+                // history.push(`/payment/${id}`)
             }
         }else{
-            history.push(`/payment/${id}`)
+          console.log(payment);
+          // history.push(`/payment/${id}`)
         }
     },[payment])
+
+    const handleRefund = async () => {
+        try {
+            const res = await fetch(`http://localhost:5001/api/v1/anonymous/payment/refund `,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    payment: payment
+                }),
+            })
+            const data = await res.json();
+            console.log(data);
+            if(data.success){
+               
+                  alert("Refund Initiated")
+                // history.push("/")
+            }else{
+                alert("Refund Failed")
+            }
+        } catch (error) {
+          
+        }
+    }
+
+    const checkRefund = async () => {
+        try {
+            const res = await fetch(`http://localhost:5001/api/v1/anonymous/payment/refund/${payment._id}`,{
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            const data = await res.json();
+            console.log(data);
+            if(data.success){
+              if(data.message.refund.status === "processed"){
+                alert("refund processed! it will reflect in your bank in 3-4 days");
+              }else{
+                console.log("yoi");
+                alert("Refund Initiated")
+              }
+              history.push("/")
+            }else{
+                alert("Refund Failed")
+            }
+        } catch (error) {
+          
+        }
+    }
   return (
     <div className=" w-full flex justify-center pt-10 md:pt-20 lg:pt-32 p-8 ">
       {payment && payment?.status && (
         <div className="w-full md:w-1/2 flex  flex-col items-center gap-4 md:gap-8 p-4 rounded-lg shadow-2xl">
-          {payment?.status === "SUCCESS" ? (
+          {payment?.status === "SUCCESS" || payment?.status === "REFUNDED" ? (
             <>
               <img
                 src="/images/Cancelled.svg"
@@ -43,7 +96,7 @@ const RefundCompo = () => {
                 Click in refund button to get refund or contact us.
               </div>
               <div className="flex gap-2">
-              <div className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg" onClick={() => history.push("/")}>
+              <div className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg" onClick={() => payment?.status ==="REFUNDED" ? checkRefund():handleRefund()}>
                   Refund
               </div>
               <div className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg" onClick={() => history.push("/")}>

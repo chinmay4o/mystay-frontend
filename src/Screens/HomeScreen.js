@@ -10,8 +10,7 @@ import Features from "../Components/HomeComponets/Features";
 import Footer from "./Footer";
 
 const HomeScreen = () => {
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
+  const [dates,setDates] = useState();
   const [destination, setDestination] = useState("bangalore");
 
   return (
@@ -29,26 +28,18 @@ const HomeScreen = () => {
       <div className="bg-[#c7c7c7]/10 py-10">
 
       <Hero
-        checkIn={checkIn}
-        setCheckIn={setCheckIn}
-        checkOut={checkOut}
-        setCheckOut={setCheckOut}
+        dates={dates}
+        setDates={setDates}
         destination={destination}
         setDestination={setDestination}
         />
         </div>
       <Features />
       <Locations
-        checkIn={checkIn}
-        setCheckIn={setCheckIn}
-        checkOut={checkOut}
-        setCheckOut={setCheckOut}
+        
       />
       <Trust
-        checkIn={checkIn}
-        setCheckIn={setCheckIn}
-        checkOut={checkOut}
-        setCheckOut={setCheckOut}
+        
       />
       <Reviews />
       <Footer />

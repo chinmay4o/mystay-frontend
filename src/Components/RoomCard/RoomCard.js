@@ -52,35 +52,35 @@ const RoomCard = ({ ele }) => {
   }
 
   return (
-    <div className="each-room-details">
-      <div className="box1">
-        <img src={ele.images[0]} alt="" />
+    <div className="h-96 flex-col flex md:flex-row gap-4 mb-5 rounded-xl shadow-xl md:h-48">
+      <div className="">
+        <img src={ele.images[0]} className="h-48 rounded-xl w-full md:w-56" alt="" />
       </div>
 
-      <div className="box2">
-        <div className="r1">
-          <p className="r1-title">
-            {ele.roomName} <span>{ele.roomDetails.length} available</span>{" "}
+      <div className="py-3 px-5 flex flex-col gap-4 md:w-full">
+        <div className="flex flex-row w-full justify-between items-center">
+          <p className="text-xl font-semibold">
+            {ele.roomName} <span className="text-primary text-sm underline">{ele.roomDetails.length} available</span>{" "}
           </p>
-          <p className="r1-price">
+          <p className="text-xl font-semibold">
             {" "}
             <i className="fas fa-rupee-sign"></i> {ele.roomPrice}
           </p>
         </div>
 
         {window.innerWidth > 600 ? (
-          <p className="r2">{ele.roomDescription}</p>
+          <p className="font-base text-[#808080] font-medium">{ele.roomDescription}</p>
         ) : (
-          <p className="r2">{ele.roomDescription.slice(0, 60)}</p>
+          <p className="font-base text-[#808080] font-medium">{ele.roomDescription.slice(0, 60)}</p>
         )}
 
-        <div className="r3">
+        <div className="flex mt-4 gap-4 items-center justify-end">
           <p>{/* space taker */}</p>
           <p className="r3-guests">No. of Rooms</p>
 
-          <div className="addition-unit-engine">
+          <div className="flex gap-2 md:gap-4 items-center">
             <i
-              className="fas fa-minus"
+              className="fas fa-minus bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8"
               onClick={() => {
                 removeRoomFromCartHandler(ele);
                 setCount(count <= 0 ? 0 : count - 1);
@@ -88,7 +88,7 @@ const RoomCard = ({ ele }) => {
             ></i>
             <p>{count}</p>
             <i
-              className="fas fa-plus"
+              className="fas fa-plus  bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8"
               onClick={() => {
                 addRoomToCartHandler(ele);
                 setCount(count >= ele.roomDetails.length ? count : count + 1);
