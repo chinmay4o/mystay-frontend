@@ -48,6 +48,7 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
               id="datepicker"
               autocomplete="off"
               value={checkIn}
+              min={new Date().toISOString().slice(0, 10)}
               onChange={(e) => {
                 setCheckIn(e.target.value)
                 console.log(e.target.value)
@@ -59,8 +60,8 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
             <input
               type="date"
               value={checkOut}
-              // id="datepicker"
               onChange={(e) => setCheckOut(e.target.value)}
+              min={checkIn}
             />
           </div>
 
@@ -73,10 +74,7 @@ const Hero = ({checkIn, checkOut, setCheckIn, setCheckOut,destination,setDestina
                 } else {
                   localStorage.setItem("destination", destination);
                   localStorage.setItem("checkIn", JSON.stringify(checkIn));
-                  //  localStorage.setItem("checkIn", checkIn);
                   localStorage.setItem("checkOut", JSON.stringify(checkOut));
-                  //  localStorage.setItem("checkOut", checkOut);
-                  console.log(checkIn, "checkIn");
                   history.push(
                     `/hotels?city=${destination}&checkIn=${JSON.stringify(
                       checkIn

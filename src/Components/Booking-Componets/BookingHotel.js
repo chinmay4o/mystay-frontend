@@ -43,8 +43,6 @@ const BookingHotel = () => {
   const date2 = new Date(localStorage.getItem("checkOut"));
   const diffTime = Math.abs(date2 - date1);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  console.log(diffTime + " milliseconds");
-  console.log(diffDays + " days");
 
   //mapping a new array to save details in requires backend format
   let b1 = selectedRooms.map((ele, id) => {
@@ -418,8 +416,8 @@ const BookingHotel = () => {
                 </p>
               </div>
 
-              {/* <div className="pay-btn" onClick={(e) => bookRooms(e)}> */}
-              <div className="pay-btn" onClick={(e) => displayRazorpay(e)}>
+              <div className="pay-btn" onClick={(e) => bookRooms(e)}>
+              {/* <div className="pay-btn" onClick={(e) => displayRazorpay(e)}> */}
                 Pay & Reserve
               </div>
             </div>

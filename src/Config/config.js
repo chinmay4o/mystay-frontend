@@ -1,7 +1,5 @@
 export const configData = {
-    // "SERVER_URL": "http://ec2-15-206-116-126.ap-south-1.compute.amazonaws.com:5001",
-    "SERVER_URL": "https://studio-x.in",
-    // "SERVER_URL": "http://localhost:5003",
+    "SERVER_URL": "http://localhost:5002",
     "THEME_COLORS": {
         "PRIMARY": "#007bff",
         "SECONDARY": "#fc3"

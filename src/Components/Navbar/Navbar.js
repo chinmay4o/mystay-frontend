@@ -11,13 +11,13 @@ const Navbar = ({ setDestination }) => {
     <div id="nav-parent">
       <nav class="navbar">
         <div class="logo" onClick={() => history.push("/")}>
-          <img
+          {/* <img
             // src="https://ik.imagekit.io/k3m4pqzpmlr/Logo/mystay-logo-removebg-preview_s7Qj1Ibh3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655707681416"
             src="https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/mystay-logo-removebg-preview_Gu-jhBpNX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656660679160"
             alt="mystay"
             className="logo-img"
-          />
-          {/* My<span>Stay</span>{" "} */}
+          /> */}
+          My<span>Stay</span>{" "}
         </div>
 
         <div className="spacer"></div>
