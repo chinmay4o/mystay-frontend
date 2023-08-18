@@ -8,7 +8,7 @@ const Signup = () => {
     const onSubmit = async (data) => {
         console.log(data);
         const response = await fetch(
-        `http://localhost:5001/api/v1/customer/register`,
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/customer/register`,
         {
             method: "POST",
             headers: {

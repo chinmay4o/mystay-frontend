@@ -9,8 +9,9 @@ const Login = () => {
     const history = useHistory();
     const onSubmit = async (data) => {
         console.log(data);
+        console.log(process.env.REACT_APP_SERVER_URL);
         const response = await fetch(
-            `http://localhost:5001/api/v1/customer/login`,
+            `${process.env.REACT_APP_SERVER_URL}/api/v1/customer/login`,
             {
                 method: "POST",
                 headers: {

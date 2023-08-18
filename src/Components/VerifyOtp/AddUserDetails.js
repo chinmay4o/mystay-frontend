@@ -18,7 +18,7 @@ const AddUserDetails = ({ setUserData }) => {
     console.log(data);
     setIsSubmitting(true);
     const token = localStorage.getItem("accessToken");
-    const response = await fetch(`http://localhost:5001/api/v1/customer/user`, {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/customer/user`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const AddUserDetails = ({ setUserData }) => {
     setIsSubmitting(true);
     const token = localStorage.getItem("accessToken");
     const response = await fetch(
-      `http://localhost:5001/api/v1/customer/getUser`,
+      `${process.env.REACT_APP_SERVER_URL}/api/v1/customer/getUser`,
       {
         method: "GET",
         headers: {

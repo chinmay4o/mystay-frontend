@@ -130,7 +130,7 @@ const BookingHotel = () => {
       });
 
       const response = await fetch(
-        `${configData.SERVER_URL}/api/v1/anonymous/roomBook`,
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/roomBook`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -163,20 +163,23 @@ const BookingHotel = () => {
   }
 
   //onclick of pay genrate oderId and open razorpay
-  async function displayRazorpay(e) {
+  async function displayRazorpay() {
+    console.log("hello");
     if (
       !userInfo.firstName ||
       !userInfo.lastName ||
       !userInfo.email ||
       !userInfo.mobile
     ) {
+
       setModalDisplay("grid");
     } else {
       setUserData({ ...userData, ...userInfo });
 
       localStorage.setItem("bookingUserData", JSON.stringify(userInfo));
+      console.log(bookingDetails, "bookingDetails");
       const orderId = await fetch(
-        `${configData.SERVER_URL}/api/v1/anonymous/razorpay`,
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/razorpay`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -217,7 +220,7 @@ const BookingHotel = () => {
         order_id: dataR.message.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         handler: async function (response) {
           const data = await fetch(
-            `${configData.SERVER_URL}/api/v1/anonymous/roomBook`,
+            `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/roomBook`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -267,7 +270,7 @@ const BookingHotel = () => {
       paymentObject.on("payment.failed", async function (response) {
         console.log(dataR.message.amount);
         const data = await fetch(
-          `${configData.SERVER_URL}/api/v1/anonymous/payment/failure`,
+          `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/failure`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -362,7 +365,7 @@ const BookingHotel = () => {
                       console.log(e.target.value);
                       setUserInfo({ ...userInfo, gender: e.target.value });
                     }}
-                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3 capitalize outline-none"
+                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
                   >
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -390,7 +393,7 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, email: e.target.value })
                     }
-                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3 capitalize outline-none"
+                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
                   />
                 </div>
               </div>
@@ -407,7 +410,7 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, mobile: e.target.value })
                     }
-                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3 capitalize outline-none"
+                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
                   />
                 </div>
               </div>
@@ -424,7 +427,7 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, address: e.target.value })
                     }
-                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3 capitalize outline-none"
+                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
                   />
                 </div>
               </div>
@@ -515,10 +518,12 @@ const BookingHotel = () => {
               <div className="flex items-center justify-center">
                 <PrimaryButton
                   text="Book Now"
-                  onClick={() =>
-                    selectedRooms.length > 0
-                      ? history.push("/booking")
-                      : setModalDisplay("grid")
+                  onClick={() =>{
+                    console.log(selectedRooms, "selectedRooms");
+                    selectedRooms.length === 0
+                    ? history.push("/booking")
+                    : displayRazorpay()
+                  }
                   }
                 />
               </div>

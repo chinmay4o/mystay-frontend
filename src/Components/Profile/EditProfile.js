@@ -30,7 +30,7 @@ const EditProfile = ({ setShowProfile, data , setData, setUserData}) => {
     setIsSubmitting(true);
     const token = localStorage.getItem("accessToken");
     const response = await fetch(
-      `http://localhost:5001/api/v1/customer/user`,
+      `${process.env.REACT_APP_SERVER_URL}/api/v1/customer/user`,
       {
         method: "PATCH",
         headers: {

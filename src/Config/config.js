@@ -1,7 +1,7 @@
 export const configData = {
-    // "SERVER_URL": "http://ec2-15-206-116-126.ap-south-1.compute.amazonaws.com:5001",
-    // "SERVER_URL": "https://studio-x.in",
-    "SERVER_URL": "http://localhost:5001",
+    // "REACT_APP_SERVER_URL": "http://ec2-15-206-116-126.ap-south-1.compute.amazonaws.com:5001",
+    // "REACT_APP_SERVER_URL": "https://studio-x.in",
+    "REACT_APP_SERVER_URL": "${process.env.REACT_APP_SERVER_URL}",
     "THEME_COLORS": {
         "PRIMARY": "#007bff",
         "SECONDARY": "#fc3"

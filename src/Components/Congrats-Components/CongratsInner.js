@@ -10,7 +10,7 @@ const CongratsInner = () => {
 
   useEffect(() => {
     // setTimeout(4000);
-    fetch(`http://localhost:5001/api/v1/anonymous/payment/${id}`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/${id}`)
       .then((res) => res.json())
       .then((data) => setPayment(data.message.payment));
   }, [id]);

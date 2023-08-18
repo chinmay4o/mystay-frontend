@@ -16,10 +16,10 @@ const LongStaysMain = () => {
   async function getLongStayHotels() {
     const response = await fetch(
       `${
-        configData.SERVER_URL
+        configData.REACT_APP_SERVER_URL
       }/api/v1/anonymous/hotels?city=jaipur&checkIn=${new Date().toISOString()}&checkOut=${new Date().toISOString()}`,
-      // `${configData.SERVER_URL}/api/v1/anonymous/hotels?city=jaipur`,
-      // `http://localhost:5001/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
+      // `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/hotels?city=jaipur`,
+      // `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
       {
         method: "GET",
       }

@@ -20,7 +20,7 @@ const SingleHotel = () => {
 
   async function getAllHotels() {
     const response = await fetch(
-      `http://localhost:5001/anonymous/api/v1/hotels?city=${destination}&checkIn=${checkIn}&checkOut=${checkOut}`,
+      `${process.env.REACT_APP_SERVER_URL}/anonymous/api/v1/hotels?city=${destination}&checkIn=${checkIn}&checkOut=${checkOut}`,
       {
         method: "GET",
       }

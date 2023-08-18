@@ -29,7 +29,7 @@ const Verify = () => {
         console.log(email , "email");
         
         const response = await fetch(
-            `http://localhost:5001/api/v1/customer/verifyOtp`,
+            `${process.env.REACT_APP_SERVER_URL}/api/v1/customer/verifyOtp`,
             {
               method: "POST",
               headers: {
@@ -54,7 +54,7 @@ const Verify = () => {
                   setNewUser(data1.data.newUser);
                 }else{
 
-                  const response = await fetch(`http://localhost:5001/api/v1/customer/getUser`, {
+                  const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/customer/getUser`, {
                     method: "GET",
                     headers: {
                       "Content-Type": "application/json",
@@ -86,7 +86,7 @@ const Verify = () => {
     const resendOtp = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5001/api/v1/customer/sendOtp`,
+          `${process.env.REACT_APP_SERVER_URL}/api/v1/customer/sendOtp`,
           {
             method: "POST",
             headers: {

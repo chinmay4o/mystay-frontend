@@ -17,7 +17,7 @@ const ProfilePanel = () => {
       if (token) {
         const getUser = async () => {
           const response = await fetch(
-            `http://localhost:5001/api/v1/customer/getUser`,
+            `${process.env.REACT_APP_SERVER_URL}/api/v1/customer/getUser`,
             {
               method: "GET",
               headers: {

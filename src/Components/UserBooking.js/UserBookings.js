@@ -19,7 +19,7 @@ const UserBookings = () => {
       if (!token) {
         history.push("/login");
       } else {
-        fetch("http://localhost:5001/api/v1/customer/bookings", {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/customer/bookings`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

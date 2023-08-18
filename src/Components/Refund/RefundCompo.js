@@ -9,7 +9,7 @@ const RefundCompo = () => {
     localStorage.removeItem("bookingUserData")
 
     useEffect(() => {
-        fetch(`http://localhost:5001/api/v1/anonymous/payment/${id}`)
+        fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/${id}`)
           .then((res) => res.json())
           .then((data) => {console.log(data);setPayment(data.message.payment)});
 
@@ -31,7 +31,7 @@ const RefundCompo = () => {
 
     const handleRefund = async () => {
         try {
-            const res = await fetch(`http://localhost:5001/api/v1/anonymous/payment/refund `,{
+            const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/refund `,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const RefundCompo = () => {
 
     const checkRefund = async () => {
         try {
-            const res = await fetch(`http://localhost:5001/api/v1/anonymous/payment/refund/${payment._id}`,{
+            const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/refund/${payment._id}`,{
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
