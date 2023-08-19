@@ -7,7 +7,7 @@ const Trust = () => {
         <div className="bg-[#a7ffcc] py-7 px-16 rounded-2xl flex flex-col gap-4 lg:w-2/5 lg:flex-shrink-0">
           <h3 className="text-3xl font-bold">Why trust MyStay</h3>
 
-          <div className="text-xl">
+          <div className="text-md">
             <div className="flex gap-4 items-center">
               <lord-icon
                 src="https://cdn.lordicon.com/nxaaasqe.json"
@@ -53,7 +53,7 @@ const Trust = () => {
             </span>
 
           <div className="flex flex-col gap-2 items-center">
-            <input type="text" name="email" id="email" className="px-2" placeholder="Enter email"/>
+            <input type="text" name="email" id="email" className="p-2 w-48 font-sans" placeholder="Enter email"/>
             <div className="text-lg cursor-pointer w-max rounded-md text-white font-semibold bg-primary p-2 px-8">Sign Up</div>
           </div>
           </div>

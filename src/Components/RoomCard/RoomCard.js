@@ -59,10 +59,10 @@ const RoomCard = ({ ele }) => {
 
       <div className="py-3 px-5 flex flex-col gap-4 md:w-full">
         <div className="flex flex-row w-full justify-between items-center">
-          <p className="text-xl font-semibold">
+          <p className="text-md font-semibold">
             {ele.roomName} <span className="text-primary text-sm underline">{ele.roomDetails.length} available</span>{" "}
           </p>
-          <p className="text-xl font-semibold">
+          <p className="text-md font-semibold">
             {" "}
             <i className="fas fa-rupee-sign"></i> {ele.roomPrice}
           </p>

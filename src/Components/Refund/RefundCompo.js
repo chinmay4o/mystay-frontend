@@ -90,8 +90,8 @@ const RefundCompo = () => {
                 alt="Failed"
                 className="h-12 w-12"
               />
-              <div className="text-xl md:text-3xl">Booking Unsuccessfull!</div>
-              <div className=" text-sm text-center md:text-xl text-gray-500">
+              <div className="text-md md:text-3xl">Booking Unsuccessfull!</div>
+              <div className=" text-sm text-center md:text-md text-gray-500">
                 Payment was successful but booking was not done. Please contact us for more information. If you have been charged, you will be refunded.
                 Click in refund button to get refund or contact us.
               </div>
@@ -111,8 +111,8 @@ const RefundCompo = () => {
                 alt="Failure"
                 className="h-12 w-12"
               />
-              <div className="text-xl md:text-3xl">Booking Unsuccessfull!</div>
-              <div className="text-sm text-center md:text-xl text-gray-500">
+              <div className="text-md md:text-3xl">Booking Unsuccessfull!</div>
+              <div className="text-sm text-center md:text-md text-gray-500">
                 Please check your email for more information.
               </div>
               <div className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg" onClick={() => history.push("/")}>

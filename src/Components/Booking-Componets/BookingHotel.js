@@ -11,6 +11,7 @@ const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
+  const [guestDetails, setGuestsDetails] = useState([]);
 
   const monthNames = [
     "January",
@@ -165,13 +166,15 @@ const BookingHotel = () => {
   //onclick of pay genrate oderId and open razorpay
   async function displayRazorpay() {
     console.log("hello");
+    console.log(guestDetails);
+    console.log(bookingDetails.bookingDetails);
+    // return;
     if (
       !userInfo.firstName ||
       !userInfo.lastName ||
       !userInfo.email ||
       !userInfo.mobile
     ) {
-
       setModalDisplay("grid");
     } else {
       setUserData({ ...userData, ...userInfo });
@@ -228,7 +231,8 @@ const BookingHotel = () => {
                 ...response,
                 amount: dataR.message.amount,
                 bookingDetails: bookingDetails.bookingDetails,
-                guestDetails: userInfo,
+                userDetails: userInfo,
+                guestDetails: guestDetails,
               }),
             }
           );
@@ -277,6 +281,9 @@ const BookingHotel = () => {
             body: JSON.stringify({
               ...response,
               amount: dataR.message.amount,
+              bookingDetails: bookingDetails.bookingDetails,
+                userDetails: userInfo,
+                guestDetails: guestDetails,
             }),
           }
         );
@@ -313,7 +320,7 @@ const BookingHotel = () => {
         setModalDisplay={setModalDisplay}
       />
 
-      <div className="w-[90%] max-w-[1280px] bg-white flex flex-col lg:flex-row gap-6 justify-center items-center mx-auto p-3  pb-24">
+      <div className="w-[90%] max-w-[1280px] bg-white flex flex-col lg:flex-row gap-6 justify-center mx-auto p-3  pb-24">
         <div className="">
           <p className="text-3xl font-bold ">
             {" "}
@@ -321,7 +328,10 @@ const BookingHotel = () => {
           </p>
 
           <form className="border-[2px] border-[#f1f1f1] rounded-xl mt-6 overflow-hidden">
-            <p className="bg-[#def5ff] text-[#2b2b2b] p-5 text-2xl font-semibold"> Guest Information</p>
+            <p className="bg-[#def5ff] text-[#2b2b2b] p-5 text-2xl font-semibold">
+              {" "}
+              Guest Information
+            </p>
 
             <div className="text-[#2b2b2b] py-[10px] px-5 mt-5">
               <div className="flex flex-col sm:flex-row sm:items-center  sm:gap-10 w-full">
@@ -432,15 +442,74 @@ const BookingHotel = () => {
                 </div>
               </div>
             </div>
+            {guestDetails.length > 0 &&
+              guestDetails.map((ele, index) => {
+                return (
+                  <div className="border-t-2 py-6 px-5 flex flex-col gap-2">
+                    <div className="text-2xl font-bold flex gap-4 items-center ">{`Guest #${
+                      index + 1
+                    }`}<span className="cursor-pointer" onClick={()=>{
+                      const guests = [...guestDetails];
+                      guests.splice(index,1);
+                      setGuestsDetails(guests);
+                    }}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2"  className="w-5 h-5 stroke-primary">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                  </svg>
+                  </span></div>
+                    <div className="flex flex-col sm:flex-row sm:items-center  sm:gap-10 w-full">
+                      <p className="font-semibold text-[18px] p-4 flex items-center">
+                        <span className="">Name</span>
+                        <sup className="text-red-400 font-bold text-[16px]">
+                          *
+                        </sup>{" "}
+                      </p>
+                      <div className="grid grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 w-[90%] gap-4">
+                        <input
+                          type="text"
+                          placeholder="First Name"
+                          value={ele.firstName}
+                          onChange={(e) => {
+                            const details = [...guestDetails];
+                            details[index].firstName = e.target.value;
+                            setGuestsDetails(details);
+                          }}
+                          className="placeholder:text-[#808080/50] font-medium p-2  text-black text-[18px] border-[2px] border-[#f1f1f1] rounded-[5px]"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Last Name"
+                          value={ele.lastName}
+                          onChange={(e) => {
+                            const details = [...guestDetails];
+                            details[index].lastName = e.target.value;
+                            setGuestsDetails(details);
+                          }}
+                          className="placeholder:text-[#808080/50] font-medium p-2  text-black text-[18px] border-[2px] border-[#f1f1f1] rounded-[5px]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
 
-            <p className="w-full border-t-2 p-4 font-medium">
-              Not Going Solo ?{" "}
-              <span className="text-primary">Add another person</span>{" "}
+            <p className="w-full border-t-2 p-4 font-medium gap-4 flex">
+              {guestDetails.length === 0 ? "Not Going Solo ?" : " "}
+              <span
+                className="text-primary cursor-pointer"
+                onClick={() => {
+                  setGuestsDetails([
+                    ...guestDetails,
+                    { firstName: "", lastName: "" },
+                  ]);
+                }}
+              >
+                Add another person
+              </span>{" "}
             </p>
           </form>
         </div>
 
-        <div className="flex max-lg:w-full max-lg:items-center justify-center">
+        <div className="flex max-lg:w-full max-lg:items-center justify-center mt-20">
           <div className="p-8 border-[2px] rounded-2xl h-max flex flex-col gap-4 lg:w-max w-96 ">
             <p className="text-3xl font-bold ">Summary</p>
 
@@ -518,13 +587,12 @@ const BookingHotel = () => {
               <div className="flex items-center justify-center">
                 <PrimaryButton
                   text="Book Now"
-                  onClick={() =>{
+                  onClick={() => {
                     console.log(selectedRooms, "selectedRooms");
                     selectedRooms.length === 0
-                    ? history.push("/booking")
-                    : displayRazorpay()
-                  }
-                  }
+                      ? history.push("/booking")
+                      : displayRazorpay();
+                  }}
                 />
               </div>
             </div>

@@ -14,7 +14,7 @@ const Features = () => {
             />
           </div>
           <div className="flex flex-col gap-2 leading-tight">
-            <div className="font-semibold text-xl">BEST HOTELS</div>
+            <div className="font-semibold text-md">BEST HOTELS</div>
             <p className="font-medium text-base w-56 lg:w-72">
               Our average rating is 4+
             </p>
@@ -30,7 +30,7 @@ const Features = () => {
             />
           </div>
           <div className="flex flex-col gap-2 leading-tight">
-            <div className="font-semibold text-xl">FLEXIBLE STAY</div>
+            <div className="font-semibold text-md">FLEXIBLE STAY</div>
             <p className="font-medium text-base w-56 lg:w-72">
               Check-in &amp; Check-out of our hotels at your convenience
             </p>
@@ -46,7 +46,7 @@ const Features = () => {
             />
           </div>
           <div className="flex flex-col gap-2 leading-tight">
-            <div className="font-semibold text-xl">FAIR PRICING</div>
+            <div className="font-semibold text-md">FAIR PRICING</div>
             <p className="font-medium text-base w-56 lg:w-72">
             Always find pricing which is 20% less to the other hotels in the similar locality
             </p>

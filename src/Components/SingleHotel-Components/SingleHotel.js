@@ -147,7 +147,7 @@ const SingleHotel = () => {
 
             <div className="flex flex-col gap-6">
               <p className="font-bold text-3xl">Book Your Stay</p>
-              <p className="font-semi-bold text-[#808080] text-xl">
+              <p className="font-semi-bold text-[#808080] text-md">
                 Select from a range of beautiful rooms
               </p>
 
@@ -276,8 +276,8 @@ const SingleHotel = () => {
 
               <div className="md:hidden fixed bottom-0 border-t-[1px] border-[#808080/10] bg-white shadow-xl left-0 p-4 flex justify-between items-center w-full">
                 <div className="flex flex-col gap-2">
-                  <p className="text-xl font-bold text-[#808080]">Payable Now</p>
-                  <p className="text-xl font-semibold">
+                  <p className="text-md font-bold text-[#808080]">Payable Now</p>
+                  <p className="text-md font-semibold">
                   <i className="fas fa-rupee-sign"></i>{" "}
                       {+selectedRooms.reduce(
                         (prev, curr) => prev + curr.qty * curr.roomPrice,

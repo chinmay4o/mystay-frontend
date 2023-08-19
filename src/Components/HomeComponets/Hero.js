@@ -10,8 +10,8 @@ import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 
 const Hero = ({ dates, setDates, destination, setDestination }) => {
   const history = useHistory();
-  let yesterday = new Date();
-  let today = new Date(yesterday.getTime() + 24 * 60 * 60 * 1000);
+  let yesterday = new Date(Date.now());
+  let today = new Date(yesterday.getTime()+24*60*60*1000);
   var tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000);
 
   const hotels = useContext(HotelContext);
@@ -36,9 +36,9 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
       <h2 className="font-bold text-3xl text-center text-shadow p-6 md:text-4xl lg:text-5xl">
         Ready to explore with MyStay?
       </h2>
-      <div className="w-full h-4/6 md:h-max xl:w-max bg-white rounded-xl flex  flex-col md:flex-wrap gap-6 md:gap-12 md:flex-row justify-center  p-12 text-black text-xl items-center">
+      <div className="w-full h-4/6 md:h-max xl:w-max bg-white rounded-xl flex  flex-col md:flex-wrap gap-6 md:gap-12 md:flex-row justify-center  p-12 text-black text-md items-center">
         <div className="flex flex-col items-center justify-center gap-2">
-          <label htmlFor="destination" className="text-2xl  xl:text-3xl">
+          <label htmlFor="destination" className="text-md  xl:text-md">
             Select Your Destination
           </label>
           <SearchBar
@@ -50,9 +50,9 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
         </div>
 
         <div className="flex flex-col gap ">
-          <div className="flex  gap-9 justify-evenly font-mono items-center text-[18px]  font-medium outline-none">
-            <div className="font-montserrat xl:text-2xl">Check in</div>
-            <div className="font-montserrat xl:text-2xl">Check Out</div>
+          <div className="flex  gap-9 justify-evenly font-mono items-center text-md  font-medium outline-none">
+            <div className="font-montserrat ">Check in</div>
+            <div className="font-montserrat ">Check Out</div>
           </div>
           <div className="flex items-center justify-center">
             <DateRangePicker
@@ -72,7 +72,7 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
               if (!destination || !dates) {
                 setTooltip("grid");
               } else {
-                const checkInDate = new Date(new Date(dates[0]).getTime() + 24 * 60 * 60 * 1000).toISOString().substring(0, 10);
+                const checkInDate = new Date(new Date(dates[0]).getTime()+ 5.5*60*60*1000).toISOString().substring(0, 10);
                 const checkOutDate = new Date(new Date(dates[1]).getTime()).toISOString().substring(0, 10);;
                 localStorage.setItem("destination", destination);
                 localStorage.setItem("checkIn", JSON.stringify(checkInDate));
