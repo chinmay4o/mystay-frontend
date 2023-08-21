@@ -4,11 +4,11 @@ const Footer = () => {
   return (
     <div className="w-screen bg-[#3b4a5b] text-white px-20">
       <div className="w-full flex flex-col md:flex-row gap-8 lg:gap-20 items-center justify-center py-12 px-4 text-[18px] md:text-sm lg:text-base xl:text-[18px]">
-        <div className="text-3xl font-semibold lg:text-6xl md:hidden lg:block">MyStay</div>
+        <div className="text-3xl font-semibold lg:text-4xl md:hidden lg:block">MyStay</div>
 
         <div className="flex flex-col gap-4 justify-center items-left">
-        <div className="text-3xl lg:hidden">MyStay</div>
-          <div className="text-lg">
+        <div className="text-base hidden md:block lg:hidden">MyStay</div>
+          <div className="text-base">
           Explore with MyStay - We provide ultra Luxurious Hotel Rooms for long
           accommodations, at Best Price, We are couple friendly, Great interiors
           and mesmerizing location in Jaipur, Gurugram, Indore and Banglore
@@ -20,8 +20,8 @@ const Footer = () => {
           <a href= "mailto:infomystay@gmail.com" className="text-left">Mail us - infomystay@gmail.com</a>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <p className="head-address"> Contact Us - </p>
+        <div className="flex flex-col gap-2 text-base">
+          <p className=""> Contact Us - </p>
 
           <p>
             Jaipur office - Ground Floor,Akshyam, Ganesh Nagar, Ramnagar, Jaipur,
@@ -37,7 +37,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-4 items-center justify-center ">
+        <div className="flex flex-col gap-4 items-center justify-center text-base">
           {/* <p className="head-address"> Follow Us on - </p> */}
           <p>Customer Support - +91 89520 93209</p>
           <a  href= "mailto:infomystay@gmail.com">Email - infomystay@gmail.com</a>

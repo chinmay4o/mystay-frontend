@@ -54,7 +54,7 @@ const RoomCard = ({ ele }) => {
   return (
     <div className="h-96 flex-col flex md:flex-row gap-4 mb-5 rounded-xl shadow-xl md:h-48">
       <div className="">
-        <img src={ele.images[0]} className="h-48 rounded-xl w-full md:w-56" alt="" />
+        <img src={ele.images[0]} className="h-48 rounded-xl rounded-b-none md:rounded-xl md:rounded-r-none w-full md:w-56" alt="" />
       </div>
 
       <div className="py-3 px-5 flex flex-col gap-4 md:w-full">

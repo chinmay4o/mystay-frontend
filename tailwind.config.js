@@ -7,14 +7,7 @@ module.exports = {
         primary: "#FF5500",
       },
       fontSize: {
-        sm: "12px",
-        base: "16px",
-        md: "20px",
-        xl: "30px",
-        "2xl": "1.563rem",
-        "3xl": "1.953rem",
-        "4xl": "2.441rem",
-        "5xl": "3.052rem",
+
       },
       screens: {
         xs: "480px",

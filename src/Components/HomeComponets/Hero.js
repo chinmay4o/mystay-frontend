@@ -30,15 +30,15 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
   }, []);
 
   return (
-    <div className="hero-image w-full md:w-5/6 md:rounded-3xl md:mt-8 md:mx-auto h-screen md:h-max md:py-24 lg:py-32 md:bg-cover flex flex-col gap-4 items-center p-6 justify-center text-white">
+    <div className="hero-image w-[96%] max-w-[1150px] md:rounded-3xl md:mt-8 md:mx-auto h-screen md:h-max md:py-24 lg:py-32 md:bg-cover flex flex-col gap-4 items-center p-6 justify-center text-white">
       {/* {hotels.state.name} */}
 
-      <h2 className="font-bold text-3xl text-center text-shadow p-6 md:text-4xl lg:text-5xl">
+      <h2 className="font-bold text-3xl text-center text-shadow p-6 ">
         Ready to explore with MyStay?
       </h2>
       <div className="w-full h-4/6 md:h-max xl:w-max bg-white rounded-xl flex  flex-col md:flex-wrap gap-6 md:gap-12 md:flex-row justify-center  p-12 text-black text-md items-center">
         <div className="flex flex-col items-center justify-center gap-2">
-          <label htmlFor="destination" className="text-md  xl:text-md">
+          <label htmlFor="destination" className="text-md font-semibold  md:text-lg">
             Select Your Destination
           </label>
           <SearchBar
@@ -50,7 +50,7 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
         </div>
 
         <div className="flex flex-col gap ">
-          <div className="flex  gap-9 justify-evenly font-mono items-center text-md  font-medium outline-none">
+          <div className="flex  gap-9 justify-evenly font-semibold items-center text-lg  outline-none">
             <div className="font-montserrat ">Check in</div>
             <div className="font-montserrat ">Check Out</div>
           </div>

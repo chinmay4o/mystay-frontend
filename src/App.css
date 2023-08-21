@@ -87,7 +87,7 @@ body {
 
 
 .react-daterange-picker__inputGroup {
-  min-width: calc((3px * 3) + 0.54em + 0.217em * 2);
+  width: 90px;
   flex-grow: 1;
   padding: 0 2px;
   box-sizing: content-box;

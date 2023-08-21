@@ -9,7 +9,7 @@ const DesktopComponent = ({ userData }) => {
     const [isOpen, setIsOpen] = useState(false);
   
     return (
-      <div className="w-screen h-16 flex p-4 lg:p-8 xl:p-12 items-center lg:justify-between">
+      <div className="w-screen h-16 flex px-8 py-4 items-center lg:justify-between">
         <div className="w-full p-2 flex justify-between items-center">
           <div className="" onClick={() => history.push("/")}>
             {/* <img

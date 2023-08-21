@@ -40,10 +40,10 @@ const HotelsScreenMain = () => {
   } else {
     return (
       <>
-        <div className="h-screen w-screen relative ">
+        <div className="h-screen w-screen relative">
           <img src="https://img.cdn.zostel.com/zostel/gallery/images/VFvd-Qq7Q92zkhbjE2ufYA/karnatakas-metropolitan-city-with-its-grand_3lJVBIb.jpg" alt="" className=" brightness-75 h-full w-full object-cover"/>
         </div>
-          <h1 className="absolute text-6xl -translate-x-1/2 -translate-y-1/2 font-bold top-1/2 left-1/2 text-white">{allSearchedHotels.data[0].city.toUpperCase()}</h1>
+          <h1 className="absolute text-6xl -translate-x-1/2 translate-y-1/2 font-bold top-1/2 left-1/2 text-white">{allSearchedHotels.data[0].city.toUpperCase()}</h1>
 
         
         <div className="w-full min-h-[354px] p-5 bg-[#f9f7f1]">

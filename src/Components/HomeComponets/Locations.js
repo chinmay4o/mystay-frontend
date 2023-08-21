@@ -1,11 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-const Locations = ({checkIn, checkOut}) => {
-
+const Locations = ({ dates }) => {
   const history = useHistory();
 
-  const cities = ["Jaipur", "Indore","Gurugram", "Bangalore"];
+  const cities = ["Jaipur", "Indore", "Gurugram", "Bangalore"];
 
   const backgroundImages = [
     "https://ik.imagekit.io/k3m4pqzpmlr/coupons/karnatakas-metropolitan-city-with-its-grand_3lJVBIb_N6NpaQyJH.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187835",
@@ -17,31 +16,45 @@ const Locations = ({checkIn, checkOut}) => {
     "https://ik.imagekit.io/k3m4pqzpmlr/coupons/the-blue-city-charms-travellers-with-rich-h_AT52qza_ndYKLog-j.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187875",
   ];
 
-
   return (
     <div className="w-screen py-24">
       <div className="flex gap-6 xl:gap-8 justify-center flex-wrap items-center">
-     { cities.map((ele, index) => {
-       return <div className="ec2 flex-grow-0 relative h-72 w-72 group" 
-        onClick={() => {
-                  localStorage.setItem("destination", ele.toLocaleLowerCase());
-                  localStorage.setItem("checkIn", JSON.stringify(checkIn));
-                  //  localStorage.setItem("checkIn", checkIn);
-                  localStorage.setItem("checkOut", JSON.stringify(checkOut));
-                  //  localStorage.setItem("checkOut", checkOut);
-                  console.log(checkIn, "checkIn");
-                  history.push(
-                    `/hotels?city=${ele.toLowerCase()}&checkIn=${JSON.stringify(
-                      checkIn
-                    )}&checkOut=${JSON.stringify(checkOut)}`
-                  );
-              }}>
-         <img src={backgroundImages[index]} alt="normal" className="h-full w-full rounded-xl group-hover:brightness-[0.25]" />
-         <p className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-semibold group-hover:text-primary">
-           {ele}
-         </p>
-       </div>
-     })}
+        {cities.map((ele, index) => {
+          return (
+            <div
+              className="ec2 flex-grow-0 relative h-72 w-72 group"
+              onClick={() => {
+                const checkInDate = new Date(
+                  new Date(dates[0]).getTime() + 5.5 * 60 * 60 * 1000
+                )
+                  .toISOString()
+                  .substring(0, 10);
+                const checkOutDate = new Date(new Date(dates[1]).getTime())
+                  .toISOString()
+                  .substring(0, 10);
+                localStorage.setItem("destination", ele.toLocaleLowerCase());
+                localStorage.setItem("checkIn", JSON.stringify(checkInDate));
+                //  localStorage.setItem("checkIn", checkIn);
+                localStorage.setItem("checkOut", JSON.stringify(checkOutDate));
+                //  localStorage.setItem("checkOut", checkOut);
+                history.push(
+                  `/hotels?city=${ele.toLowerCase()}&checkIn=${JSON.stringify(
+                    checkInDate
+                  )}&checkOut=${JSON.stringify(checkOutDate)}`
+                );
+              }}
+            >
+              <img
+                src={backgroundImages[index]}
+                alt="normal"
+                className="h-full w-full rounded-xl group-hover:brightness-[0.25]"
+              />
+              <p className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-semibold group-hover:text-primary">
+                {ele}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

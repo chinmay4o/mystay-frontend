@@ -5,7 +5,7 @@ const Trust = () => {
     <div className="w-screen mt-10 md:mt-0">
       <div className="flex gap-8 flex-wrap w-full justify-center px-8 md:px-4">
         <div className="bg-[#a7ffcc] py-7 px-16 rounded-2xl flex flex-col gap-4 lg:w-2/5 lg:flex-shrink-0">
-          <h3 className="text-3xl font-bold">Why trust MyStay</h3>
+          <h3 className="text-2xl font-bold">Why trust MyStay</h3>
 
           <div className="text-md">
             <div className="flex gap-4 items-center">

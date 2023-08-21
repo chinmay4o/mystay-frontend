@@ -55,7 +55,9 @@ const SingleHotel = () => {
     const response = await fetch(
       // `${process.env.REACT_APP_SERVER_URL}/anonymous/api/v1/hotels?checkIn=2022-04-16T00:00:00.000z&checkOut=2022-04-17T00:00:00.000z&hotelId=${id}`,
       // `http://15.206.116.126:5001/api/v1/anonymous/hotels?checkIn=${JSON.stringify(new Date(checkIn))}&checkOut=${JSON.stringify(new Date(checkOut))}&hotelId=${id}`,
-      `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/hotels?checkIn=${new Date(
+      `${
+        process.env.REACT_APP_SERVER_URL
+      }/api/v1/anonymous/hotels?checkIn=${new Date(
         checkIn
       ).toISOString()}&checkOut=${new Date(
         checkOut
@@ -145,30 +147,33 @@ const SingleHotel = () => {
           <div className=" py-12 px-5 flex flex-col lg:flex-row gap-12 mx-auto rounded-xl  max-w-[1280px]">
             {/* date grid */}
 
-            <div className="flex flex-col gap-6">
-              <p className="font-bold text-3xl">Book Your Stay</p>
-              <p className="font-semi-bold text-[#808080] text-md">
-                Select from a range of beautiful rooms
-              </p>
+            <div className="flex flex-col ">
+              <div className="flex md:flex-row flex-col gap-4 md:items-center md:justify-between py-4">
+                <div className="flex flex-col gap-4">
+                  <p className="font-bold text-3xl">Book Your Stay</p>
+                  <p className="font-semi-bold text-[#808080] text-md">
+                    Select from a range of beautiful rooms
+                  </p>
+                </div>
+                <div className="grid place-items-center">
+                  <div className="flex gap-4 items-center justify-center p-4 rounded-xl bg-white shadow-md w-max">
+                    {/* <input type="date" value={checkIn} /> */}
+                    <p className="font-medium text-[#484848]">
+                      {new Date(checkIn).getDate()}th{" "}
+                      {monthNames[new Date(checkIn).getMonth()]}{" "}
+                      {new Date(checkIn).getFullYear()}
+                    </p>
 
-              <div className="grid place-items-center">
-                <div className="flex gap-4 items-center justify-center p-4 rounded-xl bg-white shadow-md w-max">
-                  {/* <input type="date" value={checkIn} /> */}
-                  <p className="font-medium text-[#484848]">
-                    {new Date(checkIn).getDate()}th{" "}
-                    {monthNames[new Date(checkIn).getMonth()]}{" "}
-                    {new Date(checkIn).getFullYear()}
-                  </p>
-
-                  <p className="arrow">
-                    <i className="fas fa-long-arrow-alt-right"></i>{" "}
-                  </p>
-                  {/* <input type="date" value={checkOut} /> */}
-                  <p className="font-medium text-[#484848]">
-                    {new Date(checkOut).getDate()}th{" "}
-                    {monthNames[new Date(checkOut).getMonth()]}{" "}
-                    {new Date(checkOut).getFullYear()}
-                  </p>
+                    <p className="arrow">
+                      <i className="fas fa-long-arrow-alt-right"></i>{" "}
+                    </p>
+                    {/* <input type="date" value={checkOut} /> */}
+                    <p className="font-medium text-[#484848]">
+                      {new Date(checkOut).getDate()}th{" "}
+                      {monthNames[new Date(checkOut).getMonth()]}{" "}
+                      {new Date(checkOut).getFullYear()}
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -182,9 +187,7 @@ const SingleHotel = () => {
               </div>
             </div>
 
-              <div className="hidden md:flex max-lg:w-full max-lg:items-center justify-center">
-
-             
+            <div className="hidden md:flex max-lg:w-full max-lg:items-center justify-center">
               <div className="hidden md:flex flex-col gap-4 lg:w-max w-96 ">
                 <p className="text-3xl font-bold ">Summary</p>
 
@@ -259,52 +262,50 @@ const SingleHotel = () => {
                     </p>
                   </div>
 
-<div className="flex items-center justify-center">
-
-                  <PrimaryButton
-                    text="Book Now"
-                    onClick={() =>
-                      selectedRooms.length > 0
-                      ? history.push("/booking")
-                      : setModalDisplay("grid")
-                    }
+                  <div className="flex items-center justify-center">
+                    <PrimaryButton
+                      text="Book Now"
+                      onClick={() =>
+                        selectedRooms.length > 0
+                          ? history.push("/booking")
+                          : setModalDisplay("grid")
+                      }
                     />
-                    </div>
+                  </div>
                 </div>
               </div>
-              </div>
+            </div>
 
-              <div className="md:hidden fixed bottom-0 border-t-[1px] border-[#808080/10] bg-white shadow-xl left-0 p-4 flex justify-between items-center w-full">
-                <div className="flex flex-col gap-2">
-                  <p className="text-md font-bold text-[#808080]">Payable Now</p>
-                  <p className="text-md font-semibold">
+            <div className="md:hidden fixed bottom-0 border-t-[1px] border-[#808080/10] bg-white shadow-xl left-0 p-4 flex justify-between items-center w-full">
+              <div className="flex flex-col gap-2">
+                <p className="text-md font-bold text-[#808080]">Payable Now</p>
+                <p className="text-md font-semibold">
                   <i className="fas fa-rupee-sign"></i>{" "}
-                      {+selectedRooms.reduce(
+                  {+selectedRooms.reduce(
+                    (prev, curr) => prev + curr.qty * curr.roomPrice,
+                    0
+                  ) *
+                    diffDays.toFixed(2) +
+                    +(
+                      (selectedRooms.reduce(
                         (prev, curr) => prev + curr.qty * curr.roomPrice,
                         0
                       ) *
-                        diffDays.toFixed(2) +
-                        +(
-                          (selectedRooms.reduce(
-                            (prev, curr) => prev + curr.qty * curr.roomPrice,
-                            0
-                          ) *
-                            diffDays *
-                            18) /
-                          (100).toFixed(2)
-                        )}
-                  </p>
-                </div>
-                <PrimaryButton 
+                        diffDays *
+                        18) /
+                      (100).toFixed(2)
+                    )}
+                </p>
+              </div>
+              <PrimaryButton
                 text="Book Now"
                 onClick={() =>
                   selectedRooms.length > 0
                     ? history.push("/booking")
                     : setModalDisplay("grid")
                 }
-                />
-              </div>
-           
+              />
+            </div>
           </div>
         </div>
       </>

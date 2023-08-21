@@ -21,9 +21,9 @@ const SingleHotel = ({ ele, checkIn, checkOut, key }) => {
         <p className="text-lg mb-4 font-bold text-[#6d6d6d]">
           Mystay Townhouse
         </p>
-        <h2 className="mb-4 text-2xl font-bold">{ele.hotelName}</h2>
+        <h2 className="mb-4 text-xl font-bold">{ele.hotelName}</h2>
 
-        <p className="text-lg mb-4 font-semibold text-[#6d6d6d]">
+        <p className="text-base mb-4 font-semibold text-[#6d6d6d]">
           {ele.description.slice(0, 200)}...
         </p>
 

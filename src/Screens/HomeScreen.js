@@ -36,7 +36,8 @@ const HomeScreen = () => {
         </div>
       <Features />
       <Locations
-        
+        dates={dates}
+        setDates={setDates}
       />
       <Trust
         
