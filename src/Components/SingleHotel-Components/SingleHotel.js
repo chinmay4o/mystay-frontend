@@ -14,6 +14,7 @@ const SingleHotel = () => {
   const history = useHistory();
   let { id } = useParams();
 
+  const [dates, setDates] = useState();
   const monthNames = [
     "January",
     "February",
@@ -33,10 +34,6 @@ const SingleHotel = () => {
   const [sliderShow, setSliderShow] = useState("none");
 
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
-  
-  React.useEffect(() => {
-    console.log(selectedRooms , "Ansh");
-  },[selectedRooms])
 
   let imgClasses = [
     "col-span-3 row-span-3 bg-cover  rounded-xl",
@@ -86,13 +83,39 @@ const SingleHotel = () => {
     // empty the selected rooms array on this page
     setSelectedRooms([]);
     window.scrollTo(0, 0);
+    setDates([new Date(checkIn), new Date(checkOut)]);
   }, []);
 
-  if (singleHotel.success === false) {
-    return <h2> Loading ...</h2>;
-  } else {
-    return (
-      <>
+  useEffect(() => {
+    if(dates){
+
+      if(dates[0] !== new Date(checkIn) || dates[1] !== new Date(checkOut)){
+        const checkInDate = new Date(
+        new Date(dates[0]).getTime() + 5.5 * 60 * 60 * 1000
+        )
+        .toISOString()
+        .substring(0, 10);
+        const checkOutDate = new Date(new Date(dates[1]).getTime())
+        .toISOString()
+        .substring(0, 10);
+
+        localStorage.setItem("checkIn", JSON.stringify(checkInDate));
+        localStorage.setItem("checkOut", JSON.stringify(checkOutDate));
+        
+        history.push(
+          `/hotel/${id}?checkIn=${JSON.stringify(
+            checkInDate
+            )}&checkOut=${JSON.stringify(checkOutDate)}`
+            );
+          }
+        }
+        },[dates]) 
+        
+        if (singleHotel.success === false) {
+          return <h2> Loading ...</h2>;
+        } else {
+          return (
+            <>
         <Slider
           sliderShow={sliderShow}
           setSliderShow={setSliderShow}
@@ -157,31 +180,31 @@ const SingleHotel = () => {
                   </p>
                 </div>
                 <div className="grid place-items-center">
-                  <div className="flex gap-4 items-center justify-center p-4 rounded-xl bg-white shadow-md w-max">
+                  <div className="flex gap-4 items-center justify-center p-2 rounded-xl bg-white shadow-md w-max">
                     {/* <input type="date" value={checkIn} /> */}
                     <DateRangePicker
-              format="dMMMy"
-              // onChange={setDates}
-              // value={dates}
-              rangeDivider={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
-              }
-              className="text-[#808080]"
-              minDate={new Date(Date.now())}
-            />
+                      format="dMMMy"
+                      onChange={setDates}
+                      value={dates}
+                      rangeDivider={
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={2}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                          />
+                        </svg>
+                      }
+                      className="text-[#808080]"
+                      minDate={new Date(Date.now())}
+                    />
                   </div>
                 </div>
               </div>
@@ -194,7 +217,7 @@ const SingleHotel = () => {
                   return <RoomCard ele={ele} />;
                 })}
               </div>
-              
+
               <Policies />
             </div>
 
@@ -403,34 +426,36 @@ const SingleHotel = () => {
                 </div>
               )}
             </div>
-            { selectedRooms.length > 0 &&
-            <div className="md:hidden fixed bottom-0 border-t-[1px] border-[#808080/10] bg-white shadow-xl left-0 p-4 flex justify-between items-center w-full">
-
-              <div className="flex flex-col gap-2">
-                <p className="text-md font-bold text-[#808080]">Payable Now</p>
-                <p className="text-md font-semibold">
-                  <i className="fas fa-rupee-sign"></i>{" "}
-                  {+selectedRooms.reduce(
-                    (prev, curr) => prev + curr.qty * curr.roomPrice,
-                    0
-                  ) *
-                    diffDays.toFixed(2) +
-                    +(
-                      (selectedRooms.reduce(
-                        (prev, curr) => prev + curr.qty * curr.roomPrice,
-                        0
-                      ) *
-                        diffDays *
-                        18) /
-                      (100).toFixed(2)
-                    )}
-                </p>
+            {selectedRooms.length > 0 && (
+              <div className="md:hidden fixed bottom-0 border-t-[1px] border-[#808080/10] bg-white shadow-xl left-0 p-4 flex justify-between items-center w-full">
+                <div className="flex flex-col gap-2">
+                  <p className="text-md font-bold text-[#808080]">
+                    Payable Now
+                  </p>
+                  <p className="text-md font-semibold">
+                    <i className="fas fa-rupee-sign"></i>{" "}
+                    {+selectedRooms.reduce(
+                      (prev, curr) => prev + curr.qty * curr.roomPrice,
+                      0
+                    ) *
+                      diffDays.toFixed(2) +
+                      +(
+                        (selectedRooms.reduce(
+                          (prev, curr) => prev + curr.qty * curr.roomPrice,
+                          0
+                        ) *
+                          diffDays *
+                          18) /
+                        (100).toFixed(2)
+                      )}
+                  </p>
+                </div>
+                <PrimaryButton
+                  text="Book Now"
+                  onClick={() => history.push("/booking")}
+                />
               </div>
-              <PrimaryButton
-                text="Book Now"
-                onClick={() => history.push("/booking")}
-              />
-            </div>}
+            )}
           </div>
         </div>
         {/* <Map location={"https://goo.gl/maps/oL9zpixkZFiGPfUB8"} /> */}

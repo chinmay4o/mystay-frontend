@@ -73,7 +73,7 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
             <div className="font-montserrat ">Check in</div>
             <div className="font-montserrat ">Check Out</div>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center border-b-2 border-gray-400">
             <DateRangePicker
               format="dMMMy"
               onChange={setDates}

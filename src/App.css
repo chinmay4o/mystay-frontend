@@ -49,7 +49,6 @@ body {
   display: inline-flex;
   position: relative;
   height: 43px;
-  border-bottom: 2px solid rgb(156 163 175);;
 }
 
 .react-daterange-picker,
@@ -130,6 +129,7 @@ body {
   border: 0;
   background: transparent;
   padding: 4px 6px;
+  display: none;
   /* color: #989898; */
 }
 .react-daterange-picker__button:enabled {
