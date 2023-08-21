@@ -11,7 +11,7 @@ import Footer from "./Footer";
 
 const HomeScreen = () => {
   const [dates,setDates] = useState();
-  const [destination, setDestination] = useState("bangalore");
+  const [destination, setDestination] = useState("");
 
   return (
     <div className="h-screen w-screen homeScreen-container">

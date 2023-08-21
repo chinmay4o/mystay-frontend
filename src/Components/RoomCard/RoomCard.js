@@ -1,13 +1,26 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { SelectedRoomsContext } from "../../context/hotelsContext.js";
+import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 
 const RoomCard = ({ ele }) => {
   //room count is
   const [count, setCount] = useState(0);
+  const [available , setAvailable] = useState();
 
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
 
+  useEffect(() => {
+    let count=0;
+    ele.roomDetails.forEach((ele1) => {
+      console.log(ele1);
+      if(ele1.bookingDetails.length===0) count++;
+    })
+
+    setAvailable(count);
+  }, [ele]);
+
   function addRoomToCartHandler(newRoom) {
+    console.log(ele);
     const existingRoom = selectedRooms.find(
       (ele, index) => ele.roomId === newRoom.roomId
     );
@@ -38,7 +51,11 @@ const RoomCard = ({ ele }) => {
       (ele, index) => ele.roomId === oldRoom.roomId
     );
 
-    if (existingRoom) {
+    if (existingRoom.qty === 1) {
+      setSelectedRooms(
+        selectedRooms.filter((ele1, index) => ele1.roomId !== oldRoom.roomId)
+      );
+    } else if (existingRoom) {
       setSelectedRooms(
         selectedRooms.map((ele1, index) => {
           if (ele1.roomId === existingRoom.roomId) {
@@ -66,7 +83,7 @@ const RoomCard = ({ ele }) => {
           <p className="text-md font-semibold">
             {ele.roomName}{" "}
             <span className="text-primary text-sm underline">
-              {ele.roomDetails.length} available
+              {available} available
             </span>{" "}
           </p>
           <p className="text-md font-semibold">
@@ -84,29 +101,44 @@ const RoomCard = ({ ele }) => {
             {ele.roomDescription.slice(0, 60)}
           </p>
         )}
-
+        {available>0 &&
         <div className="flex mt-4 gap-4 items-center justify-end">
-          <p>{/* space taker */}</p>
-          <p className="r3-guests">No. of Rooms</p>
-
-          <div className="flex gap-2 md:gap-4 items-center">
-            <i
-              className="fas fa-minus bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8"
-              onClick={() => {
-                removeRoomFromCartHandler(ele);
-                setCount(count <= 0 ? 0 : count - 1);
-              }}
-            ></i>
-            <p>{count}</p>
-            <i
-              className="fas fa-plus  bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8"
+          {count === 0 ? (
+            <button
+              className="btn bg-primary text-white hover:bg-white hover:text-primary hover:border hover:border-primary text-[10px] p-2 min-h-6 h-10 uppercase-none"
               onClick={() => {
                 addRoomToCartHandler(ele);
                 setCount(count >= ele.roomDetails.length ? count : count + 1);
               }}
-            ></i>
-          </div>
-        </div>
+            >
+              Select Room
+            </button>
+          ) : (
+            <>
+              <p className="r3-guests">No. of Rooms</p>
+
+              <div className="flex gap-2 md:gap-4 items-center">
+                <i
+                  className="fas fa-minus bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8"
+                  onClick={() => {
+                    removeRoomFromCartHandler(ele);
+                    setCount(count <= 0 ? 0 : count - 1);
+                  }}
+                ></i>
+                <p>{count}</p>
+                <i
+                  className="fas fa-plus  bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8"
+                  onClick={() => {
+                    addRoomToCartHandler(ele);
+                    setCount(
+                      count >= ele.roomDetails.length ? count : count + 1
+                    );
+                  }}
+                ></i>
+              </div>
+            </>
+          )}
+        </div>}
       </div>
     </div>
   );

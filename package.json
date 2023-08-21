@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@googlemaps/js-api-loader": "^1.16.2",
     "@syncfusion/ej2-react-calendars": "^20.1.47",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "daisyui": "^3.5.1",
     "tailwindcss": "^3.3.3"
   }
 }

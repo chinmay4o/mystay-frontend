@@ -13,6 +13,10 @@ const citiesD = [
     {
         city: "Gurugram",
         img: "https://ik.imagekit.io/k3m4pqzpmlr/coupons/theog-20220129083825_XqK_wo4Xl.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187815",
+    },
+    {
+        city: "Bangalore",
+        img: "https://ik.imagekit.io/k3m4pqzpmlr/coupons/the-blue-city-charms-travellers-with-rich-h_AT52qza_ndYKLog-j.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1650732187875",
     }
 ];
 

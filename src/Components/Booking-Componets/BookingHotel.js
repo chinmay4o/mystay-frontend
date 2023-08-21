@@ -7,11 +7,25 @@ import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 import Modal from "../Modal/Modal";
 import { configData } from "../../Config/config.js";
 import { useHistory } from "react-router-dom";
+import Policies from "../SingleHotel-Components/Policies.js";
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
   const [guestDetails, setGuestsDetails] = useState([]);
+
+  useEffect(()=>{
+    if(selectedRooms.length>0){
+      localStorage.setItem("selectedRooms",JSON.stringify(selectedRooms));
+    }else{
+      const rooms = JSON.parse(localStorage.getItem("selectedRooms"));
+      if(rooms && rooms.length>0){
+        setSelectedRooms(rooms);
+      }else{
+        console.log(history.goBack());
+      }
+    }
+  },[selectedRooms])
 
   const monthNames = [
     "January",
@@ -32,7 +46,7 @@ const BookingHotel = () => {
   const [successPaymentId, setSuccessPaymentId] = useState("");
 
   //Modal Display
-  const [modalDisplay, setModalDisplay] = useState("none");
+  const [modalDisplay, setModalDisplay] = useState(false);
   const [modalContent, setModalContent] = useState(
     "Please Fill all the details"
   );
@@ -84,86 +98,8 @@ const BookingHotel = () => {
     bookingDetails: [...b1],
   });
 
-  // onClick pay and reserve handler
-  // onClick pay and reserve handler
-  async function bookRooms(e) {
-    e.preventDefault();
+  
 
-    setBookingDetails({
-      guestDetails: {
-        firstName: userInfo.firstName,
-        lastName: userInfo.lastName,
-        email: userInfo.email,
-        mobile: userInfo.mobile,
-      },
-      bookingDetails: [...b1],
-    });
-
-    console.log(
-      {
-        guestDetails: {
-          firstName: userInfo.firstName,
-          lastName: userInfo.lastName,
-          email: userInfo.email,
-          mobile: userInfo.mobile,
-        },
-        bookingDetails: [...b1],
-      },
-      "console of details line 71"
-    );
-
-    if (
-      !userInfo.firstName ||
-      !userInfo.lastName ||
-      !userInfo.email ||
-      !userInfo.mobile
-    ) {
-      setModalDisplay("grid");
-    } else {
-      setBookingDetails({
-        guestDetails: {
-          firstName: userInfo.firstName,
-          lastName: userInfo.lastName,
-          email: userInfo.email,
-          mobile: userInfo.mobile,
-        },
-        bookingDetails: [...b1],
-      });
-
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/roomBook`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            guestDetails: {
-              firstName: userInfo.firstName,
-              lastName: userInfo.lastName,
-              email: userInfo.email,
-              mobile: userInfo.mobile,
-            },
-            bookingDetails: [...b1],
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.success === false) {
-        setModalContent("Booking Failure");
-        setModalDisplay("grid");
-        console.log("Booking Failure");
-        console.log("FinalData", data);
-      } else {
-        setModalContent("Booking Success");
-        setModalDisplay("grid");
-        console.log("Booking Success");
-        console.log("FinalData", data);
-      }
-    }
-  }
-
-  //onclick of pay genrate oderId and open razorpay
   async function displayRazorpay() {
     console.log("hello");
     console.log(guestDetails);
@@ -322,13 +258,13 @@ const BookingHotel = () => {
 
       <div className="w-[90%] max-w-[1280px] bg-white flex flex-col lg:flex-row gap-6 justify-center mx-auto p-3  pb-24">
         <div className="">
-          <p className="text-3xl font-bold ">
+          <p className="text-xl font-bold cursor-pointer" onClick={()=> history.goBack()}>
             {" "}
             <i className="fas fa-long-arrow-alt-left"></i> Confirm your booking
           </p>
 
-          <form className="border-[2px] border-[#f1f1f1] rounded-xl mt-6 overflow-hidden">
-            <p className="bg-[#def5ff] text-[#2b2b2b] p-5 text-2xl font-semibold">
+          <form className="border-[2px] mb-8 border-[#f1f1f1] rounded-xl mt-6 overflow-hidden">
+            <p className="bg-[#def5ff] text-[#2b2b2b] p-5 text-xl font-semibold">
               {" "}
               Guest Information
             </p>
@@ -446,7 +382,7 @@ const BookingHotel = () => {
               guestDetails.map((ele, index) => {
                 return (
                   <div className="border-t-2 py-6 px-5 flex flex-col gap-2">
-                    <div className="text-2xl font-bold flex gap-4 items-center ">{`Guest #${
+                    <div className="text-xl font-bold flex gap-4 items-center ">{`Guest #${
                       index + 1
                     }`}<span className="cursor-pointer" onClick={()=>{
                       const guests = [...guestDetails];
@@ -507,6 +443,8 @@ const BookingHotel = () => {
               </span>{" "}
             </p>
           </form>
+
+          <Policies />
         </div>
 
         <div className="flex max-lg:w-full max-lg:items-center justify-center mt-20">

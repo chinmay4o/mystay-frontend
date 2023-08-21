@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import "./SearchBar.css";
 import { useHistory } from "react-router-dom";
 
-const SearchBar = ({ placeholder, data, setDestination }) => {
+const SearchBar = ({wordEntered,error, setWordEntered, placeholder, data, setDestination }) => {
   const history = useHistory();
   const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
@@ -28,7 +27,7 @@ const SearchBar = ({ placeholder, data, setDestination }) => {
 
   return (
     <div className="w-full relative">
-      <div className="border-b-2 border-gray-400">
+      <div className={`border-b-2 ${error? "border-red-400" : "border-gray-400"} p-1`} >
         <input
           type="text"
           placeholder={placeholder}
