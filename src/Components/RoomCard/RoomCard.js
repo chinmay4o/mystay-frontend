@@ -6,6 +6,7 @@ const RoomCard = ({ ele }) => {
   //room count is
   const [count, setCount] = useState(0);
   const [available , setAvailable] = useState();
+  const [disabled, setDisabled] = useState(false);
 
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
 
@@ -31,10 +32,11 @@ const RoomCard = ({ ele }) => {
       setSelectedRooms(
         selectedRooms.map((ele1, index) => {
           if (ele1.roomId === existingRoom.roomId) {
+            if(ele1.qty+1 >=available) setDisabled(true)
             return {
               ...ele1,
               qty:
-                ele1.qty >= ele1.roomDetails.length ? ele1.qty : ele1.qty + 1,
+                ele1.qty >= available ? ele1.qty : ele1.qty + 1,
             };
           } else {
             return ele1;
@@ -56,9 +58,11 @@ const RoomCard = ({ ele }) => {
         selectedRooms.filter((ele1, index) => ele1.roomId !== oldRoom.roomId)
       );
     } else if (existingRoom) {
+
       setSelectedRooms(
         selectedRooms.map((ele1, index) => {
           if (ele1.roomId === existingRoom.roomId) {
+            if(ele1.qty-1 <available) setDisabled(false)
             return { ...ele1, qty: ele1.qty > 0 ? ele1.qty - 1 : 0 };
           } else {
             return ele1;
@@ -127,8 +131,9 @@ const RoomCard = ({ ele }) => {
                 ></i>
                 <p>{count}</p>
                 <i
-                  className="fas fa-plus  bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8"
+                  className={`fas fa-plus  bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8 ${disabled && "bg-gray-400"}`}
                   onClick={() => {
+                    !disabled && 
                     addRoomToCartHandler(ele);
                     setCount(
                       count >= ele.roomDetails.length ? count : count + 1
