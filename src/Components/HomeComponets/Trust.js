@@ -1,10 +1,11 @@
 import React from "react";
+import PrimaryButton from "../../Common/buttons/PrimaryButton";
 
 const Trust = () => {
   return (
-    <div className="w-screen mt-10 md:mt-0">
-      <div className="flex gap-8 flex-wrap w-full justify-center px-8 md:px-4">
-        <div className="bg-[#a7ffcc] py-7 px-16 rounded-2xl flex flex-col gap-4 lg:w-2/5 lg:flex-shrink-0">
+    <div className="w-screen mt-10 md:mt-0 flex items-center justify-center">
+      <div className="flex gap-8 flex-wrap w-[90%] max-w-7xl justify-center px-8 md:px-4">
+        <div className="bg-[#a7ffcc] py-7 px-16 rounded-2xl flex flex-col gap-4 lg:w-3/5 lg:flex-shrink-0">
           <h3 className="text-2xl font-bold">Why trust MyStay</h3>
 
           <div className="text-md">
@@ -53,8 +54,8 @@ const Trust = () => {
             </span>
 
           <div className="flex flex-col gap-2 items-center">
-            <input type="text" name="email" id="email" className="p-2 w-48 font-sans" placeholder="Enter email"/>
-            <div className="text-lg cursor-pointer w-max rounded-md text-white font-semibold bg-primary p-2 px-8">Sign Up</div>
+            <input type="text" name="email" id="email" className="input w-full max-w-xs" placeholder="Enter email"/>
+            <div className="btn hover:text-primary hover:bg-white text-sm cursor-pointer w-max rounded-md text-white font-semibold bg-primary p-2 px-8">Sign Up</div>
           </div>
           </div>
 

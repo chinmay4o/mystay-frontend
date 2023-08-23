@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchBar.css";
 import { useHistory } from "react-router-dom";
 
-const SearchBar = ({wordEntered,error, setWordEntered, placeholder, data, setDestination }) => {
+const SearchBar = ({wordEntered,error, setWordEntered, placeholder,  setDestination }) => {
   const history = useHistory();
   const [filteredData, setFilteredData] = useState([]);
+  const [data , setData] = useState([]);
+  const getData  = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/city`);
+      const data2 = await response.json();
+      setData(data2.data);
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  },[])
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = data.filter((value) => {
-      return value.city.toLowerCase().includes(searchWord.toLowerCase());
+      return value.name.toLowerCase().includes(searchWord.toLowerCase());
     });
 
     if (searchWord === "") {
@@ -27,7 +41,7 @@ const SearchBar = ({wordEntered,error, setWordEntered, placeholder, data, setDes
 
   return (
     <div className="w-full relative">
-      <div className={`border-b-2 ${error? "border-red-400" : "border-gray-400"} p-1`} >
+      <div className={`border-b-2 ${error? "border-red-400" : "border-gray-400"}  dropdown dropdown-bottom p-1` } tabIndex={0} >
         <input
           type="text"
           placeholder={placeholder}
@@ -43,25 +57,24 @@ const SearchBar = ({wordEntered,error, setWordEntered, placeholder, data, setDes
           </div> */}
       </div>
       {filteredData.length != 0 && (
-        <div className="absolute left-0 mt-4 min-w-[150px] max-w-[320px] min-h-[120px] z-[10] p-2 bg-white max-h-[320px] result-shadow rounded-xl">
+        <ul className="absolute dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full">
           {filteredData.slice(0, 15).map((ele, index) => {
             return (
-              <p
-                className="dataItem"
+              <li
+                className="cursor-pointer  hover:text-primary rounded-xl p-1 hover:bg-white"
                 onClick={() => {
-                  setWordEntered(ele.city);
-                  setDestination(ele.city.toLowerCase());
+                  setWordEntered(ele.name);
+                  setDestination(ele.name.toLowerCase());
                   setFilteredData([]);
                 }}
                 key="index"
               >
                 {/* <p className="dataItem"> */}
-                <img src={ele.img} alt="" className="img-search"/>
-                <p>{ele.city} </p>
-              </p>
+                <p className="text-base text-gray-400 font-semibold hover:text-primary">{ele.name} </p>
+              </li>
             );
           })}
-        </div>
+        </ul>
       )}
     </div>
   );

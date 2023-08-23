@@ -2,13 +2,13 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="w-screen bg-[#3b4a5b] text-white px-20">
+    <div className="w-screen bg-[#3b4a5b] text-white px-20 font-semibold">
       <div className="w-full flex flex-col md:flex-row gap-8 lg:gap-20 items-center justify-center py-12 px-4 text-[18px] md:text-sm lg:text-base xl:text-[18px]">
-        <div className="text-3xl font-semibold lg:text-4xl md:hidden lg:block">MyStay</div>
+        <div className="text-3xl  text-primary  font-bold logo-shadow cursor-pointer  lg:text-4xl md:hidden lg:block">MyStay</div>
 
         <div className="flex flex-col gap-4 justify-center items-left">
-        <div className="text-base hidden md:block lg:hidden">MyStay</div>
-          <div className="text-base">
+        <div className="text-3xl  text-primary  font-bold logo-shadow cursor-pointer  lg:text-4xl hidden md:block lg:hidden">MyStay</div>
+          <div className="text-base ">
           Explore with MyStay - We provide ultra Luxurious Hotel Rooms for long
           accommodations, at Best Price, We are couple friendly, Great interiors
           and mesmerizing location in Jaipur, Gurugram, Indore and Banglore

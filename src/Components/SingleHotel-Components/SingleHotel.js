@@ -9,6 +9,7 @@ import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 import Map from "./Map.js";
 import Policies from "./Policies.js";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import AmenitiesIcons from "../../Common/Icons/AmenitiesIcons.js";
 
 const SingleHotel = () => {
   const history = useHistory();
@@ -87,42 +88,49 @@ const SingleHotel = () => {
   }, []);
 
   useEffect(() => {
-    if(dates){
-
-      if(dates[0] !== new Date(checkIn) || dates[1] !== new Date(checkOut)){
+    if (dates) {
+      if (dates[0] !== new Date(checkIn) || dates[1] !== new Date(checkOut)) {
         const checkInDate = new Date(
-        new Date(dates[0]).getTime() + 5.5 * 60 * 60 * 1000
+          new Date(dates[0]).getTime() + 5.5 * 60 * 60 * 1000
         )
-        .toISOString()
-        .substring(0, 10);
-        const checkOutDate = new Date(new Date(dates[1]).getTime())
-        .toISOString()
-        .substring(0, 10);
+          .toISOString()
+          .substring(0, 10);
+        const checkOutDate = new Date(new Date(dates[1]).getTime() + 5.5 * 60 * 60 * 1000)
+          .toISOString()
+          .substring(0, 10);
 
         localStorage.setItem("checkIn", JSON.stringify(checkInDate));
         localStorage.setItem("checkOut", JSON.stringify(checkOutDate));
-        
+
         history.push(
           `/hotel/${id}?checkIn=${JSON.stringify(
             checkInDate
-            )}&checkOut=${JSON.stringify(checkOutDate)}`
-            );
-          }
-        }
-        },[dates]) 
-        
-        if (singleHotel.success === false) {
-          return <h2> Loading ...</h2>;
-        } else {
-          return (
-            <>
+          )}&checkOut=${JSON.stringify(checkOutDate)}`
+        );
+      }
+    }
+  }, [dates]);
+  useEffect(() => {
+    const selectElement = document.querySelectorAll(
+      ".react-daterange-picker__inputGroup__month"
+    );
+    for (let i = 0; i < selectElement.length; i++) {
+      selectElement[i].disabled = true;
+    }
+  }, []);
+
+  if (singleHotel.success === false) {
+    return <h2> Loading ...</h2>;
+  } else {
+    return (
+      <>
         <Slider
           sliderShow={sliderShow}
           setSliderShow={setSliderShow}
-          sliderImages={singleHotel.data[0].images}
+          sliderImages={singleHotel.data.hotels[0].images}
         />
         <div className="w-[96%] md:w-[96%] h-96 md:h-[600px] xl:w-[1280px] md:gap-2 mx-auto py-5 grid grid-cols-3 grid-rows-3 md:grid-cols-4">
-          {singleHotel.data[0].images.map((ele, index) => {
+          {singleHotel.data.hotels[0].images.map((ele, index) => {
             return (
               <div
                 className={imgClasses[index]}
@@ -146,28 +154,34 @@ const SingleHotel = () => {
           <div className="d1"></div> */}
         </div>
 
-        <div className="w-[96%] xl:w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 px-4">
-          <div className="flex flex-col gap-6 lg:w-4/6">
-            <p className="text-2xl font-bold">
-              {singleHotel.data[0].hotelName}
+        <div className="w-[96%] xl:w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 py-6 px-4">
+          <div className="flex flex-col gap-6 lg:w-7/12">
+            <p className="text-2xl font-bold text-primary">
+              {singleHotel.data.hotels[0].hotelName}
             </p>
 
             <p className="font-semibold text-base text-[#6d6d6d]">
-              {singleHotel.data[0].description}
+              {singleHotel.data.hotels[0].description}
             </p>
           </div>
-          <div className=" flex flex-col gap-6 lg:w-2/6">
-            <p className="text-2xl font-bold">Amenities</p>
+          <div className=" flex flex-col gap-2 lg:w-5/12">
+            <p className="text-xl font-bold">Amenities</p>
 
-            <div className="grid grid-cols-2 grid-rows-4 gap-4 grid-flow-row md:grid-cols-3">
-              {singleHotel.data[0].amenities.map((ele, index) => {
-                return <div className="">{ele}</div>;
+            <div className="grid grid-cols-2 grid-rows-4 gap-3 text-sm font-medium grid-flow-row md:grid-cols-3">
+              {singleHotel.data.hotels[0].amenities.map((ele, index) => {
+                const str = ele.toLowerCase();
+                return (
+                  <div className="flex gap-2 items-center">
+                    <AmenitiesIcons type={str} />
+                    <div className="">{ele}</div>
+                  </div>
+                );
               })}
             </div>
           </div>
         </div>
 
-        <div className="w-full bg-[#f9f7f1]">
+        <div className="w-full bg-secondary">
           <div className=" py-12 px-5 flex flex-col lg:flex-row gap-12 mx-auto rounded-xl  max-w-[1280px]">
             {/* date grid */}
 
@@ -179,8 +193,8 @@ const SingleHotel = () => {
                     Select from a range of beautiful rooms
                   </p>
                 </div>
-                <div className="grid place-items-center">
-                  <div className="flex gap-4 items-center justify-center p-2 rounded-xl bg-white shadow-md w-max">
+                <div className="grid place-items-center -mt-8">
+                  <div className="flex gap-4 items-center justify-center p-2 rounded-xl bg-white shadow-xs w-max">
                     {/* <input type="date" value={checkIn} /> */}
                     <DateRangePicker
                       format="dMMMy"
@@ -213,7 +227,7 @@ const SingleHotel = () => {
 
               {/* hotel rooms mapping */}
               <div className="w-full rounded-xl gap-6 flex-col flex">
-                {singleHotel.data[0].rooms.map((ele, index) => {
+                {singleHotel.data.hotels[0].rooms.map((ele, index) => {
                   return <RoomCard ele={ele} />;
                 })}
               </div>
@@ -224,7 +238,7 @@ const SingleHotel = () => {
             <div className="hidden md:flex max-lg:w-full max-lg:items-center justify-center">
               {selectedRooms.length === 0 ? (
                 <div className="h-full lg:w-max w-96 flex flex-col items-center gap-4 justify-start">
-                  <p className="text-3xl font-bold text-left w-full">Summary</p>
+                  <p className="text-2xl font-bold text-left w-full">Summary</p>
 
                   <p className="text-[#808080] text-left w-full font-semibold">
                     Starting from {new Date(checkIn).getDate()}th{" "}
@@ -358,13 +372,13 @@ const SingleHotel = () => {
                       selectedRooms.map((ele, index) => {
                         return (
                           <div
-                            className="flex justify-between items-center"
+                            className="flex justify-between items-center text-base"
                             key={index}
                           >
                             <p className="font-bold">
                               {" "}
                               {ele.roomName}{" "}
-                              <span className="text-[#808080] text-base font-semibold">
+                              <span className="text-[#808080] text-md font-semibold">
                                 {" "}
                                 X {ele.qty}
                               </span>
@@ -380,7 +394,7 @@ const SingleHotel = () => {
                     )}
 
                     <div className="bg-primary h-1 w-full">&nbsp;</div>
-                    <div className="flex justify-between items-center font-bold">
+                    <div className="flex justify-between items-center font-bold text-base">
                       <p className="font-bold">Tax</p>{" "}
                       <p className="dynamic">
                         {" "}
@@ -395,7 +409,7 @@ const SingleHotel = () => {
                       </p>
                     </div>
 
-                    <div className="flex justify-between items-center font-bold">
+                    <div className="flex justify-between items-center font-bold text-base">
                       <p className="font-bold ">Total payable</p>{" "}
                       <p className="dynamic">
                         <i className="fas fa-rupee-sign"></i>{" "}

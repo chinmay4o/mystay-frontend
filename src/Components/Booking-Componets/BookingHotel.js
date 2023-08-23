@@ -13,19 +13,20 @@ const BookingHotel = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
   const [guestDetails, setGuestsDetails] = useState([]);
+  const [error, setError] = useState("");
 
-  useEffect(()=>{
-    if(selectedRooms.length>0){
-      localStorage.setItem("selectedRooms",JSON.stringify(selectedRooms));
-    }else{
+  useEffect(() => {
+    if (selectedRooms.length > 0) {
+      localStorage.setItem("selectedRooms", JSON.stringify(selectedRooms));
+    } else {
       const rooms = JSON.parse(localStorage.getItem("selectedRooms"));
-      if(rooms && rooms.length>0){
+      if (rooms && rooms.length > 0) {
         setSelectedRooms(rooms);
-      }else{
+      } else {
         console.log(history.goBack());
       }
     }
-  },[selectedRooms])
+  }, [selectedRooms]);
 
   const monthNames = [
     "January",
@@ -60,6 +61,22 @@ const BookingHotel = () => {
     address: "",
   });
 
+  useEffect(() => {
+    if (!userInfo.firstName || !userInfo.lastName) {
+      setError("Enter Name");
+    } else if (!userInfo.email) {
+      setError("Enter Email");
+    } else if (!userInfo.mobile) {
+      setError("Enter Mobile Number");
+    } else if (
+      userInfo.firstName &&
+      userInfo.lastName &&
+      userInfo.email &&
+      userInfo.mobile
+    ) {
+      setError("");
+    }
+  }, [userInfo]);
   //Calculating differecebetween Days/nights
   const date1 = new Date(localStorage.getItem("checkIn"));
   const date2 = new Date(localStorage.getItem("checkOut"));
@@ -68,20 +85,26 @@ const BookingHotel = () => {
   console.log(diffTime + " milliseconds");
   console.log(diffDays + " days");
 
+  const checkOutDate = new Date(
+    new Date(localStorage.getItem("checkOut")).getTime() + 5.5 * 60 * 60 * 1000
+  );
+  const checkInDate = new Date(
+    new Date(localStorage.getItem("checkIn")).getTime() + 5.5 * 60 * 60 * 1000
+  );
+
+  console.log(
+    JSON.stringify(checkInDate).slice(1, 23),
+    JSON.stringify(checkOutDate).slice(1, 23)
+  );
   //mapping a new array to save details in requires backend format
   let b1 = selectedRooms.map((ele, id) => {
     return {
       roomId: ele.roomId,
       hotelId: ele.hotelId,
       bookingNoOfRoom: ele.qty,
-      checkIn: JSON.stringify(new Date(localStorage.getItem("checkIn"))).slice(
-        1,
-        23
-      ),
+      checkIn: JSON.stringify(checkInDate).slice(1, 23),
       // checkIn: new Date(localStorage.getItem("checkIn")),
-      checkOut: JSON.stringify(
-        new Date(localStorage.getItem("checkOut"))
-      ).slice(1, 23),
+      checkOut: JSON.stringify(checkOutDate).slice(1, 23),
       // checkOut: new Date(localStorage.getItem("checkOut")),
       night: diffDays,
     };
@@ -97,8 +120,6 @@ const BookingHotel = () => {
     },
     bookingDetails: [...b1],
   });
-
-  
 
   async function displayRazorpay() {
     console.log("hello");
@@ -218,8 +239,8 @@ const BookingHotel = () => {
               ...response,
               amount: dataR.message.amount,
               bookingDetails: bookingDetails.bookingDetails,
-                userDetails: userInfo,
-                guestDetails: guestDetails,
+              userDetails: userInfo,
+              guestDetails: guestDetails,
             }),
           }
         );
@@ -256,9 +277,12 @@ const BookingHotel = () => {
         setModalDisplay={setModalDisplay}
       />
 
-      <div className="w-[90%] max-w-[1280px] bg-white flex flex-col lg:flex-row gap-6 justify-center mx-auto p-3  pb-24">
-        <div className="">
-          <p className="text-xl font-bold cursor-pointer" onClick={()=> history.goBack()}>
+      <div className="w-[90%] max-w-[1280px]  bg-white flex flex-col lg:flex-row gap-6 justify-center mx-auto p-3  pb-24">
+        <div className="w-3/4">
+          <p
+            className="text-xl font-bold cursor-pointer"
+            onClick={() => history.goBack()}
+          >
             {" "}
             <i className="fas fa-long-arrow-alt-left"></i> Confirm your booking
           </p>
@@ -270,12 +294,12 @@ const BookingHotel = () => {
             </p>
 
             <div className="text-[#2b2b2b] py-[10px] px-5 mt-5">
-              <div className="flex flex-col sm:flex-row sm:items-center  sm:gap-10 w-full">
-                <p className="font-semibold text-[18px] p-4 flex items-center">
+              <div className="flex flex-col sm:flex-row sm:items-center  sm:gap-10 w-full relative">
+                <p className="font-semibold text-base p-4 flex items-center">
                   Name{" "}
                   <sup className="text-red-400 font-bold text-[16px]">*</sup>{" "}
                 </p>{" "}
-                <div className="grid grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 w-[90%] gap-4">
+                <div className="grid grid-rows-2 sm:grid-rows-1 sm:grid-cols-2  w-[90%] gap-4 ">
                   <input
                     type="text"
                     placeholder="First Name"
@@ -283,7 +307,7 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, firstName: e.target.value })
                     }
-                    className="placeholder:text-[#808080/50] font-medium p-2  text-black text-[18px] border-[2px] border-[#f1f1f1] rounded-[5px]"
+                    className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                   />
                   <input
                     type="text"
@@ -292,12 +316,12 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, lastName: e.target.value })
                     }
-                    className="placeholder:text-[#808080/50] font-medium p-2  text-black text-[18px] border-[2px] border-[#f1f1f1] rounded-[5px]"
+                    className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                   />
                 </div>
               </div>
-              <div className="flex sm:items-center flex-col sm:flex-row sm:gap-7 w-full">
-                <p className="font-semibold text-[18px] p-4 flex items-center">
+              <div className="flex sm:items-center mt-4 flex-col sm:flex-row sm:gap-7 w-full">
+                <p className="font-semibold text-base p-4 flex items-center">
                   Gender{" "}
                   <sup className="text-red-400 font-bold text-[16px]">*</sup>
                 </p>{" "}
@@ -326,8 +350,8 @@ const BookingHotel = () => {
                 /> */}
                 </div>
               </div>
-              <div className="flex sm:items-center flex-col sm:flex-row  sm:gap-10 w-full">
-                <p className="font-semibold text-[18px] p-4 flex items-center">
+              <div className="flex sm:items-center mt-4 flex-col sm:flex-row  sm:gap-10 w-full">
+                <p className="font-semibold text-base p-4 flex items-center">
                   Email{" "}
                   <sup className="text-red-400 font-bold text-[16px]">*</sup>
                 </p>{" "}
@@ -343,14 +367,14 @@ const BookingHotel = () => {
                   />
                 </div>
               </div>
-              <div className="flex sm:items-center flex-col sm:flex-row sm:gap-5 w-full">
-                <p className="font-semibold text-[18px] p-4 flex items-center">
+              <div className="flex sm:items-center mt-4 flex-col sm:flex-row sm:gap-5 w-full">
+                <p className="font-semibold text-base p-4 flex items-center">
                   Number{" "}
                   <sup className="text-red-400 font-bold text-[16px]">*</sup>
                 </p>{" "}
                 <div className="w-full">
                   <input
-                    type="number"
+                    type="text"
                     placeholder="Phone Number"
                     value={userInfo.mobile}
                     onChange={(e) =>
@@ -360,10 +384,9 @@ const BookingHotel = () => {
                   />
                 </div>
               </div>
-              <div className="flex sm:items-center flex-col sm:flex-row sm:gap-5 w-full">
-                <p className="font-semibold text-[18px] p-4 flex items-center">
+              <div className="flex sm:items-center mt-4 flex-col sm:flex-row sm:gap-5 w-full">
+                <p className="font-semibold text-base p-4 flex items-center">
                   Address{" "}
-                  <sup className="text-red-400 font-bold text-[16px]">*</sup>
                 </p>{" "}
                 <div className="w-full">
                   <input
@@ -382,18 +405,33 @@ const BookingHotel = () => {
               guestDetails.map((ele, index) => {
                 return (
                   <div className="border-t-2 py-6 px-5 flex flex-col gap-2">
-                    <div className="text-xl font-bold flex gap-4 items-center ">{`Guest #${
-                      index + 1
-                    }`}<span className="cursor-pointer" onClick={()=>{
-                      const guests = [...guestDetails];
-                      guests.splice(index,1);
-                      setGuestsDetails(guests);
-                    }}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2"  className="w-5 h-5 stroke-primary">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                  </svg>
-                  </span></div>
+                    <div className="text-lg font-bold flex gap-4 items-center ">
+                      {`Guest #${index + 1}`}
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => {
+                          const guests = [...guestDetails];
+                          guests.splice(index, 1);
+                          setGuestsDetails(guests);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="2"
+                          className="w-5 h-5 stroke-primary"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                          />
+                        </svg>
+                      </span>
+                    </div>
                     <div className="flex flex-col sm:flex-row sm:items-center  sm:gap-10 w-full">
-                      <p className="font-semibold text-[18px] p-4 flex items-center">
+                      <p className="font-semibold text-base p-4 flex items-center">
                         <span className="">Name</span>
                         <sup className="text-red-400 font-bold text-[16px]">
                           *
@@ -409,7 +447,7 @@ const BookingHotel = () => {
                             details[index].firstName = e.target.value;
                             setGuestsDetails(details);
                           }}
-                          className="placeholder:text-[#808080/50] font-medium p-2  text-black text-[18px] border-[2px] border-[#f1f1f1] rounded-[5px]"
+                          className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                         />
                         <input
                           type="text"
@@ -420,7 +458,7 @@ const BookingHotel = () => {
                             details[index].lastName = e.target.value;
                             setGuestsDetails(details);
                           }}
-                          className="placeholder:text-[#808080/50] font-medium p-2  text-black text-[18px] border-[2px] border-[#f1f1f1] rounded-[5px]"
+                          className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                         />
                       </div>
                     </div>
@@ -457,7 +495,7 @@ const BookingHotel = () => {
               {monthNames[new Date(localStorage.getItem("checkIn")).getMonth()]}
             </p>
 
-            <div className="text-[18px] flex-col flex gap-4 w-full">
+            <div className="text-base flex-col flex gap-4 w-full">
               {selectedRooms.length === 0 ? (
                 <p>No Rooms Selected</p>
               ) : (
@@ -522,7 +560,7 @@ const BookingHotel = () => {
                 </p>
               </div>
 
-              <div className="flex items-center justify-center">
+              <div className="flex flex-col gap-2 items-center justify-center">
                 <PrimaryButton
                   text="Book Now"
                   onClick={() => {
@@ -531,7 +569,11 @@ const BookingHotel = () => {
                       ? history.push("/booking")
                       : displayRazorpay();
                   }}
+                  disabled={error.length > 0}
                 />
+                {error.length > 0 && (
+                  <p className="text-red-500 text-sm">*{error}</p>
+                )}
               </div>
             </div>
           </div>

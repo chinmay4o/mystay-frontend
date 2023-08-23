@@ -48,7 +48,7 @@ function Slider(props) {
         </span>
         <div className="h-full w-full flex-col md:justify-start justify-center  flex items-center gap-10">
           {/* <SliderContent activeIndex={activeIndex} sliderImage={sliderImage} /> */}
-          <div className="carousel w-3/4 h-2/3">
+          <div className="carousel w-3/4 h-2/3 transition-all duration-100 ">
             {props.sliderImages.map((image, index) => (
               <div id={`item${index}`} className="carousel-item w-full relative">
                 <img src={image} className="w-full" />

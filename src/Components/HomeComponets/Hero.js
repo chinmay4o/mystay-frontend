@@ -14,7 +14,7 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
   let today = new Date(yesterday.getTime() + 24 * 60 * 60 * 1000);
   var tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000);
   const [wordEntered, setWordEntered] = useState("");
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
   useEffect(() => {
     if (error) {
       setTimeout(() => {
@@ -22,6 +22,16 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
       }, 3000);
     }
   }, [error]);
+  useEffect(() => {
+    const selectElement = document.querySelectorAll(
+      ".react-daterange-picker__inputGroup__month"
+    );
+    // console.log(selectElement);
+    for (let i = 0; i < selectElement.length; i++) {
+      selectElement[i].disabled = true;
+    }
+  }, []);
+
 
   const hotels = useContext(HotelContext);
 
@@ -39,10 +49,10 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
   }, []);
 
   return (
-    <div className="hero-image w-[96%] max-w-[1150px] md:rounded-3xl md:mt-8 mx-auto h-screen md:h-max md:py-24 lg:py-32 md:bg-cover flex flex-col gap-4 items-center p-6 justify-center text-white">
+    <div className="hero-image w-[96%] max-w-[1150px] md:rounded-3xl  mx-auto h-screen md:h-max md:py-24 lg:py-32 md:bg-cover flex flex-col items-center px-6 justify-center text-white">
       {/* {hotels.state.name} */}
 
-      <h2 className="font-bold text-3xl text-center text-shadow p-6 ">
+      <h2 className="font-bold text-3xl text-center text-shadow p-4 ">
         Ready to explore with MyStay?
       </h2>
       <div className="w-full h-4/6 md:h-max xl:w-max bg-white rounded-xl flex  flex-col md:flex-wrap gap-6 md:gap-12 md:flex-row justify-center  p-12 text-black text-md items-center">

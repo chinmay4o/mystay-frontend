@@ -84,7 +84,7 @@ body {
   color: #ff5500;
   font-size: 40px;
   font-weight: 700;
-  text-shadow: 1px 1px 1px rgba(255, 66, 37, 0.187);
+  
   cursor: pointer;
   position: relative;
 }

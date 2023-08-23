@@ -36,7 +36,7 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 items-center'>
             <label className="text-gray-700 text-md font-normal">Enter Your email </label>
             <input type="text" placeholder="Email" {...register("email", {required: true})} className="w-72 md:w-96 h-12 px-3 rounded-lg border-2 border-gray-200 outline-none focus:border-primary" />
-            <button type="submit" className="w-72 md:w-96 h-12 mt-4 mb-4 rounded-lg bg-primary text-white font-normal">Submit</button>
+            <button type="submit" className="btn  w-full bg-primary text-white hover:bg-white hover:text-primary">Submit</button>
         </form>
     </div>
   )

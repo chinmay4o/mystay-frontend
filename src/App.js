@@ -33,7 +33,7 @@ function App() {
       <HotelState>
         <BookedRoomsState>
           <SliderImageState>
-            <div id="parent">
+            <div>
               <div className="layout-container">
                 <Route exact path="/">
                   <HomeScreen />

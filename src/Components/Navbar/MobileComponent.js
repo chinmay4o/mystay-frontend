@@ -1,27 +1,41 @@
 import React, { useState } from "react";
-import citiesD from "../HomeComponets/citiesData.js";
 import { nanoid } from "nanoid";
-
+import Logo from "../../images/logo.png"
 import { useHistory } from 'react-router-dom'
 
 const MobileComponent = ({ userData }) => {
     const history = useHistory();
     const [show, setShow] = useState("none");
     const [isOpen, setIsOpen] = useState(false);
+    const [data, setData] = useState([]);
+    const getData  = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/city`);
+        const data2 = await response.json();
+        setData(data2.data);
+      } catch (error) {
+        
+      }
+    }
+
+    React.useEffect(() => {
+      getData();
+    }, []);
   
     console.log(userData);
   
     return (
       <div className="w-screen max-h-screen relative">
         <div className="w-full  p-4 flex justify-between items-center">
-          <div className="" onClick={() => history.push("/")}>
+          <div className="text-primary text-2xl font-bold logo-shadow cursor-pointer" onClick={() => history.push("/")}>
             {/* <img
               // src="https://ik.imagekit.io/k3m4pqzpmlr/Logo/mystay-logo-removebg-preview_s7Qj1Ibh3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655707681416"
               src="https://ik.imagekit.io/k3m4pqzpmlr/Hotel_pictures/mystay-logo-removebg-preview_Gu-jhBpNX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656660679160"
               alt="mystay"
               className="h-10 w-12 object-contain"
             /> */}
-            My<span>Stay</span>{" "}
+            {/* My<span>Stay</span>{" "} */}
+            <img src={Logo} alt="" className="h-full w-40 object-contain" />
           </div>
           <div
             className="flex flex-col gap-1 cursor-pointer"
@@ -38,27 +52,27 @@ const MobileComponent = ({ userData }) => {
           }`}
         >
           <div
-            className="hover:text-primary cursor-pointer relative"
+            className="hover:text-primary cursor-pointer relative dropdown "
             onClick={() => setShow(show === "none" ? "grid" : "none")}
           >
             {/* <a href="#location"> */}
-            <a>
+            <label tabIndex={0} className="cursor-pointer m-1 hover:text-primary">
               {" "}
               {/* <i className="fas fa-home"></i> */}
               Search Destination <i className="fas fa-angle-down"></i>
-              {citiesD.length !== 0 && (
-                <div
-                  className="absolute  max-w-[410px] grid mt-3 py-3 min-w-[210px] overflow-hidden overflow-y-auto shadow-lg gap-y-2 place-items-center grid-cols-1 grid-rows-2 rounded-lg bg-white "
-                  style={{ display: show }}
+              </label>
+              {data.length !== 0 && (
+                <ul
+                tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                  {citiesD.slice(0, 15).map((ele, index) => {
+                  {data.slice(0, 15).map((ele, index) => {
                     return (
-                      <p
+                      <li
                         className="cursor-pointer"
                         onClick={() => {
                           // setDestination(ele.city.toLowerCase());
                           history.push(
-                            `/hotels?city=${ele.city.toLowerCase()}&checkIn=${localStorage.getItem(
+                            `/hotels?city=${ele.name.toLowerCase()}&checkIn=${localStorage.getItem(
                               "checkIn"
                             )}&checkOut=${localStorage.getItem("checkOut")}`
                           );
@@ -67,34 +81,33 @@ const MobileComponent = ({ userData }) => {
                       >
                         {/* <p className="dataItem"> */}
                         {/* <img src={ele.img} alt="" className="img-search" /> */}
-                        <p className="hover:bg-[#c7c7c7] hover:text-black text-md text-[#c7c7c7]">
-                          {ele.city}{" "}
+                        <p className=" hover:text-black text-md text-[#c7c7c7]">
+                          {ele.name}{" "}
                         </p>
-                      </p>
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
               )}
-            </a>
+
           </div>
-          <div className="hover:text-primary cursor-pointer">
+          {/* <div className="hover:text-primary cursor-pointer">
             <a onClick={() => history.push(`/longstays`)}>
-              {" "}
-              {/* <i className="fas fa-people-carry"></i> */}
+             
               Longstays <i className="fas fa-angle-down"></i>
             </a>
-          </div>
-          <div className="hover:text-primary cursor-pointer">
+          </div> */}
+          {/* <div className="hover:text-primary cursor-pointer">
             <a
               href="https://master.d3mfetjd9ywif7.amplifyapp.com/"
               target="_blank"
               rel="noreferrer noopener"
             >
               {" "}
-              {/* <i className="fas fa-globe-americas"></i>  */}
+              {/* <i className="fas fa-globe-americas"></i>  
               Coworking
             </a>
-          </div>
+          </div> */}
           <div
             className="hover:text-primary cursor-pointer"
             style={{ cursor: "pointer" }}

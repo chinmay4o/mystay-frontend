@@ -73,7 +73,7 @@ const RoomCard = ({ ele }) => {
   }
 
   return (
-    <div className="h-96 flex-col flex md:flex-row gap-4 mb-5 rounded-xl shadow-xl md:h-48">
+    <div className="h-96 flex-col flex md:flex-row gap-4 mb-5 rounded-lg shadow-xs hover:shadow-md md:h-48 bg-white">
       <div className="">
         <img
           src={ele.images[0]}
@@ -108,15 +108,16 @@ const RoomCard = ({ ele }) => {
         {available>0 &&
         <div className="flex mt-4 gap-4 items-center justify-end">
           {count === 0 ? (
-            <button
-              className="btn bg-primary text-white hover:bg-white hover:text-primary hover:border hover:border-primary text-[10px] p-2 min-h-6 h-10 uppercase-none"
+            <PrimaryButton
+              classes="uppercase btn-sm text-xs flex items-center justify-center max-w-max "
               onClick={() => {
                 addRoomToCartHandler(ele);
                 setCount(count >= ele.roomDetails.length ? count : count + 1);
               }}
-            >
-              Select Room
-            </button>
+              text="Select Room"
+            />
+              
+            
           ) : (
             <>
               <p className="r3-guests">No. of Rooms</p>

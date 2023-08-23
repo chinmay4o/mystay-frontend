@@ -24,9 +24,9 @@ const SingleHotel = ({ ele, checkIn, checkOut, key }) => {
         <h2 className="mb-4 text-xl font-bold">{ele.hotelName}</h2>
 
         <p className="text-base mb-4 font-semibold text-[#6d6d6d]">
-          {ele.description.slice(0, 200)}...
+          {ele.description.slice(0, 180)}...
         </p>
-
+        
         <PrimaryButton
           text="Book Now"
           onClick={() =>
