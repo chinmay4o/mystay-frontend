@@ -31,7 +31,7 @@ const HotelsScreenMain = () => {
   useEffect(() => {
     getAllHotels();
     window.scrollTo(0, 0);
-  }, []);
+  }, [city]);
 
   if (allSearchedHotels.success === false) {
     return <h2> Loading ...</h2>;

@@ -7,9 +7,13 @@ import "../SearchBar/DatePicker.css";
 import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import AdultBar from "./AdultBar.js";
 
 const Hero = ({ dates, setDates, destination, setDestination }) => {
   const history = useHistory();
+  const [adults, setAdults] = useState(2);
+  const [rooms, setRooms] = useState(1);
+  const [roomAdults , setRoomAdults] = useState([2]);
   let yesterday = new Date(Date.now());
   let today = new Date(yesterday.getTime() + 24 * 60 * 60 * 1000);
   var tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000);
@@ -55,17 +59,17 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
       <h2 className="font-bold text-3xl text-center text-shadow p-4 ">
         Ready to explore with MyStay?
       </h2>
-      <div className="w-full h-4/6 md:h-max xl:w-max bg-white rounded-xl flex  flex-col md:flex-wrap gap-6 md:gap-12 md:flex-row justify-center  p-12 text-black text-md items-center">
+      <div className="w-full h-4/6 md:h-max xl:w-max bg-white rounded-xl flex  flex-col md:flex-wrap gap-6 md:gap-12 md:flex-row justify-center  p-8 text-black text-md items-center">
         <div className="flex flex-col items-center justify-between  gap-2 relative">
           <label
             htmlFor="destination"
             className="text-md font-semibold  md:text-lg"
           >
-            Select Your Destination
+            Destination
           </label>
           <SearchBar
             data={cities}
-            placeholder="Search Destination..."
+            placeholder="Search Destination"
             setDestination={setDestination}
             wordEntered={wordEntered}
             setWordEntered={setWordEntered}
@@ -108,6 +112,26 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
               minDate={new Date(Date.now())}
             />
           </div>
+        </div>
+
+        <div className="flex flex-col items-center justify-between  gap-2 relative">
+          <label
+            htmlFor="destination"
+            className="text-md font-semibold  md:text-lg"
+          >
+            Guests & Rooms
+          </label>
+          <div className="flex items-center justify-center border-b-2 pb-2 border-gray-400">
+          <AdultBar
+            adults={adults}
+            setAdults={setAdults}
+            rooms={rooms}
+            setRooms={setRooms}
+            roomAdults={roomAdults}
+            setRoomAdults={setRoomAdults}
+            
+          /></div>
+
         </div>
 
         <div className="book-container">

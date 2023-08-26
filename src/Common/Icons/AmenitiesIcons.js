@@ -1,35 +1,26 @@
 import React from 'react'
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import WifiIcon from '@mui/icons-material/Wifi';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
-import HotTubIcon from '@mui/icons-material/HotTub';
-import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
-import DiningIcon from '@mui/icons-material/Dining';
-import TvIcon from '@mui/icons-material/Tv';
-import RoomServiceIcon from '@mui/icons-material/RoomService';
-import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 
 
 const Amenties = ({type})=>{
     switch(type){
         case 'lockers':
-            return <VpnKeyIcon/>
+            return <i className="fas fa-key"></i>
         case 'wifi':
-            return <WifiIcon/>
+            return <i className="fas fa-wifi"></i>
         case 'air-conditioning':
-            return <AcUnitIcon/>
+            return <i className="fas fa-fan"></i>
         case 'tv':
-            return <TvIcon/>
+            return <i className="fas fa-tv"></i>
         case '24/7 reception':
-            return <RoomServiceIcon/>
+            return <i className="fas fa-concierge-bell"></i>
         case 'hot water':
-            return <HotTubIcon/>
+            return <i className="fas fa-hot-tub"></i>
         case 'water dispenser':
-            return <LocalDrinkIcon/>
+            return <i className="fas fa-tint"></i>
         case 'cafe':
-            return <DiningIcon/>
+            return <i className="fas fa-utensils"></i>
         default:
-            return <AccessibilityNewIcon/>
+            return <i className="fas fa-universal-access"></i>
     }
 }
 

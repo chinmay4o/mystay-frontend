@@ -3,13 +3,41 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../context/hotelsContext";
 import AddUserDetails from "./AddUserDetails";
+import OTPLogin from "./OtpLogin";
 
 const Verify = () => {
   const { userData, setUserData } = React.useContext(UserContext);
   const search = useLocation().search;
-  const [newUser, setNewUser] = React.useState(true);
+  const [otp,setOtp]= React.useState(['','','',''])
+  const [newUser, setNewUser] = React.useState(false);
   const params = new URLSearchParams(search).get("redirect");
   const history = useHistory();
+
+  const handleChange = (e) => {
+    const regex = /^[0-9\b]+$/;
+    const inputChar = e.target.value;
+    if (inputChar === "" || (regex.test(inputChar) && inputChar.length <= 1)) {
+      // if (regex.test(inputChar) && inputChar.length <= 1) {
+      const index = parseInt(e.target.id.slice(-1)) - 1;
+      const newOtp = otp.slice();
+      newOtp[index] = e.target.value;
+      setOtp(newOtp);
+
+      if (inputChar !== "" && index < 3) {
+        const nextInput = e.target.nextSibling;
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+      if (inputChar === "" && index > 0) {
+        const prevInput = e.target.previousSibling;
+        if (prevInput) {
+          prevInput.focus();
+        }
+      }
+    }
+  };
+
   const {
     register,
     handleSubmit,
@@ -24,14 +52,15 @@ const Verify = () => {
   const email = user?.email;
 
   console.log(params);
-  if (!token && !newUser) {
-    history.push("/login");
-  }
+  // if (!token && !newUser) {
+  //   history.push("/login");
+  // }
 
   const onSubmit = async (data) => {
     console.log(data);
 
     console.log(email, "email");
+    const finalOtp = Number(otp.join(""));
 
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/api/v1/customer/verifyOtp`,
@@ -41,7 +70,7 @@ const Verify = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          otp: parseInt(data.otp),
+          otp: finalOtp,
           email: user.email,
           token: token,
         }),
@@ -119,10 +148,10 @@ const Verify = () => {
     <>
       {!newUser && (
         <section>
-          <div className="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-20 max-w-xl">
+          <div className="relative items-center w-full h-[calc(100vh-64px)] flex justify-center px-5 py-12 mx-auto md:px-12 lg:px-20 max-w-xl">
             <div className="w-full max-w-md p-8 mx-auto text-center">
               <div>
-                <h2 className="text-4xl tracking-tighter text-black">Verify</h2>
+                <h2 className="text-[24px] font-[700] ">Verify</h2>
               </div>
               <div className="mt-8">
                 <div className="mt-6">
@@ -134,12 +163,7 @@ const Verify = () => {
                       >
                         Enter OTP
                       </label>
-                      <input
-                        className="block w-full px-6 py-3 text-center text-black bg-white border border-gray-200 rounded-lg appearance-none placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                        placeholder="XXXX"
-                        type="text"
-                        {...register("otp", { required: " otp is required" })}
-                      />
+                      <OTPLogin otp={otp} handleChange={handleChange} />
                     </div>
                     <div>
                       <button

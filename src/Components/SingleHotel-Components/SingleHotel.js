@@ -193,7 +193,7 @@ const SingleHotel = () => {
                     Select from a range of beautiful rooms
                   </p>
                 </div>
-                <div className="grid place-items-center -mt-8">
+                <div className="grid place-items-center md:-mt-8">
                   <div className="flex gap-4 items-center justify-center p-2 rounded-xl bg-white shadow-xs w-max">
                     {/* <input type="date" value={checkIn} /> */}
                     <DateRangePicker
@@ -472,7 +472,7 @@ const SingleHotel = () => {
             )}
           </div>
         </div>
-        {/* <Map location={"https://goo.gl/maps/oL9zpixkZFiGPfUB8"} /> */}
+        <Map location={"https://goo.gl/maps/oL9zpixkZFiGPfUB8"} />
       </>
     );
   }

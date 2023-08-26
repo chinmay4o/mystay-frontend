@@ -11,6 +11,7 @@ const SearchBar = ({wordEntered,error, setWordEntered, placeholder,  setDestinat
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/city`);
       const data2 = await response.json();
       setData(data2.data);
+      setFilteredData(data2.data);
     } catch (error) {
       
     }
@@ -28,25 +29,26 @@ const SearchBar = ({wordEntered,error, setWordEntered, placeholder,  setDestinat
     });
 
     if (searchWord === "") {
-      setFilteredData([]);
+      setFilteredData(data);
     } else {
       setFilteredData(newFilter);
     }
   };
 
   const clearInput = () => {
-    setFilteredData([]);
+    setFilteredData(data);
     setWordEntered("");
   };
 
   return (
-    <div className="w-full relative">
-      <div className={`border-b-2 ${error? "border-red-400" : "border-gray-400"}  dropdown dropdown-bottom p-1` } tabIndex={0} >
+    <div className="w-full relative dropdown dropdown-bottom">
+      <div className={`border-b-2 ${error? "border-red-400" : "border-gray-400"}   p-1` }  >
         <input
           type="text"
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
+          tabIndex={0} 
         />
         {/* <div className="searchIcon">
             {filteredData.length === 0 ? (
@@ -57,7 +59,7 @@ const SearchBar = ({wordEntered,error, setWordEntered, placeholder,  setDestinat
           </div> */}
       </div>
       {filteredData.length != 0 && (
-        <ul className="absolute dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full">
+        <ul tabIndex={0} className="absolute dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full">
           {filteredData.slice(0, 15).map((ele, index) => {
             return (
               <li

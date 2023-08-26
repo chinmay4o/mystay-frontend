@@ -49,6 +49,7 @@ body {
   display: inline-flex;
   position: relative;
   height: 36px;
+  cursor: pointer;
 }
 
 .react-daterange-picker,
@@ -71,9 +72,9 @@ body {
   flex-shrink: 0;
   height: 36px !important;
   border-radius: 10px;
-  padding: 5px 16px;
+  padding: 5px 1px;
   background-color: #ffffff;
-  gap: 32px;
+  gap: 8px;
 }
 
 @media screen and (max-width: 500px) {
@@ -100,7 +101,7 @@ body {
 }
 
 .react-daterange-picker__inputGroup__input {
-  color: rgb(106, 106, 106);
+  color: rgb(0, 0, 0);
   min-width: 0.54em;
   height: 100%;
   position: relative;
@@ -115,7 +116,6 @@ body {
 }
 
 .react-daterange-picker__inputGroup__month:disabled{
-  color: rgb(106, 106, 106);
   font-weight: 500;
 }
 .react-daterange-picker__inputGroup__input::-webkit-outer-spin-button,
@@ -324,3 +324,32 @@ body {
  }
 
 
+ .swiper .swiper-button-next,
+ .swiper .swiper-button-prev{
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 500px;
+  background-color: white;
+  color: #ff5500;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* position: absolute;
+  left: -20px */
+ }
+ .swiper .swiper-button-next::after , .swiper .swiper-button-prev::after{
+  font-size: 20px !important;
+  font-weight: 600;
+ }
+
+ .swiper .swiper-button-next:hover, .swiper .swiper-button-prev:hover{
+  background-color: #ff5500;
+  color: white;
+ }
+
+  .swiper .swiper-button-disabled{
+    color: white;
+    background-color: #808080;
+    opacity: 1 !important;
+  }

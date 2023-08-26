@@ -73,7 +73,7 @@ const RoomCard = ({ ele }) => {
   }
 
   return (
-    <div className="h-96 flex-col flex md:flex-row gap-4 mb-5 rounded-lg shadow-xs hover:shadow-md md:h-48 bg-white">
+    <div className="max-md:min-h-96 flex-col flex md:flex-row gap-4 mb-5 rounded-lg shadow-xs hover:shadow-md md:h-48 bg-white">
       <div className="">
         <img
           src={ele.images[0]}
@@ -97,7 +97,7 @@ const RoomCard = ({ ele }) => {
         </div>
 
         {window.innerWidth > 600 ? (
-          <p className="font-base text-[#808080] font-medium">
+          <p className="font-base text-sm text-[#808080] font-medium">
             {ele.roomDescription}
           </p>
         ) : (

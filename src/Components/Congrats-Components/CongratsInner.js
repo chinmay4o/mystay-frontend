@@ -5,15 +5,17 @@ import { useParams, useHistory } from "react-router-dom";
 const CongratsInner = () => {
   const history = useHistory();
   const { id } = useParams();
-  const [payment, setPayment] = React.useState({});
+  const [payment, setPayment] = React.useState(null);
   localStorage.removeItem("bookingUserData")
 
   useEffect(() => {
-    // setTimeout(4000);
-    fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/${id}`)
-      .then((res) => res.json())
-      .then((data) => setPayment(data.message.payment));
+    setTimeout(()=>{fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/${id}`)
+    .then((res) => res.json())
+    .then((data) => setPayment(data.message.payment))},4000);
+
   }, [id]);
+
+  useEffect(() => {console.log(payment)}, [payment]);
 
   return (
     <div className=" w-full flex justify-center pt-10 md:pt-20 lg:pt-32 p-8 ">
@@ -52,7 +54,7 @@ const CongratsInner = () => {
           )}
         </div>
       )}
-      {!payment && <div className="text-primary text-4xl">Loading...</div>}
+      {!payment && <div className="text-primary text-4xl"><span className="loading loading-spinner loading-lg"></span></div>}
 
       {/* <div className="b-box1">
         <p className="confirm-title">

@@ -1,50 +1,15 @@
 import React from "react";
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
-const Reviews = () => {
-  let pxx1 = 0;
-  let pxx2 = 0;
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-  const sliderNxt = () => {
-    const box = document.querySelector(".reviews-inner");
-    box.style.transition = "all 0.3s ease-in-out";
-    console.log(box.style.transform);
-    pxx1 = pxx1 - 150;
-    pxx2 = 0;
-    if (box.style.transform === "translateX(-1500px)") {
-      box.style.transform = `translateX(0px)`;
-      pxx1 = 0;
-      return;
-    }
-    box.style.transform = `translateX(${pxx1}px)`;
-  };
-
-  const sliderPre = () => {
-    const box = document.querySelector(".reviews-inner");
-    box.style.transition = "all 0.3s ease-in-out";
-    console.log(box.style.transform);
-
-    //  pxx2 = box.style.transform;
-    pxx2 = pxx2 + 100;
-    pxx1 = 0;
-    // box.style.transform = `translateX(${pxx2}px)`;
-    box.style.transform = `translateX(${0}px)`;
-  };
-
-  return (
-    <div className="review-container">
-      <p className="title">
-        Customer Reviews <span className="emoji">🥳</span>{" "}
-        <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
-      </p>
-      <div className="nxt" onClick={sliderNxt}>
-        <i className="fa fa-chevron-right " aria-hidden="true"></i>
-      </div>
-      <div className="pre" onClick={sliderPre}>
-        <i className="fa fa-chevron-left" aria-hidden="true"></i>
-      </div>
-      <div className="reviews-outer">
-        <div className="reviews-inner">
-          <div className="one">
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+{
+  /* <div className="one">
             <p className="name">
               {" "}
               <span>Rahul Srivastava</span>{" "}
@@ -57,73 +22,166 @@ const Reviews = () => {
                 experience.
               </span>
             </p>
-          </div>
-          <div className="two">
-            <p className="name">
-              {" "}
-              <span>Ayushman aggarwal</span>
-            </p>
+          </div> */
+}
 
-            <p className="review">
-              <span>
-                it was a good stay.... quite residential place.... away from
-                markets... the only con is that they dont have any option for
-                breakfast. it is very quite area after getting tired you can
-                sleep in peace
-              </span>
-            </p>
-          </div>
-          <div className="three">
-            <p className="name">
-              <span>Chinmay Surve</span>
-            </p>
+const reviews = [
+  {
+    name: "Rahul Srivastava",
+    review:
+      "As promised as served. Location is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+  {
+    name: "Rahul Srivastava",
+    review:
+      "As promised as served. Location is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+  {
+    name: "Rahul",
+    review:
+      "As promised as served. Location is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+  {
+    name: "Rahul  rfg Srivastava",
+    review:
+      "As promised as served. Location is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+  {
+    name: "Rahul Srivastava",
+    review:
+      "As promised as served. Location is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+  {
+    name: "Rahul Srivastava",
+    review:
+      "As promised as served. dsg,f.md,grm,;dm,.gfm,.dmgLocation is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+  {
+    name: "Rahul Srivastava",
+    review:
+      "As promised as served. Location is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+  {
+    name: "Rahul Srivastava",
+    review:
+      "As promised as served. Location is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+  {
+    name: "Rahul Srivastava",
+    review:
+      "As promised as served. Location is really accessible from Scheme 78 ibus station. Room was clean and spacious. Overall a good experience.",
+  },
+];
 
-            <p className="review">
-              <span>
-                it was amazing experience..i stayed here 2nd time..they are
-                excellent in all. nice, clen and spacious room..highly
-                recommended stay.
-              </span>
-            </p>
-          </div>
+// const Reviews = () => {
+//   return (
+//     <div className="w-full flex items-center justify-center my-12 min-h-max">
+//       <div className="w-[90%] max-w-7xl  flex flex-col items-center gap-4 justify-center ">
+//         <h3 className="text-3xl font-bold text-primary">Reviews</h3>
+//         <p className="text-base font-medium">
+//           Don't just take our word for it - See what our satisfied customers
+//           have to say about us
+//         </p>
+//         <div className="overflow-hidden w-full px-12 ">
 
-          <div className="four">
-            <p className="name">
-              <span>Siddhi Harish</span>
-            </p>
+        
+//         <div className="flex items-center gap-5 w-full -translate-x-2/3">
+//           {reviews.map((review) => (
+//             <div class="mb-12 md:mb-0 bg-secondary flex-shrink-0 p-8 rounded-xl w-1/3 shadow-md">
+//               {/* <div class="mb-6 flex justify-center">
+//               <img
+//                 src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+//                 class="w-32 rounded-full shadow-lg dark:shadow-black/30" />
+//             </div> */}
+//               <h5 class="mb-4 text-xl w-full text-center text-primary font-semibold">
+//                 {review.name}
+//               </h5>
 
-            <p className="review">
-              <span>
-                Great hotet..at an affordable price..one issue i faced was to
-                find the hotel..sooo complicated location..it took me 1.5hrs to
-                find the hotel..other than that no issue..great accomodation🙌
-              </span>
-            </p>
-          </div>
+//               <p class="mb-4">
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   fill="currentColor"
+//                   class="inline-block h-7 w-7 pr-2"
+//                   viewBox="0 0 24 24"
+//                 >
+//                   <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+//                 </svg>
+//                 {review.review}
+//               </p>
+//             </div>
+//           ))}
+//         </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
-          <div className="five">
-            <p className="name">
-              <span>Vijay Hegde</span>
-            </p>
 
-            <p className="review">
-              <span>
-                This is a very good hotel. Well located. Courteous staff made our stay very comfortable. We
-                stayed here after having a horrendous experience at a hotel in
-                Shivpuri called Shivam Paradise, which reminded us of hell. The
-                best part of the room is the shower, which is placed inside the
-                false ceiling of the bathroom. The room was very clean and tidy.
-                The linen too was clean. Since it's a recently built hotel, they
-                didn't have a functional kitchen, but the team was very helpful
-                in arranging crockery cutlery and glassware for us for dinner.
-                Will definitely stay here when I am in Indore next.
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
+const Reviews = () => {
+  return (
+    <div className="w-full flex items-center justify-center mt-12 pb-12 min-h-max">
+       <div className="w-[90%] max-w-7xl  flex flex-col items-center gap-4 justify-center ">
+         <h3 className="text-3xl font-bold text-primary">Reviews</h3>
+         <p className="text-base font-medium">
+           Don't just take our word for it - See what our satisfied customers
+           have to say about us
+         </p>
+
+    <Swiper
+      // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={50}
+      slidesPerView={1}
+      navigation
+      pagination={false}
+      scrollbar={false}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+      className="w-full !px-8 !h-max"
+      breakpoints={{
+      650: {
+        slidesPerView: 2,
+        spaceBetween: 30
+      },
+      768:{
+        slidesPerView: 2,
+        spaceBetween: 40
+      },
+      1080: {
+        slidesPerView: 3,
+        spaceBetween: 50
+      }
+    }}
+
+    >
+      {reviews.map((review) => (
+        <SwiperSlide className="!h-full">
+          <div class="mb-12 md:mb-0 bg-secondary flex-shrink-0 p-8 rounded-xl shadow-md h-full min-h-full max-h-full">
+               <h5 class="mb-4 text-xl w-full text-center text-primary font-semibold">
+                 {review.name}
+               </h5>
+
+               <p class="mb-4 break-words">
+                 <svg
+                   xmlns="http:www.w3.org/2000/svg"
+                   fill="currentColor"
+                   class="inline-block h-7 w-7 pr-2"
+                   viewBox="0 0 24 24"
+                 >
+                   <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                 </svg>
+                 {review.review}
+               </p>
+             </div>
+
+          </SwiperSlide>
+      ))}
+    </Swiper>
     </div>
+</div>
   );
-};
+}
+
 
 export default Reviews;

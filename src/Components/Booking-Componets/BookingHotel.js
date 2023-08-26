@@ -7,7 +7,7 @@ import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 import Modal from "../Modal/Modal";
 import { configData } from "../../Config/config.js";
 import { useHistory } from "react-router-dom";
-import Policies from "../SingleHotel-Components/Policies.js";
+import Policies from "./Policies.js";
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
   const { userData, setUserData } = useContext(UserContext);

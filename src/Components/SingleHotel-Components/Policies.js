@@ -24,142 +24,106 @@ const contactInformation = [
 ];
 
 const Policies = () => {
-  const [policies, setPolicies] = React.useState(true);
-  const [cancel , setCancel] = React.useState(false);
-  const [contact , setContact] = React.useState(false);
-
-  // {cancellationPolicy.map((ele) => {
-  //   return <p>- {ele}</p>;
-  // })}
   return (
-    <div className="flex flex-col gap-4 w-full min-w-min">
-      <section className={`sm:mb-4 bg-white rounded-t-lg ${
-            policies ? "rounded-b-lg" : "rounded-b-lg"
-          }`}>
-        <header
-          className={`p-4 border bg-light border-gray-200 rounded-t-lg ${
-            policies ? "rounded-b-none" : "rounded-b-lg"
-          } sm:text-lg font-semibold text-text flex items-center justify-between`}
-        >
-          Property Policy
-          <button
-            className={`text-text leading-none focus:outline-none ${
-              policies ? "rotate-180" : "rotate-0"
-            }`}
-            onClick={() => setPolicies(!policies)}
-          >
-            <i className="material-icons text-xl">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                />
-              </svg>
-            </i>
-          </button>
-        </header>
-        {policies && (
-          <article className="rounded-b-lg border-gray-200 border border-t-0 p-2 sm:p-4 whitespace-pre-line text-text">
-            <div className="whitespace-pre-line">
-              {propertyPolicies.map((ele) => {
-                return <p>- {ele}</p>;
-              })}
-            </div>
-          </article>
-        )}
+    <>
+      <section className="text-sm" id="policy">
+        <section className="max-w-screen-xl w-full mx-auto p-4">
+          <h2 className="font-bold text-2xl mb-4">Property Policy</h2>
+          <div className="whitespace-pre-line html-renderer-div flex flex-col gap-2">
+            <p>
+              - Guests are required to pay a 21% advance at the time of booking
+              itself. The entire balance needs to be cleared upon arrival at the
+              property during check-in.
+            </p>
+            <p>
+              - Our standard check-in time is 12 PM and the standard check-out
+              time is 10 AM. Early check-in and late check-out requests are
+              subject to availability, and may also attract an additional fee at
+              the property's discretion.
+            </p>
+            <p>
+              - We strictly DO NOT allow a group of more than 6 people. In case
+              of a group of 4 or more, you might be purposefully allotted
+              different dorm rooms. Further, if the group behaviour is deemed
+              unfit at the property, the Zostel Property Manager, upon
+              subjective evaluation, retains the full right to take required
+              action which may also result in an on-spot cancellation without
+              refunds.
+            </p>
+            <p>
+              - Children below 18 years of age are not permitted entry/stay at
+              any of our hostels, with or without guardians. We do not recommend
+              families.
+            </p>
+            <p>
+              - We only accept a government ID as valid identification proof. No
+              local IDs shall be accepted at the time of check-in.
+            </p>
+            <p>
+              - Guests are not permitted to bring outsiders inside the hostel
+              campus.
+            </p>
+            <p>
+              - We believe in self-help and do not provide luggage assistance or
+              room services.
+            </p>
+            <p>
+              - Drugs and any substance abuse is strictly banned inside and
+              around the property.
+            </p>
+            <p>
+              - Alcohol consumption is permitted at the premises as per the
+              property’s discretion and local laws. Please reach out to the
+              property prior to your arrival to confirm the same.
+            </p>
+            <p>- Right to admission reserved.&nbsp;</p>
+          </div>
+        </section>
       </section>
-      <section className="sm:mb-4 bg-white rounded-lg">
-        <header
-          className={`p-4 border bg-light border-gray-200 rounded-t-lg ${
-            cancel ? "rounded-b-none" : "rounded-b-lg"
-          } sm:text-lg font-semibold text-text flex items-center justify-between`}
-        >
-          Cancellation Policy
-          <button
-            className={`text-text leading-none focus:outline-none ${
-              cancel ? "rotate-180" : "rotate-0"
-            }`}
-            onClick={() => setCancel(!cancel)}
-          >
-            <i className="material-icons text-xl">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
+
+      <section className="text-sm" id="cancellation-policy">
+        <section className="max-w-screen-xl w-full mx-auto p-4">
+          <h2 className="font-bold text-2xl mb-4">Cancellation Policy</h2>
+          <div className="whitespace-pre-line html-renderer-div flex flex-col gap-2">
+            <p>
+              We understand that sometimes plans change. Hence, to make it light
+              on your pocket, we are only charging a 21% advance, which is on a
+              non-refundable basis.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>NOTE:</p>
+            <p>
+              - 21% advance payment is non-refundable at all times, as stated
+              above.&nbsp;
+            </p>
+            <p>
+              - If you have paid any amount over this 21%, it stands applicable
+              for a credit only if the cancellation is informed 7 days or more
+              in advance. You will be able to avail the credited amount for any
+              future booking at any of our properties.
+            </p>
+            <p>
+              - If informed within 7 days of the standard check-in time (12 pm),
+              the amount shall be adjusted against the cancellation fee.
+            </p>
+            <p>&nbsp;</p>
+            <p>
+              For any other queries, please reach out to us at{" "}
+              <a
+                href="mailto:reservations@zostel.com"
+                rel="noopener noreferrer"
+                target="_blank"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                />
-              </svg>
-            </i>
-          </button>
-        </header>
-        {cancel && (
-          <article className="rounded-b-lg border-gray-200 border border-t-0 p-2 sm:p-4 whitespace-pre-line text-text">
-            <div className="whitespace-pre-line">
-              {cancellationPolicy.map((ele) => {
-                return <p>- {ele}</p>;
-              })}
-            </div>
-          </article>
-        )}
+                reservations@zostel.com
+              </a>
+              .
+            </p>
+          </div>
+        </section>
       </section>
-      
-      <section className="sm:mb-4 bg-white rounded-lg">
-        <header
-          className={`p-4 border bg-light border-gray-200 rounded-t-lg ${
-            contact ? "rounded-b-none" : "rounded-b-lg"
-          } sm:text-lg font-semibold text-text flex items-center justify-between`}
-        >
-          Contact Information
-          <button
-            className={`text-text leading-none focus:outline-none ${
-              contact ? "rotate-180" : "rotate-0"
-            }`}
-            onClick={() => setContact(!contact)}
-          >
-            <i className="material-icons text-xl">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                />
-              </svg>
-            </i>
-          </button>
-        </header>
-        {contact && (
-          <article className="rounded-b-lg border-gray-200 border border-t-0 p-2 sm:p-4 whitespace-pre-line text-text">
-            <div className="whitespace-pre-line">
-              {contactInformation.map((ele) => {
-                return <p>- {ele}</p>;
-              })}
-            </div>
-          </article>
-        )}
-      </section>
-    </div>
+    </>
   );
 };
 
