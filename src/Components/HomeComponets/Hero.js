@@ -11,9 +11,9 @@ import AdultBar from "./AdultBar.js";
 
 const Hero = ({ dates, setDates, destination, setDestination }) => {
   const history = useHistory();
-  const [adults, setAdults] = useState(2);
+  const [adults, setAdults] = useState(1);
   const [rooms, setRooms] = useState(1);
-  const [roomAdults , setRoomAdults] = useState([2]);
+  const [roomAdults , setRoomAdults] = useState([1]);
   let yesterday = new Date(Date.now());
   let today = new Date(yesterday.getTime() + 24 * 60 * 60 * 1000);
   var tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000);
@@ -152,6 +152,7 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
                 localStorage.setItem("destination", destination);
                 localStorage.setItem("checkIn", JSON.stringify(checkInDate));
                 localStorage.setItem("checkOut", JSON.stringify(checkOutDate));
+                localStorage.setItem("roomConfig", JSON.stringify(roomAdults));
 
                 history.push(
                   `/hotels?city=${destination}&checkIn=${JSON.stringify(

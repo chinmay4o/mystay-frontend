@@ -14,10 +14,13 @@ const BookingHotel = () => {
   const history = useHistory();
   const [guestDetails, setGuestsDetails] = useState([]);
   const [error, setError] = useState("");
+  const [rooms , setRooms] = useState([])
 
   useEffect(() => {
     if (selectedRooms.length > 0) {
       localStorage.setItem("selectedRooms", JSON.stringify(selectedRooms));
+      const room = JSON.parse(localStorage.getItem("roomConfig"));
+      setRooms(room);
     } else {
       const rooms = JSON.parse(localStorage.getItem("selectedRooms"));
       if (rooms && rooms.length > 0) {
@@ -98,15 +101,22 @@ const BookingHotel = () => {
   );
   //mapping a new array to save details in requires backend format
   let b1 = selectedRooms.map((ele, id) => {
+    let n = rooms.length;
+    let total = 0;
+    for (let i = 0; i < n; i++) {
+      total+= rooms[i]>2 ? rooms[i]-2 : 0;
+    }
+
     return {
       roomId: ele.roomId,
       hotelId: ele.hotelId,
-      bookingNoOfRoom: ele.qty,
+      bookingNoOfRoom: n,
       checkIn: JSON.stringify(checkInDate).slice(1, 23),
       // checkIn: new Date(localStorage.getItem("checkIn")),
       checkOut: JSON.stringify(checkOutDate).slice(1, 23),
       // checkOut: new Date(localStorage.getItem("checkOut")),
       night: diffDays,
+      extra: total,
     };
   });
 
@@ -266,8 +276,9 @@ const BookingHotel = () => {
       JSON.stringify(new Date(localStorage.getItem("checkIn")))
     );
     console.log("b1", b1);
+    setBookingDetails({ ...bookingDetails, bookingDetails: [...b1] });
     window.scrollTo(0, 0);
-  }, []);
+  }, [b1,selectedRooms]);
 
   return (
     <>

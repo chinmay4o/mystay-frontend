@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { SelectedRoomsContext } from "../../context/hotelsContext.js";
 import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 
-const RoomCard = ({ ele }) => {
+const RoomCard = ({ ele , number }) => {
   //room count is
   const [count, setCount] = useState(0);
   const [available , setAvailable] = useState();
@@ -20,56 +20,22 @@ const RoomCard = ({ ele }) => {
     setAvailable(count);
   }, [ele]);
 
-  function addRoomToCartHandler(newRoom) {
-    console.log(ele);
-    const existingRoom = selectedRooms.find(
-      (ele, index) => ele.roomId === newRoom.roomId
+  useEffect(() => {
+    setCount(
+      selectedRooms.filter((ele1) => ele1.roomId === ele.roomId).length
     );
+  }, [selectedRooms]);
 
-    if (selectedRooms.length === 0) {
-      setSelectedRooms([...selectedRooms, { ...newRoom, qty: 1 }]);
-    } else if (existingRoom) {
-      setSelectedRooms(
-        selectedRooms.map((ele1, index) => {
-          if (ele1.roomId === existingRoom.roomId) {
-            if(ele1.qty+1 >=available) setDisabled(true)
-            return {
-              ...ele1,
-              qty:
-                ele1.qty >= available ? ele1.qty : ele1.qty + 1,
-            };
-          } else {
-            return ele1;
-          }
-        })
-      );
-    } else {
-      setSelectedRooms([...selectedRooms, { ...newRoom, qty: 1 }]);
-    }
+  function addRoomToCartHandler(newRoom) {
+      setSelectedRooms([{ ...newRoom, qty: 1 }]);
+    
   }
 
   function removeRoomFromCartHandler(oldRoom) {
-    const existingRoom = selectedRooms.find(
-      (ele, index) => ele.roomId === oldRoom.roomId
-    );
 
-    if (existingRoom.qty === 1) {
       setSelectedRooms(
         selectedRooms.filter((ele1, index) => ele1.roomId !== oldRoom.roomId)
       );
-    } else if (existingRoom) {
-
-      setSelectedRooms(
-        selectedRooms.map((ele1, index) => {
-          if (ele1.roomId === existingRoom.roomId) {
-            if(ele1.qty-1 <available) setDisabled(false)
-            return { ...ele1, qty: ele1.qty > 0 ? ele1.qty - 1 : 0 };
-          } else {
-            return ele1;
-          }
-        })
-      );
-    }
   }
 
   return (
@@ -112,37 +78,21 @@ const RoomCard = ({ ele }) => {
               classes="uppercase btn-sm text-xs flex items-center justify-center max-w-max "
               onClick={() => {
                 addRoomToCartHandler(ele);
-                setCount(count >= ele.roomDetails.length ? count : count + 1);
+                
               }}
               text="Select Room"
             />
               
             
           ) : (
-            <>
-              <p className="r3-guests">No. of Rooms</p>
-
-              <div className="flex gap-2 md:gap-4 items-center">
-                <i
-                  className="fas fa-minus bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8"
-                  onClick={() => {
-                    removeRoomFromCartHandler(ele);
-                    setCount(count <= 0 ? 0 : count - 1);
-                  }}
-                ></i>
-                <p>{count}</p>
-                <i
-                  className={`fas fa-plus  bg-primary flex items-center justify-center text-white rounded-md w-6 h-6 md:w-8 md:h-8 ${disabled && "bg-gray-400"}`}
-                  onClick={() => {
-                    !disabled && 
-                    addRoomToCartHandler(ele);
-                    setCount(
-                      count >= ele.roomDetails.length ? count : count + 1
-                    );
-                  }}
-                ></i>
-              </div>
-            </>
+            <PrimaryButton
+              classes="uppercase btn-sm text-xs flex items-center justify-center max-w-max bg-white !text-primary  hover:border-primary"
+              onClick={() => {
+                removeRoomFromCartHandler(ele);
+                
+              }}
+              text="Selected "
+            />
           )}
         </div>}
       </div>

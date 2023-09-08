@@ -14,6 +14,7 @@ import AmenitiesIcons from "../../Common/Icons/AmenitiesIcons.js";
 const SingleHotel = () => {
   const history = useHistory();
   let { id } = useParams();
+  const [rooms,setRooms] = useState([]);
 
   const [dates, setDates] = useState();
   const monthNames = [
@@ -55,7 +56,7 @@ const SingleHotel = () => {
   console.log(diffTime + " milliseconds");
   console.log(diffDays + " days");
 
-  async function getSingleHotel(id) {
+  async function getSingleHotel(id,rooms) {
     const response = await fetch(
       // `${process.env.REACT_APP_SERVER_URL}/anonymous/api/v1/hotels?checkIn=2022-04-16T00:00:00.000z&checkOut=2022-04-17T00:00:00.000z&hotelId=${id}`,
       // `http://15.206.116.126:5001/api/v1/anonymous/hotels?checkIn=${JSON.stringify(new Date(checkIn))}&checkOut=${JSON.stringify(new Date(checkOut))}&hotelId=${id}`,
@@ -65,19 +66,21 @@ const SingleHotel = () => {
         checkIn
       ).toISOString()}&checkOut=${new Date(
         checkOut
-      ).toISOString()}&hotelId=${id}`,
+      ).toISOString()}&hotelId=${id}&rooms=${rooms}`,
       {
         method: "GET",
       }
     );
 
     const data = await response.json();
-    setSingleHotel(data);
     console.log(data);
+    setSingleHotel(data);
   }
 
   useEffect(() => {
-    getSingleHotel(id);
+    const room = JSON.parse(localStorage.getItem("roomConfig"));
+    setRooms(room);
+    getSingleHotel(id,room);
     console.log("date", new Date(checkIn).getDate());
     // console.log("month", new Date(checkIn).getMonth());
     console.log("month", monthNames[new Date(checkIn).getMonth()]);
@@ -228,7 +231,7 @@ const SingleHotel = () => {
               {/* hotel rooms mapping */}
               <div className="w-full rounded-xl gap-6 flex-col flex">
                 {singleHotel.data.hotels[0].rooms.map((ele, index) => {
-                  return <RoomCard ele={ele} />;
+                  return <RoomCard ele={ele} number={rooms.length}/>;
                 })}
               </div>
 
