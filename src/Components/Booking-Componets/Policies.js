@@ -25,18 +25,20 @@ const contactInformation = [
 
 const Policies = () => {
   const [policies, setPolicies] = React.useState(true);
-  const [cancel , setCancel] = React.useState(false);
-  const [contact , setContact] = React.useState(false);
+  const [cancel, setCancel] = React.useState(false);
+  const [contact, setContact] = React.useState(false);
 
   // {cancellationPolicy.map((ele) => {
   //   return <p>- {ele}</p>;
   // })}
   return (
     <div className="flex flex-col gap-4 w-full min-w-min text-sm">
-      <section className={`sm:mb-4 bg-white rounded-t-lg ${
-            policies ? "rounded-b-lg" : "rounded-b-lg"
-          }`}>
-        <header
+      <div
+        className={`sm:mb-4 bg-white rounded-t-lg ${
+          policies ? "rounded-b-lg" : "rounded-b-lg"
+        }`}
+      >
+        <div
           className={`p-4 border bg-light border-gray-200 rounded-t-lg ${
             policies ? "rounded-b-none" : "rounded-b-lg"
           } sm:text-lg font-semibold text-text flex items-center justify-between`}
@@ -65,19 +67,19 @@ const Policies = () => {
               </svg>
             </i>
           </button>
-        </header>
+        </div>
         {policies && (
-          <article className="rounded-b-lg border-gray-200 border border-t-0 p-2  sm:p-4 whitespace-pre-line text-text">
+          <div className="rounded-b-lg border-gray-200 border border-t-0 p-2  sm:p-4 whitespace-pre-line text-text">
             <div className="whitespace-pre-line flex flex-col gap-2">
               {propertyPolicies.map((ele) => {
                 return <p>- {ele}</p>;
               })}
             </div>
-          </article>
+          </div>
         )}
-      </section>
-      <section className="sm:mb-4 bg-white rounded-lg">
-        <header
+      </div>
+      <div className="sm:mb-4 bg-white rounded-lg">
+        <div
           className={`p-4 border bg-light border-gray-200 rounded-t-lg ${
             cancel ? "rounded-b-none" : "rounded-b-lg"
           } sm:text-lg font-semibold text-text flex items-center justify-between`}
@@ -106,20 +108,20 @@ const Policies = () => {
               </svg>
             </i>
           </button>
-        </header>
+        </div>
         {cancel && (
-          <article className="rounded-b-lg border-gray-200 border border-t-0 p-2 sm:p-4 whitespace-pre-line text-text">
+          <div className="rounded-b-lg border-gray-200 border border-t-0 p-2 sm:p-4 whitespace-pre-line text-text">
             <div className="whitespace-pre-line flex flex-col gap-2">
               {cancellationPolicy.map((ele) => {
                 return <p>- {ele}</p>;
               })}
             </div>
-          </article>
+          </div>
         )}
-      </section>
-      
-      <section className="sm:mb-4 bg-white rounded-lg">
-        <header
+      </div>
+
+      <div className="sm:mb-4 bg-white rounded-lg">
+        <div
           className={`p-4 border bg-light border-gray-200 rounded-t-lg ${
             contact ? "rounded-b-none" : "rounded-b-lg"
           } sm:text-lg font-semibold text-text flex items-center justify-between`}
@@ -148,17 +150,17 @@ const Policies = () => {
               </svg>
             </i>
           </button>
-        </header>
+        </div>
         {contact && (
-          <article className="rounded-b-lg border-gray-200 border border-t-0 p-2 sm:p-4 whitespace-pre-line text-text">
+          <div className="rounded-b-lg border-gray-200 border border-t-0 p-2 sm:p-4 whitespace-pre-line text-text">
             <div className="whitespace-pre-line flex flex-col gap-2">
               {contactInformation.map((ele) => {
                 return <p>- {ele}</p>;
               })}
             </div>
-          </article>
+          </div>
         )}
-      </section>
+      </div>
     </div>
   );
 };

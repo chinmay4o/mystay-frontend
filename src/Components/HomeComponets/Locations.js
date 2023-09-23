@@ -36,6 +36,7 @@ const Locations = ({ dates }) => {
                 localStorage.setItem("checkIn", JSON.stringify(checkInDate));
                 //  localStorage.setItem("checkIn", checkIn);
                 localStorage.setItem("checkOut", JSON.stringify(checkOutDate));
+                localStorage.setItem("roomConfig", JSON.stringify([1]));
                 //  localStorage.setItem("checkOut", checkOut);
                 history.push(
                   `/hotels?city=${ele.toLowerCase()}&checkIn=${JSON.stringify(
