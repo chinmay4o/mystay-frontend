@@ -13,7 +13,7 @@ import HotelState from "./context/HotelSate.js";
 import BookedRoomsState from "./context/BookedRoomsState.js";
 import SliderImageState from "./context/SliderImageState.js";
 import UserStateContext from "./context/UserContext.js";
-import "./App.css"
+import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import VerifyOtp from "./Screens/VerifyOtp";
 import Login from "./Screens/Login";
@@ -22,74 +22,75 @@ import React from "react";
 import UserBooking from "./Screens/UserBooking";
 import Profile from "./Screens/Profile";
 import RefundScreen from "./Screens/RefundScreen";
-
+import SingleBooking from "./Screens/SingleBooking";
 
 function App() {
-
-
   return (
     <Router>
       <UserStateContext>
-      <HotelState>
-        <BookedRoomsState>
-          <SliderImageState>
-            <div>
-              <div className="layout-container">
-                <Route exact path="/">
-                  <HomeScreen />
-                </Route>
+        <HotelState>
+          <BookedRoomsState>
+            <SliderImageState>
+              <div>
+                <div className="layout-container">
+                  <Route exact path="/">
+                    <HomeScreen />
+                  </Route>
 
-                <Route path="/aboutus">
-                  <Aboutus />
-                </Route>
+                  <Route path="/aboutus">
+                    <Aboutus />
+                  </Route>
 
-                <Route path="/hotels">
-                  <HotelsCityScreen />
-                </Route>
+                  <Route path="/hotels">
+                    <HotelsCityScreen />
+                  </Route>
 
-                <Route path="/hotel/:id">
-                  <SingleHotelScreen />
-                </Route>
+                  <Route path="/hotel/:id">
+                    <SingleHotelScreen />
+                  </Route>
 
-                <Route path="/booking">
-                  <BookingScreen />
-                </Route>
+                  <Route exact path="/booking">
+                    <BookingScreen />
+                  </Route>
 
-                <Route path="/longstays">
-                  <LongStaysScreen />
-                </Route>
+                  <Route path="/longstays">
+                    <LongStaysScreen />
+                  </Route>
 
-                <Route path="/verify">
-                  <VerifyOtp />
-                </Route>
+                  <Route path="/verify">
+                    <VerifyOtp />
+                  </Route>
 
-                <Route path= "/payment/:id">
-                  <CongratsScreen />
-                </Route>
+                  <Route path="/payment/:id">
+                    <CongratsScreen />
+                  </Route>
 
-                <Route path = "/refund/:id">
-                  <RefundScreen />
-                </Route>
+                  <Route path="/refund/:id">
+                    <RefundScreen />
+                  </Route>
 
-                <Route path= "/login">
-                  <Login />
-                </Route>
+                  <Route path="/login">
+                    <Login />
+                  </Route>
 
-                <Route path = "/signup">
-                  <Signup />
-                </Route>
+                  <Route path="/signup">
+                    <Signup />
+                  </Route>
+                  <Route exact path="/bookings/:id">
+                    <SingleBooking />
+                  </Route>
 
-                <Route path= "/bookings">
-                  <UserBooking />
-                </Route>
-                <Route path = "/profile">
-                  <Profile />
-                </Route>
+                  <Route exact path="/bookings">
+                    <UserBooking />
+                  </Route>
+                  <Route path="/profile">
+                    <Profile />
+                  </Route>
+                </div>
               </div>
-            </div>
-          </SliderImageState>
-        </BookedRoomsState>
-      </HotelState>
+            </SliderImageState>
+          </BookedRoomsState>
+        </HotelState>
       </UserStateContext>
     </Router>
   );

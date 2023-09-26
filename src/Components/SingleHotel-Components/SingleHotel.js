@@ -10,11 +10,13 @@ import Map from "./Map.js";
 import Policies from "./Policies.js";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import AmenitiesIcons from "../../Common/Icons/AmenitiesIcons.js";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const SingleHotel = () => {
   const history = useHistory();
   let { id } = useParams();
-  const [rooms,setRooms] = useState([]);
+  const [rooms, setRooms] = useState([]);
 
   const [dates, setDates] = useState();
   const monthNames = [
@@ -56,7 +58,7 @@ const SingleHotel = () => {
   console.log(diffTime + " milliseconds");
   console.log(diffDays + " days");
 
-  async function getSingleHotel(id,rooms) {
+  async function getSingleHotel(id, rooms) {
     const response = await fetch(
       // `${process.env.REACT_APP_SERVER_URL}/anonymous/api/v1/hotels?checkIn=2022-04-16T00:00:00.000z&checkOut=2022-04-17T00:00:00.000z&hotelId=${id}`,
       // `http://15.206.116.126:5001/api/v1/anonymous/hotels?checkIn=${JSON.stringify(new Date(checkIn))}&checkOut=${JSON.stringify(new Date(checkOut))}&hotelId=${id}`,
@@ -80,7 +82,7 @@ const SingleHotel = () => {
   useEffect(() => {
     const room = JSON.parse(localStorage.getItem("roomConfig"));
     setRooms(room);
-    getSingleHotel(id,room);
+    getSingleHotel(id, room);
     console.log("date", new Date(checkIn).getDate());
     // console.log("month", new Date(checkIn).getMonth());
     console.log("month", monthNames[new Date(checkIn).getMonth()]);
@@ -98,7 +100,9 @@ const SingleHotel = () => {
         )
           .toISOString()
           .substring(0, 10);
-        const checkOutDate = new Date(new Date(dates[1]).getTime() + 5.5 * 60 * 60 * 1000)
+        const checkOutDate = new Date(
+          new Date(dates[1]).getTime() + 5.5 * 60 * 60 * 1000
+        )
           .toISOString()
           .substring(0, 10);
 
@@ -123,7 +127,75 @@ const SingleHotel = () => {
   }, []);
 
   if (singleHotel.success === false) {
-    return <h2> Loading ...</h2>;
+    return (
+      <>
+        <div className="w-[96%] md:w-[96%] h-96 md:h-[600px] xl:w-[1280px] md:gap-2 mx-auto py-5 ">
+          <Skeleton className="h-full w-full " />
+
+          {/* <div className="a1">
+        <img src={singleHotel.data.images[0]} alt="" />
+      </div>
+      <div className="b1"></div>
+      <div className="c1"></div>
+      <div className="d1"></div> */}
+        </div>
+
+        <div className="w-[96%] xl:w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 py-6 px-4">
+          <div className="flex flex-col gap-6 lg:w-7/12">
+            <Skeleton count={1} />
+
+            <p className="font-semibold text-base text-[#6d6d6d]">
+              <Skeleton count={3} />
+            </p>
+          </div>
+          <div className=" flex flex-col gap-2 lg:w-5/12">
+            <Skeleton count={1} />
+
+            <div className=" gap-3 text-sm font-medium">
+              <Skeleton className="h-full w-full" />
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full bg-secondary">
+          <div className=" py-12 px-5 flex flex-col lg:flex-row gap-12 mx-auto rounded-xl  max-w-[1280px]">
+            {/* date grid */}
+
+            <div className="flex flex-col ">
+              <div className="flex md:flex-row flex-col gap-4 md:items-center md:justify-between py-4">
+                <div className="flex flex-col gap-4">
+                  <Skeleton count={1} />
+                  <Skeleton count={1} />
+                </div>
+                <div className="grid place-items-center md:-mt-8">
+                  <div className="flex gap-4 items-center justify-center  h-20 w-[400px] lg:w-[800px]">
+                    {/* <input type="date" value={checkIn} /> */}
+                    <Skeleton
+                      // count={1}
+                      className="h-full w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* end of date grid */}
+
+              {/* hotel rooms mapping */}
+              <div className=" w-[400px] lg:w-[800px] h-full rounded-xl gap-6 flex-col flex">
+                <Skeleton className="h-[200px] w-full" />
+                <Skeleton className="h-[200px] w-full" />
+                <Skeleton className="h-[200px] w-full" />
+              </div>
+            </div>
+
+            <div className="md:flex max-lg:w-full max-lg:items-center justify-center">
+              <Skeleton className="h-screen w-screen" />
+            </div>
+          </div>
+        </div>
+        {/* <Map location={"https://goo.gl/maps/oL9zpixkZFiGPfUB8"} /> */}
+      </>
+    );
   } else {
     return (
       <>
@@ -231,7 +303,7 @@ const SingleHotel = () => {
               {/* hotel rooms mapping */}
               <div className="w-full rounded-xl gap-6 flex-col flex">
                 {singleHotel.data.hotels[0].rooms.map((ele, index) => {
-                  return <RoomCard ele={ele} number={rooms.length}/>;
+                  return <RoomCard ele={ele} number={rooms.length} />;
                 })}
               </div>
 

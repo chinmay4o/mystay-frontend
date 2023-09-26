@@ -6,16 +6,22 @@ const CongratsInner = () => {
   const history = useHistory();
   const { id } = useParams();
   const [payment, setPayment] = React.useState(null);
-  localStorage.removeItem("bookingUserData")
+  localStorage.removeItem("bookingUserData");
+  localStorage.removeItem("roomConfig");
 
   useEffect(() => {
-    setTimeout(()=>{fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/${id}`)
-    .then((res) => res.json())
-    .then((data) => setPayment(data.message.payment))},4000);
-
+    setTimeout(() => {
+      fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/${id}`
+      )
+        .then((res) => res.json())
+        .then((data) => setPayment(data.message.payment));
+    }, 4000);
   }, [id]);
 
-  useEffect(() => {console.log(payment)}, [payment]);
+  useEffect(() => {
+    console.log(payment);
+  }, [payment]);
 
   return (
     <div className=" w-full flex justify-center pt-10 md:pt-20 lg:pt-32 p-8 ">
@@ -32,8 +38,11 @@ const CongratsInner = () => {
               <div className=" text-sm text-center md:text-md text-gray-500">
                 Please check your email for booking information and receipts.
               </div>
-              <div className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg" onClick={() => history.push("/")}>
-                  Go to Home
+              <div
+                className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg"
+                onClick={() => history.push("/")}
+              >
+                Go to Home
               </div>
             </>
           ) : (
@@ -47,14 +56,21 @@ const CongratsInner = () => {
               <div className="text-sm text-center md:text-md text-gray-500">
                 Please check your email for more information.
               </div>
-              <div className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg" onClick={() => history.push("/")}>
-                  Go to Home
+              <div
+                className="cursor-pointer bg-primary text-white px-4 py-2 rounded-lg"
+                onClick={() => history.push("/")}
+              >
+                Go to Home
               </div>
             </>
           )}
         </div>
       )}
-      {!payment && <div className="text-primary text-4xl"><span className="loading loading-spinner loading-lg"></span></div>}
+      {!payment && (
+        <div className="text-primary text-4xl">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      )}
 
       {/* <div className="b-box1">
         <p className="confirm-title">

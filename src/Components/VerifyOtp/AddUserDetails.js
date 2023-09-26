@@ -155,7 +155,7 @@ const AddUserDetails = ({ setUserData }) => {
                     First name
                   </label>
                   <input
-                    className="block w-full px-6 py-3 text-black bg-white border border-gray-200 appearance-none rounded-lg placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                    className="input input-bordered w-full  font-semibold"
                     placeholder="First Name"
                     {...register("firstName", {
                       required: "First Name is required",
@@ -170,7 +170,7 @@ const AddUserDetails = ({ setUserData }) => {
                     Last name
                   </label>
                   <input
-                    className="block w-full px-6 py-3 text-black bg-white border border-gray-200 appearance-none rounded-lg placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                    className="input input-bordered w-full  font-semibold"
                     placeholder="First Name"
                     {...register("lastName", {
                       required: "Last Name is required",
@@ -186,7 +186,7 @@ const AddUserDetails = ({ setUserData }) => {
                     How shall we contact you?
                   </label>
                   <input
-                    className="block w-full px-6 py-3 text-black bg-white border border-gray-200 appearance-none rounded-lg placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                    className="input input-bordered w-full  font-semibold"
                     placeholder="Mobile Number"
                     type="text"
                     min={10}

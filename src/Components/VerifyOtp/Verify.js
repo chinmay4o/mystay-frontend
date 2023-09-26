@@ -4,11 +4,13 @@ import { useForm } from "react-hook-form";
 import { UserContext } from "../../context/hotelsContext";
 import AddUserDetails from "./AddUserDetails";
 import OTPLogin from "./OtpLogin";
+import Card from "../../Common/cards/Card";
+import PrimaryButton from "../../Common/buttons/PrimaryButton";
 
 const Verify = () => {
   const { userData, setUserData } = React.useContext(UserContext);
   const search = useLocation().search;
-  const [otp,setOtp]= React.useState(['','','',''])
+  const [otp, setOtp] = React.useState(["", "", "", ""]);
   const [newUser, setNewUser] = React.useState(false);
   const params = new URLSearchParams(search).get("redirect");
   const history = useHistory();
@@ -147,41 +149,75 @@ const Verify = () => {
   return (
     <>
       {!newUser && (
-        <section>
-          <div className="relative items-center w-full h-[calc(100vh-64px)] flex justify-center px-5 py-12 mx-auto md:px-12 lg:px-20 max-w-xl">
-            <div className="w-full max-w-md p-8 mx-auto text-center">
+        <div
+          className={`grid justify-center content-center w-full sm:max-w-[1280px]  mx-auto min-h-[calc(100vh-58px)]`}
+        >
+          <Card>
+            <form
+              className="w-[340px] flex flex-col gap-[20px]"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <p className="text-[24px] font-[700] block text-left w-[340px]">
+                Enter OTP
+              </p>
+              {/* <ProgressBar width="45" step={1} /> */}
               <div>
-                <h2 className="text-[24px] font-[700] ">Verify</h2>
+                <OTPLogin otp={otp} handleChange={handleChange} />
               </div>
-              <div className="mt-8">
-                <div className="mt-6">
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-                    <div className="col-span-full">
-                      <label
-                        className="block mb-3 text-sm font-medium text-gray-600"
-                        name="email"
-                      >
-                        Enter OTP
-                      </label>
-                      <OTPLogin otp={otp} handleChange={handleChange} />
-                    </div>
-                    <div>
-                      <button
-                        type="submit"
-                        className="btn  w-full bg-primary text-white hover:bg-white hover:text-primary"
-                      >
-                        <span> Submit </span>
-                      </button>
-                    </div>
-                    <div className="text-sm text-primary cursor-pointer" onClick={()=>resendOtp()}>
-                      Resend OTP
-                      </div>
-                  </form>
-                </div>
+
+              <PrimaryButton
+                type="submit"
+                classes="!w-full !max-w-[340px]"
+                text="Verify OTP"
+              />
+              <div
+                className="flex w-full items-center justify-center gap-2 text-[12px] font-[500] text-primary text-left cursor-pointer"
+                onClick={() => history.push("/login")}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  className="w-4 h-4 stroke-primary"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+                  />
+                </svg>
+                Go Back
               </div>
-            </div>
-          </div>
-        </section>
+
+              <p className="text-[12px] font-[500] text-gray-500 text-left w-full">
+                Didn’t receive OTP?{" "}
+                <span
+                  className={`
+                    text-[#2596be] cursor-pointer
+                  `}
+                  onClick={() => resendOtp()}
+                >
+                  Resend OTP
+                </span>{" "}
+              </p>
+
+              <div className="border-[1px] border-gray-300 w-full"></div>
+              <p
+                className="text-[12px] font-[500] text-gray-500 text-left w-full cursor-pointer	"
+                onClick={() => history.push("/login")}
+              >
+                Not your email?{" "}
+                <span
+                  onClick={() => history.push("/login")}
+                  className="text-primary"
+                >
+                  Change email address
+                </span>
+              </p>
+            </form>
+          </Card>
+        </div>
       )}
       {newUser && <AddUserDetails setUserData={setUserData} />}
     </>

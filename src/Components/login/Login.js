@@ -46,10 +46,7 @@ const Login = () => {
     //     onSubmit={handleSubmit(onSubmit)}
     //     className="flex flex-col gap-8 items-center"
     //   >
-       
-   
-        
-        
+
     //     <PrimaryButton
     //         text="Send Otp to Login"
     //         classes="!w-full"
@@ -59,40 +56,40 @@ const Login = () => {
     //   </form>
     // </div>
     <div
-    className={`grid justify-center content-center w-full sm:max-w-[1280px] mx-auto h-[calc(100vh-58px)]`}
-  >
-    <Card>
-      <form
-        className="max-w-[340px] flex flex-col gap-[20px]"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <p className="text-[22px] font-[700] block text-left mb-[10px]">
-          Login to MyStay!!
-        </p>
-        <div>
-        <input
-          type="text"
-          placeholder="Email"
-          {...register("email", { required: true })}
-          className="w-72 md:w-96  h-12 px-3 rounded-lg border-2 border-gray-200 outline-none focus:border-primary"
-        />
-        </div>
-        <PrimaryButton
-          type="submit"
-          classes=" !w-72 md:!w-96"
-          disabled={loading}
-          text="Send Otp to Login"
-        />
+      className={`grid justify-center content-center w-full sm:max-w-[1280px] mx-auto h-[calc(100vh-58px)]`}
+    >
+      <Card>
+        <form
+          className="max-w-[340px] flex flex-col gap-[20px]"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <p className="text-[22px] font-[700] block text-left mb-[10px]">
+            Login to MyStay!!
+          </p>
+          <div>
+            <input
+              type="text"
+              placeholder="Enter your email"
+              {...register("email", { required: true })}
+              className="input input-bordered w-full max-w-[340px] text-[12px] font-semibold"
+            />
+          </div>
+          <PrimaryButton
+            type="submit"
+            classes="!w-full !max-w-[340px]"
+            disabled={loading}
+            text="Send Otp to Login"
+          />
 
-        <p className="text-[13px] font-[500]">
-          By continuing you agree to the{" "}
-          <span className="text-primary">Term of Service</span> and{" "}
-          <span className="text-primary">Privacy Policy</span>
-        </p>
-      </form>
-    </Card>
-    {/* <ScanIcon /> */}
-  </div>
+          <p className="text-[13px] font-[500]">
+            By continuing you agree to the{" "}
+            <span className="text-primary">Term of Service</span> and{" "}
+            <span className="text-primary">Privacy Policy</span>
+          </p>
+        </form>
+      </Card>
+      {/* <ScanIcon /> */}
+    </div>
   );
 };
 

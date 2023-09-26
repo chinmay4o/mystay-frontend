@@ -3,7 +3,7 @@ const OTPLogin = (props) => {
   const { otp, handleChange } = props;
 
   return (
-    <div className="w-full flex justify-between items-center h-[60px] px-12">
+    <div className="w-full flex justify-between items-center h-[60px]">
       <div className="container">
         <div className="row">
           <div className="col-md-4 text-center">

@@ -43,13 +43,19 @@ const UserBookings = () => {
         Your Bookings
       </div>
       {bookings &&
-      hotels &&
+        hotels &&
         bookings.length > 0 &&
         bookings.map((booking, index) => {
-          const hotel = hotels.find((hotel) => hotel.hotelId === booking.hotelId);
-        //   console.log(hotel);
+          const hotel = hotels.find(
+            (hotel) => hotel.hotelId === booking.hotelId
+          );
+          //   console.log(hotel);
           return (
-            <div key={index} className="w-full flex  items-center justify-center">
+            <div
+              key={index}
+              className="w-full flex  items-center justify-center"
+              onClick={() => history.push(`/bookings/${booking._id}`)}
+            >
               {booking.status === "Booked" ? (
                 <div className="w-full md:w-1/2 flex  items-center justify-center gap-4 md:gap-8 p-4 rounded-lg border-2 border-green-400">
                   <div className="flex flex-col gap-2">

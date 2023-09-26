@@ -4,17 +4,17 @@ import {
   UserContext,
 } from "../../context/hotelsContext.js";
 import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
-import Modal from "../Modal/Modal";
 import { configData } from "../../Config/config.js";
 import { useHistory } from "react-router-dom";
 import Policies from "./Policies.js";
+
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
   const [guestDetails, setGuestsDetails] = useState([]);
   const [error, setError] = useState("");
-  const [rooms , setRooms] = useState([])
+  const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
     if (selectedRooms.length > 0) {
@@ -104,7 +104,7 @@ const BookingHotel = () => {
     let n = rooms.length;
     let total = 0;
     for (let i = 0; i < n; i++) {
-      total+= rooms[i]>2 ? rooms[i]-2 : 0;
+      total += rooms[i] > 2 ? rooms[i] - 2 : 0;
     }
 
     return {
@@ -132,9 +132,6 @@ const BookingHotel = () => {
   });
 
   async function displayRazorpay() {
-    console.log("hello");
-    console.log(guestDetails);
-    console.log(bookingDetails.bookingDetails);
     // return;
     if (
       !userInfo.firstName ||
@@ -277,17 +274,11 @@ const BookingHotel = () => {
     );
     console.log("b1", b1);
     setBookingDetails({ ...bookingDetails, bookingDetails: [...b1] });
-    window.scrollTo(0, 0);
-  }, [b1,selectedRooms]);
+    // window.scrollTo(0, 0);
+  }, [b1, selectedRooms]);
 
   return (
     <>
-      <Modal
-        content={modalContent}
-        modalDisplay={modalDisplay}
-        setModalDisplay={setModalDisplay}
-      />
-
       <div className="w-[90%] max-w-[1280px]  bg-white flex flex-col lg:flex-row gap-6 justify-center mx-auto p-3  pb-24">
         <div className="w-3/4">
           <p
@@ -318,7 +309,7 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, firstName: e.target.value })
                     }
-                    className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
+                    className="input input-bordered w-full max-w-sm"
                   />
                   <input
                     type="text"
@@ -327,7 +318,9 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, lastName: e.target.value })
                     }
-                    className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
+                    className="input input-bordered w-full max-w-sm"
+
+                    // className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                   />
                 </div>
               </div>
@@ -346,7 +339,8 @@ const BookingHotel = () => {
                       console.log(e.target.value);
                       setUserInfo({ ...userInfo, gender: e.target.value });
                     }}
-                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
+                    // className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
+                    className="input input-bordered w-full "
                   >
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -374,7 +368,9 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, email: e.target.value })
                     }
-                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
+                    className="input input-bordered w-full"
+
+                    // className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
                   />
                 </div>
               </div>
@@ -391,7 +387,8 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, mobile: e.target.value })
                     }
-                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
+                    // className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
+                    className="input input-bordered w-full"
                   />
                 </div>
               </div>
@@ -407,7 +404,8 @@ const BookingHotel = () => {
                     onChange={(e) =>
                       setUserInfo({ ...userInfo, address: e.target.value })
                     }
-                    className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
+                    // className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
+                    className="input input-bordered w-full"
                   />
                 </div>
               </div>
@@ -458,7 +456,9 @@ const BookingHotel = () => {
                             details[index].firstName = e.target.value;
                             setGuestsDetails(details);
                           }}
-                          className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
+                          className="input input-bordered w-full max-w-sm"
+
+                          // className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                         />
                         <input
                           type="text"
@@ -469,7 +469,9 @@ const BookingHotel = () => {
                             details[index].lastName = e.target.value;
                             setGuestsDetails(details);
                           }}
-                          className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
+                          className="input input-bordered w-full max-w-sm"
+
+                          // className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                         />
                       </div>
                     </div>
