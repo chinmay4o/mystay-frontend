@@ -455,7 +455,7 @@ const SingleHotel = () => {
                               {ele.roomName}{" "}
                               <span className="text-[#808080] text-md font-semibold">
                                 {" "}
-                                X {ele.qty}
+                                X {rooms.length}
                               </span>
                             </p>
                             <p className="font-bold">

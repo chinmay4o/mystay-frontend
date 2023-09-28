@@ -37,7 +37,7 @@ const HotelsScreenMain = () => {
     window.scrollTo(0, 0);
   }, [city]);
 
-  if (loading) {
+  if (loading || !allSearchedHotels?.data?.city?.name) {
     return (
       <>
         <div className="h-screen w-screen relative">
@@ -57,7 +57,7 @@ const HotelsScreenMain = () => {
         </div>
       </>
     );
-  } else if (allSearchedHotels.data.hotels.length <= 0) {
+  } else if (allSearchedHotels?.data?.hotels?.length <= 0) {
     return (
       <div className="coming_soon-box">
         {" "}
