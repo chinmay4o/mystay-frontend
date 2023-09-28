@@ -103,6 +103,7 @@ const SingleHotel = () => {
 
   useEffect(() => {
     if (dates) {
+      window.scrollTo(0, 0);
       if (dates[0] !== new Date(checkIn) || dates[1] !== new Date(checkOut)) {
         const checkInDate = new Date(
           new Date(dates[0]).getTime() + 5.5 * 60 * 60 * 1000

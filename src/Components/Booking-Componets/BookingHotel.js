@@ -264,7 +264,7 @@ const BookingHotel = () => {
   //useEffect Hook
   useEffect(() => {
     setBookingDetails({ ...bookingDetails, bookingDetails: [...b1] });
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, []);
 
   return (
