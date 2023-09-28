@@ -2,40 +2,36 @@ import React, { useState, useContext, useEffect } from "react";
 import { SelectedRoomsContext } from "../../context/hotelsContext.js";
 import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 
-const RoomCard = ({ ele , number }) => {
+const RoomCard = ({ ele, number }) => {
   //room count is
   const [count, setCount] = useState(0);
-  const [available , setAvailable] = useState();
+  const [available, setAvailable] = useState();
   const [disabled, setDisabled] = useState(false);
 
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
 
   useEffect(() => {
-    let count=0;
+    let count = 0;
     ele.roomDetails.forEach((ele1) => {
       console.log(ele1);
-      if(ele1.bookingDetails.length===0) count++;
-    })
+      if (ele1.bookingDetails.length === 0) count++;
+    });
 
     setAvailable(count);
   }, [ele]);
 
   useEffect(() => {
-    setCount(
-      selectedRooms.filter((ele1) => ele1.roomId === ele.roomId).length
-    );
+    setCount(selectedRooms.filter((ele1) => ele1.roomId === ele.roomId).length);
   }, [selectedRooms]);
 
   function addRoomToCartHandler(newRoom) {
-      setSelectedRooms([{ ...newRoom, qty: 1 }]);
-    
+    setSelectedRooms([{ ...newRoom, qty: 1 }]);
   }
 
   function removeRoomFromCartHandler(oldRoom) {
-
-      setSelectedRooms(
-        selectedRooms.filter((ele1, index) => ele1.roomId !== oldRoom.roomId)
-      );
+    setSelectedRooms(
+      selectedRooms.filter((ele1, index) => ele1.roomId !== oldRoom.roomId)
+    );
   }
 
   return (
@@ -58,7 +54,7 @@ const RoomCard = ({ ele , number }) => {
           </p>
           <p className="text-md font-semibold">
             {" "}
-            <i className="fas fa-rupee-sign"></i> {ele.roomPrice}
+            <i className="fas fa-rupee-sign"></i> {ele.roomPrice / number}
           </p>
         </div>
 
@@ -71,30 +67,27 @@ const RoomCard = ({ ele , number }) => {
             {ele.roomDescription.slice(0, 60)}
           </p>
         )}
-        {available>0 &&
-        <div className="flex mt-4 gap-4 items-center justify-end">
-          {count === 0 ? (
-            <PrimaryButton
-              classes="uppercase btn-sm text-xs flex items-center justify-center max-w-max "
-              onClick={() => {
-                addRoomToCartHandler(ele);
-                
-              }}
-              text="Select Room"
-            />
-              
-            
-          ) : (
-            <PrimaryButton
-              classes="uppercase btn-sm text-xs flex items-center justify-center max-w-max bg-white !text-primary  hover:border-primary"
-              onClick={() => {
-                removeRoomFromCartHandler(ele);
-                
-              }}
-              text="Selected "
-            />
-          )}
-        </div>}
+        {available > 0 && (
+          <div className="flex mt-4 gap-4 items-center justify-end">
+            {count === 0 ? (
+              <PrimaryButton
+                classes="uppercase btn-sm text-xs flex items-center justify-center max-w-max "
+                onClick={() => {
+                  addRoomToCartHandler(ele);
+                }}
+                text="Select Room"
+              />
+            ) : (
+              <PrimaryButton
+                classes="uppercase btn-sm text-xs flex items-center justify-center max-w-max bg-white !text-primary  hover:border-primary"
+                onClick={() => {
+                  removeRoomFromCartHandler(ele);
+                }}
+                text="Selected "
+              />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

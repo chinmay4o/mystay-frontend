@@ -41,7 +41,9 @@ const Locations = ({ dates }) => {
                 history.push(
                   `/hotels?city=${ele.toLowerCase()}&checkIn=${JSON.stringify(
                     checkInDate
-                  )}&checkOut=${JSON.stringify(checkOutDate)}`
+                  )}&checkOut=${JSON.stringify(
+                    checkOutDate
+                  )}&roomConfig=${JSON.stringify([1])}`
                 );
               }}
             >

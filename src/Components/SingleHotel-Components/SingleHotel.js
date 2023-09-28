@@ -49,7 +49,7 @@ const SingleHotel = () => {
   const search = useLocation().search;
   const checkIn = new URLSearchParams(search).get("checkIn");
   const checkOut = new URLSearchParams(search).get("checkOut");
-
+  const roomConfig = new URLSearchParams(search).get("roomConfig");
   //Calculating differecebetween Days/nights
   const date1 = new Date(localStorage.getItem("checkIn"));
   const date2 = new Date(localStorage.getItem("checkOut"));
@@ -80,7 +80,16 @@ const SingleHotel = () => {
   }
 
   useEffect(() => {
-    const room = JSON.parse(localStorage.getItem("roomConfig"));
+    let room;
+    if (roomConfig && roomConfig !== "null") {
+      console.log(roomConfig, "ansh");
+      room = JSON.parse(roomConfig);
+      if (room.length === 0) {
+        room.push(1);
+      }
+    } else {
+      room = [1];
+    }
     setRooms(room);
     getSingleHotel(id, room);
     console.log("date", new Date(checkIn).getDate());
@@ -112,7 +121,11 @@ const SingleHotel = () => {
         history.push(
           `/hotel/${id}?checkIn=${JSON.stringify(
             checkInDate
-          )}&checkOut=${JSON.stringify(checkOutDate)}`
+          )}&checkOut=${JSON.stringify(checkOutDate)}&roomConfig=${
+            !roomConfig || roomConfig === "null"
+              ? JSON.stringify([1])
+              : roomConfig
+          }`
         );
       }
     }

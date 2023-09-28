@@ -105,7 +105,10 @@ const MobileComponent = ({ userData }) => {
                       );
                       localStorage.setItem("roomConfig", JSON.stringify([1]));
                       history.push(
-                        `/hotels?city=${ele.name.toLowerCase()}&checkIn=${checkInDate}&checkOut=${checkOutDate}`
+                        `/hotels?city=${ele.name.toLowerCase()}&checkIn=${checkInDate}&checkOut=${checkOutDate}&roomConfig=${JSON.stringify(
+                          [1]
+                        )}
+                          `
                       );
                     }}
                     key={nanoid()}

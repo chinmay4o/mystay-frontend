@@ -13,7 +13,7 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
   const history = useHistory();
   const [adults, setAdults] = useState(1);
   const [rooms, setRooms] = useState(1);
-  const [roomAdults , setRoomAdults] = useState([1]);
+  const [roomAdults, setRoomAdults] = useState([1]);
   let yesterday = new Date(Date.now());
   let today = new Date(yesterday.getTime() + 24 * 60 * 60 * 1000);
   var tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000);
@@ -35,7 +35,6 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
       selectElement[i].disabled = true;
     }
   }, []);
-
 
   const hotels = useContext(HotelContext);
 
@@ -122,16 +121,15 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
             Guests & Rooms
           </label>
           <div className="flex items-center justify-center border-b-2 pb-2 border-gray-400">
-          <AdultBar
-            adults={adults}
-            setAdults={setAdults}
-            rooms={rooms}
-            setRooms={setRooms}
-            roomAdults={roomAdults}
-            setRoomAdults={setRoomAdults}
-            
-          /></div>
-
+            <AdultBar
+              adults={adults}
+              setAdults={setAdults}
+              rooms={rooms}
+              setRooms={setRooms}
+              roomAdults={roomAdults}
+              setRoomAdults={setRoomAdults}
+            />
+          </div>
         </div>
 
         <div className="book-container">
@@ -157,7 +155,9 @@ const Hero = ({ dates, setDates, destination, setDestination }) => {
                 history.push(
                   `/hotels?city=${destination}&checkIn=${JSON.stringify(
                     checkInDate
-                  )}&checkOut=${JSON.stringify(checkOutDate)}`
+                  )}&checkOut=${JSON.stringify(
+                    checkOutDate
+                  )}&roomConfig= ${JSON.stringify(roomAdults)}`
                 );
               }
             }}

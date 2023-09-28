@@ -16,6 +16,7 @@ const HotelsScreenMain = () => {
   const city = new URLSearchParams(search).get("city");
   const checkIn = new URLSearchParams(search).get("checkIn");
   const checkOut = new URLSearchParams(search).get("checkOut");
+  const roomConfig = new URLSearchParams(search).get("roomConfig");
   const [loading, setLoading] = useState(false);
 
   async function getAllHotels() {
@@ -101,6 +102,7 @@ const HotelsScreenMain = () => {
                   ele={ele}
                   checkIn={checkIn}
                   checkOut={checkOut}
+                  roomConfig={roomConfig}
                   key={index}
                 />
               );

@@ -9,6 +9,7 @@ const SingleHotel = ({
   checkIn = "",
   checkOut = "",
   key = "123",
+  roomConfig = [1],
 }) => {
   const history = useHistory();
   return (
@@ -50,7 +51,7 @@ const SingleHotel = ({
             text="Book Now"
             onClick={() =>
               history.push(
-                `/hotel/${ele.hotelId}?checkIn=${checkIn}&checkOut=${checkOut}`
+                `/hotel/${ele.hotelId}?checkIn=${checkIn}&checkOut=${checkOut}&roomConfig=${roomConfig}`
               )
             }
           />
