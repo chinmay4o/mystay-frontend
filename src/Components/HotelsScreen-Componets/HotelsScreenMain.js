@@ -16,8 +16,10 @@ const HotelsScreenMain = () => {
   const city = new URLSearchParams(search).get("city");
   const checkIn = new URLSearchParams(search).get("checkIn");
   const checkOut = new URLSearchParams(search).get("checkOut");
+  const [loading, setLoading] = useState(false);
 
   async function getAllHotels() {
+    setLoading(true);
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
       // `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/hotels?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`,
@@ -26,8 +28,8 @@ const HotelsScreenMain = () => {
       }
     );
     const data = await response.json();
-    console.log(data);
     setAllSearchedHotels(data);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const HotelsScreenMain = () => {
     window.scrollTo(0, 0);
   }, [city]);
 
-  if (allSearchedHotels.success === false) {
+  if (loading) {
     return (
       <>
         <div className="h-screen w-screen relative">
