@@ -20,9 +20,7 @@ const Map = ({ lat = 18.9885983229874, lang = 72.82971196711472, address }) => {
         zoom: 13,
       });
 
-      const ttMarker = new tt.Marker({ draggable: true })
-        .setLngLat([lang, lat])
-        .addTo(ttMap);
+      const ttMarker = new tt.Marker().setLngLat([lang, lat]).addTo(ttMap);
 
       console.log(ttMap, ttMarker);
       setMap(ttMap);
