@@ -40,7 +40,7 @@ const SingleHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
 
   let imgClasses = [
-    "col-span-3 row-span-3 bg-cover  rounded-xl",
+    "col-span-3 row-span-3 bg-cover rounded-xl h-full",
     "col-start-4 bg-cover rounded-xl hidden md:block",
     "col-start-4 bg-cover rounded-xl hidden md:block",
     "col-start-4 bg-cover rounded-xl hidden md:block",
@@ -218,7 +218,7 @@ const SingleHotel = () => {
           setSliderShow={setSliderShow}
           sliderImages={singleHotel.data.hotels[0].images}
         />
-        <div className="w-[96%] md:w-[96%] h-96 md:h-[600px] xl:w-[1280px] md:gap-2 mx-auto py-5 grid grid-cols-3 grid-rows-3 md:grid-cols-4">
+        <div className="w-[96%] md:w-[96%] h-96 md:h-[600px] xl:w-[1280px] md:gap-2 mx-auto py-5 pb-2 grid grid-rows-[33%_33%_33%] grid-cols-3 md:grid-cols-4">
           {singleHotel.data.hotels[0].images.map((ele, index) => {
             return (
               <div
@@ -234,13 +234,6 @@ const SingleHotel = () => {
               </div>
             );
           })}
-
-          {/* <div className="a1">
-            <img src={singleHotel.data.images[0]} alt="" />
-          </div>
-          <div className="b1"></div>
-          <div className="c1"></div>
-          <div className="d1"></div> */}
         </div>
 
         <div className="w-[96%] xl:w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 py-6 px-4">
@@ -561,7 +554,15 @@ const SingleHotel = () => {
             )}
           </div>
         </div>
-        <Map location={"https://goo.gl/maps/oL9zpixkZFiGPfUB8"} />
+        {singleHotel?.data?.hotels[0]?.location ? (
+          <Map
+            lat={parseFloat(singleHotel.data.hotels[0].location.lat)}
+            lang={parseFloat(singleHotel.data.hotels[0].location.lang)}
+            address={singleHotel.data.hotels[0].address}
+          />
+        ) : (
+          <Map />
+        )}
       </>
     );
   }

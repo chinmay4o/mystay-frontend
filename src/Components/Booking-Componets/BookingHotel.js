@@ -301,7 +301,7 @@ const BookingHotel = () => {
                       onChange={(e) =>
                         setUserInfo({ ...userInfo, firstName: e.target.value })
                       }
-                      className="input input-bordered w-full max-w-sm"
+                      className="input input-bordered font-semibold text-[14px] w-full max-w-sm"
                     />
                     <input
                       type="text"
@@ -310,7 +310,7 @@ const BookingHotel = () => {
                       onChange={(e) =>
                         setUserInfo({ ...userInfo, lastName: e.target.value })
                       }
-                      className="input input-bordered w-full max-w-sm"
+                      className="input input-bordered font-semibold text-[14px] w-full max-w-sm "
 
                       // className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                     />
@@ -332,7 +332,7 @@ const BookingHotel = () => {
                         setUserInfo({ ...userInfo, gender: e.target.value });
                       }}
                       // className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
-                      className="input input-bordered w-full "
+                      className="input input-bordered font-semibold text-[14px] w-full "
                     >
                       <option value="male">Male</option>
                       <option value="female">Female</option>
@@ -360,7 +360,7 @@ const BookingHotel = () => {
                       onChange={(e) =>
                         setUserInfo({ ...userInfo, email: e.target.value })
                       }
-                      className="input input-bordered w-full"
+                      className="input input-bordered font-semibold text-[14px] w-full"
 
                       // className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
                     />
@@ -380,7 +380,7 @@ const BookingHotel = () => {
                         setUserInfo({ ...userInfo, mobile: e.target.value })
                       }
                       // className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
-                      className="input input-bordered w-full"
+                      className="input input-bordered font-semibold text-[14px] w-full"
                     />
                   </div>
                 </div>
@@ -397,7 +397,7 @@ const BookingHotel = () => {
                         setUserInfo({ ...userInfo, address: e.target.value })
                       }
                       // className="font-semibold border-[2px] border-[#f1f1f1] rounded-lg w-[90%] h-11 p-3  outline-none"
-                      className="input input-bordered w-full"
+                      className="input input-bordered font-semibold text-[14px] w-full"
                     />
                   </div>
                 </div>
@@ -448,7 +448,7 @@ const BookingHotel = () => {
                               details[index].firstName = e.target.value;
                               setGuestsDetails(details);
                             }}
-                            className="input input-bordered w-full max-w-sm"
+                            className="input input-bordered font-semibold text-[14px] w-full max-w-sm"
 
                             // className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                           />
@@ -461,7 +461,7 @@ const BookingHotel = () => {
                               details[index].lastName = e.target.value;
                               setGuestsDetails(details);
                             }}
-                            className="input input-bordered w-full max-w-sm"
+                            className="input input-bordered font-semibold text-[14px] w-full max-w-sm"
 
                             // className="placeholder:text-[#808080/50] font-medium p-2  text-black text-base border-[2px] border-[#f1f1f1] rounded-[5px]"
                           />
