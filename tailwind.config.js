@@ -7,9 +7,7 @@ module.exports = {
         primary: "#FF5500",
         secondary: "#e8f0f2",
       },
-      fontSize: {
-
-      },
+      fontSize: {},
       screens: {
         xs: "480px",
         sm: "640px",
@@ -20,6 +18,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Montserrat", "Open-Sans", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
     },
   },

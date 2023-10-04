@@ -7,7 +7,6 @@ import PrimaryButton from "../../Common/buttons/PrimaryButton.js";
 import { configData } from "../../Config/config.js";
 import { useHistory } from "react-router-dom";
 import Policies from "./Policies.js";
-import { set } from "react-hook-form";
 
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
@@ -17,21 +16,6 @@ const BookingHotel = () => {
   const [error, setError] = useState("");
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (selectedRooms.length > 0) {
-      localStorage.setItem("selectedRooms", JSON.stringify(selectedRooms));
-      const room = JSON.parse(localStorage.getItem("roomConfig"));
-      setRooms(room);
-    } else {
-      const rooms = JSON.parse(localStorage.getItem("selectedRooms"));
-      if (rooms && rooms.length > 0) {
-        setSelectedRooms(rooms);
-      } else {
-        console.log(history.goBack());
-      }
-    }
-  }, []);
 
   const monthNames = [
     "January",
@@ -98,27 +82,7 @@ const BookingHotel = () => {
     JSON.stringify(checkOutDate).slice(1, 23)
   );
   //mapping a new array to save details in requires backend format
-  let b1 = selectedRooms.map((ele, id) => {
-    let n = rooms.length;
-    let total = 0;
-    for (let i = 0; i < n; i++) {
-      total += rooms[i] > 2 ? rooms[i] - 2 : 0;
-    }
-
-    return {
-      roomId: ele.roomId,
-      hotelId: ele.hotelId,
-      bookingNoOfRoom: n,
-      checkIn: JSON.stringify(checkInDate).slice(1, 23),
-      // checkIn: new Date(localStorage.getItem("checkIn")),
-      checkOut: JSON.stringify(checkOutDate).slice(1, 23),
-      // checkOut: new Date(localStorage.getItem("checkOut")),
-      night: diffDays,
-      extra: total,
-    };
-  });
-
-  //main object to pass in Backend
+  console.log(selectedRooms);
   const [bookingDetails, setBookingDetails] = useState({
     guestDetails: {
       firstName: userInfo.firstName,
@@ -126,8 +90,64 @@ const BookingHotel = () => {
       email: userInfo.email,
       mobile: userInfo.mobile,
     },
-    bookingDetails: [...b1],
+    // bookingDetails: [...b1],
   });
+  useEffect(() => {
+    if (selectedRooms.length > 0) {
+      localStorage.setItem("selectedRooms", JSON.stringify(selectedRooms));
+      const room = JSON.parse(localStorage.getItem("roomCount"));
+      setRooms(room);
+      let b1 = selectedRooms.map((ele, id) => {
+        let n = room.length;
+        let total = 0;
+        for (let i = 0; i < n; i++) {
+          total += room[i] > 2 ? room[i] - 2 : 0;
+        }
+
+        return {
+          roomId: ele.roomId,
+          hotelId: ele.hotelId,
+          bookingNoOfRoom: n,
+          checkIn: JSON.stringify(checkInDate).slice(1, 23),
+          // checkIn: new Date(localStorage.getItem("checkIn")),
+          checkOut: JSON.stringify(checkOutDate).slice(1, 23),
+          // checkOut: new Date(localStorage.getItem("checkOut")),
+          night: diffDays,
+          extra: total,
+        };
+      });
+
+      setBookingDetails({ ...bookingDetails, bookingDetails: [...b1] });
+    } else {
+      // const rooms = JSON.parse(localStorage.getItem("roomConfig"));
+      // if (rooms && rooms.length > 0) {
+      //   setSelectedRooms(rooms);
+      // } else {
+      console.log(history.goBack());
+      // }
+    }
+  }, []);
+  // let b1 = selectedRooms.map((ele, id) => {
+  //   let n = rooms.length;
+  //   let total = 0;
+  //   for (let i = 0; i < n; i++) {
+  //     total += rooms[i] > 2 ? rooms[i] - 2 : 0;
+  //   }
+
+  //   return {
+  //     roomId: ele.roomId,
+  //     hotelId: ele.hotelId,
+  //     bookingNoOfRoom: n,
+  //     checkIn: JSON.stringify(checkInDate).slice(1, 23),
+  //     // checkIn: new Date(localStorage.getItem("checkIn")),
+  //     checkOut: JSON.stringify(checkOutDate).slice(1, 23),
+  //     // checkOut: new Date(localStorage.getItem("checkOut")),
+  //     night: diffDays,
+  //     extra: total,
+  //   };
+  // });
+
+  //main object to pass in Backend
 
   async function displayRazorpay() {
     // return;
@@ -140,7 +160,7 @@ const BookingHotel = () => {
       setModalDisplay("grid");
     } else {
       setUserData({ ...userData, ...userInfo });
-      setBookingDetails({ ...bookingDetails, bookingDetails: [...b1] });
+      // setBookingDetails({ ...bookingDetails });
 
       localStorage.setItem("bookingUserData", JSON.stringify(userInfo));
       setLoading(true);
@@ -171,6 +191,8 @@ const BookingHotel = () => {
       );
 
       const dataR = await orderId.json();
+
+      console.log(bookingDetails);
 
       setBookingDetails({ ...bookingDetails, guestDetails: userInfo });
 
@@ -263,7 +285,7 @@ const BookingHotel = () => {
 
   //useEffect Hook
   useEffect(() => {
-    setBookingDetails({ ...bookingDetails, bookingDetails: [...b1] });
+    // setBookingDetails({ ...bookingDetails, bookingDetails: [...b1] });
     window.scrollTo(0, 0);
   }, []);
 

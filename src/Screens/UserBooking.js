@@ -1,14 +1,14 @@
-import React from 'react'
-import UserBookings from '../Components/UserBooking.js/UserBookings'
-import Navbar from '../Components/Navbar/Navbar'
+import React from "react";
+import UserBookings from "../Components/UserBookings/UserBookings";
+import Navbar from "../Components/Navbar/Navbar";
 
 const UserBooking = () => {
   return (
     <>
-    <Navbar />
-    <UserBookings />
+      <Navbar />
+      <UserBookings />
     </>
-  )
-}
+  );
+};
 
-export default UserBooking
+export default UserBooking;
