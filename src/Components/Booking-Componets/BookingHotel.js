@@ -545,7 +545,7 @@ const BookingHotel = () => {
 
           <div className="flex  w-1/3 max-lg:w-full max-lg:items-center  justify-center mt-[50px]">
             <div className="p-8 border-[1px] rounded-2xl h-max flex flex-col gap-4 lg:w-full w-96 ">
-              <p className="text-3xl font-bold ">Summary</p>
+              <p className="text-2xl font-bold ">Summary</p>
 
               <p className="text-[#808080] font-bold text-sm">
                 <span className="text-black">
