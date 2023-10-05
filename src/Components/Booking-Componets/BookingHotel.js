@@ -151,7 +151,7 @@ const BookingHotel = () => {
       const room = JSON.parse(localStorage.getItem("roomCount"));
       setRooms(room);
       let b1 = selectedRooms.map((ele, id) => {
-        let n = room.length;
+        let n = room?.length;
         let total = 0;
         for (let i = 0; i < n; i++) {
           total += room[i] > 2 ? room[i] - 2 : 0;
