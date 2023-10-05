@@ -8,6 +8,59 @@ import { configData } from "../../Config/config.js";
 import { useHistory } from "react-router-dom";
 import Policies from "./Policies.js";
 
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function getDaySuffix(day) {
+  if (day >= 11 && day <= 13) {
+    return "th";
+  }
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
+const dateParser = (date) => {
+  const d = new Date(date);
+  const day = days[d.getUTCDay()];
+  const currDate = d.getUTCDate();
+  const month = months[d.getUTCMonth()];
+
+  const formattedDate = `${day ? day : "Fri"} ${
+    currDate ? currDate : 5
+  }${getDaySuffix(currDate ? currDate : 5)} ${month ? month : "Jun"}`;
+
+  return formattedDate;
+};
+
+const getNights = (checkIn, checkOut) => {
+  const checkInDate = new Date(checkIn);
+  const checkOutDate = new Date(checkOut);
+  const diffTime = Math.abs(checkOutDate - checkInDate);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays ? diffDays : 1;
+};
+
 const BookingHotel = () => {
   const { selectedRooms, setSelectedRooms } = useContext(SelectedRoomsContext);
   const { userData, setUserData } = useContext(UserContext);
@@ -271,7 +324,7 @@ const BookingHotel = () => {
     <>
       {!loading && (
         <div className="w-[90%] max-w-[1280px]  bg-white flex flex-col lg:flex-row gap-6 justify-center mx-auto p-3  pb-24">
-          <div className="w-3/4">
+          <div className="w-2/3">
             <p
               className="text-xl font-bold cursor-pointer"
               onClick={() => history.goBack()}
@@ -490,18 +543,22 @@ const BookingHotel = () => {
             <Policies />
           </div>
 
-          <div className="flex max-lg:w-full max-lg:items-center justify-center mt-20">
-            <div className="p-8 border-[2px] rounded-2xl h-max flex flex-col gap-4 lg:w-max w-96 ">
+          <div className="flex  w-1/3 max-lg:w-full max-lg:items-center  justify-center mt-[50px]">
+            <div className="p-8 border-[1px] rounded-2xl h-max flex flex-col gap-4 lg:w-full w-96 ">
               <p className="text-3xl font-bold ">Summary</p>
 
-              <p className="text-[#808080] font-semibold">
-                Starting from{" "}
-                {new Date(localStorage.getItem("checkIn")).getDate()}th{" "}
-                {
-                  monthNames[
-                    new Date(localStorage.getItem("checkIn")).getMonth()
-                  ]
-                }
+              <p className="text-[#808080] font-bold text-sm">
+                <span className="text-black">
+                  {getNights(
+                    localStorage.getItem("checkIn"),
+                    localStorage.getItem("checkOut")
+                  )}{" "}
+                  night
+                </span>{" "}
+                starting from{" "}
+                <span className="text-black">
+                  {dateParser(localStorage.getItem("checkIn"))}
+                </span>
               </p>
 
               <div className="text-base flex-col flex gap-4 w-full">
@@ -509,24 +566,64 @@ const BookingHotel = () => {
                   <p>No Rooms Selected</p>
                 ) : (
                   selectedRooms.map((ele, index) => {
+                    console.log(ele);
                     return (
-                      <div
-                        className="flex justify-between items-center"
-                        key={index}
-                      >
-                        <p className="font-bold">
-                          {" "}
-                          {ele.roomName}{" "}
-                          <span className="text-[#808080] text-base font-semibold">
-                            {" "}
-                            X {ele.qty}
-                          </span>
-                        </p>
-                        <p className="font-bold">
-                          {" "}
-                          <i className="fas fa-rupee-sign"></i>{" "}
-                          {ele.roomPrice * ele.qty * diffDays}
-                        </p>
+                      // <div
+                      //   className="flex justify-between items-center"
+                      //
+                      // >
+                      //   <p className="font-bold">
+                      //     {" "}
+                      //     {ele.roomName}{" "}
+                      //     <span className="text-[#808080] text-base font-semibold">
+                      //       {" "}
+                      //       X {ele.qty}
+                      //     </span>
+                      //   </p>
+                      //   <p className="font-bold">
+                      //     {" "}
+                      //     <i className="fas fa-rupee-sign"></i>{" "}
+                      //     {ele.roomPrice * ele.qty * diffDays}
+                      //   </p>
+                      // </div>
+                      <div class="flex items-start w-full my-2" key={index}>
+                        <div class="w-16 h-12 mr-2 mt-1 flex-shrink-0 bg-subtitle rounded-lg">
+                          <img
+                            src={
+                              ele?.images
+                                ? ele?.images[0]
+                                : "https://img.cdn.zostel.com/zostel/gallery/images/GLCHS0o0SU28KZ1y-6eL2w/zostel-alleppey-6-bed-mixed-dorm-20221008141024.jpg?w=64"
+                            }
+                            alt=""
+                            class="w-full h-full object-cover rounded-lg object-center cursor-zoom-in hover:opacity-75"
+                          />
+                        </div>
+                        <div class="flex flex-col w-full text-text">
+                          <div class="flex items-center justify-between w-full">
+                            <span class="flex-grow">
+                              <span class="font-semibold text-base mr-1 text-dark">
+                                {ele.roomName}
+                              </span>{" "}
+                              x {ele.qty}
+                            </span>
+                          </div>
+                          <div class="flex flex-col">
+                            <div class="flex items-start justify-between w-full text-sm">
+                              <span>
+                                <span class="text-dark">₹{ele.roomPrice}</span>{" "}
+                                x{" "}
+                                {getNights(
+                                  localStorage.getItem("checkIn"),
+                                  localStorage.getItem("checkOut")
+                                )}{" "}
+                                night
+                              </span>
+                              <span class="text-dark font-semibold text-base">
+                                ₹{ele.roomPrice * ele.qty * diffDays}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     );
                   })
@@ -588,6 +685,88 @@ const BookingHotel = () => {
               </div>
             </div>
           </div>
+          {/* <section class="p-4 bg-light h-max w-96 border rounded-lg">
+            <h3 class="font-bold text-2xl">Summary</h3>
+            <div class="text-sm font-bold">
+              1 night <span class="text-text">starting from</span> Thu 5 Oct,
+              2023
+            </div>
+            <div class="flex flex-col items-center mt-4">
+              {selectedRooms.length === 0 &&
+                selectedRooms.map((ele) => (
+                  <div class="flex items-start w-full my-2">
+                    <div class="w-16 h-12 mr-2 mt-1 flex-shrink-0 bg-subtitle rounded-lg">
+                      <img
+                        src="https://img.cdn.zostel.com/zostel/gallery/images/GLCHS0o0SU28KZ1y-6eL2w/zostel-alleppey-6-bed-mixed-dorm-20221008141024.jpg?w=64"
+                        alt=""
+                        class="w-full h-full object-cover rounded-lg object-center cursor-zoom-in hover:opacity-75"
+                      />
+                    </div>
+                    <div class="flex flex-col w-full text-text">
+                      <div class="flex items-center justify-between w-full">
+                        <span class="flex-grow">
+                          <span class="font-semibold text-base mr-1 text-dark">
+                            6 Bed Mixed Dorm
+                          </span>{" "}
+                          x 1
+                        </span>
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="flex items-start justify-between w-full">
+                          <span>
+                            <span class="text-dark">₹599</span> x 1 night
+                          </span>
+                          <span class="text-dark font-semibold text-base">
+                            ₹599
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              <div class="flex items-center justify-between w-full mt-4 mb-2 text-dark text-lg font-semibold">
+                <span>Tax</span>
+                <span>₹72</span>
+              </div>
+              <div class="flex items-center justify-between w-full mb-2 text-dark text-lg font-semibold">
+                <span>Total (tax incl.)</span>
+                <span>₹671</span>
+              </div>
+              {/* <div class="flex items-center justify-between w-full mb-2 text-dark text-lg font-semibold">
+                <span>Payable Now</span>
+                <span>₹141</span>
+              </div> 
+              <div class="flex items-start mb-4 mt-2">
+                <input
+                  type="checkbox"
+                  name="tc-check"
+                  id="tc-check"
+                  class="mt-1"
+                />
+                <label for="tc-check" class="ml-2 text-xs">
+                  I acknowledge and accept the terms and conditions mentioned in
+                  the Property Policy &amp; Cancellation Policy.{" "}
+                  <span class="text-primary font-bold">*</span>
+                </label>
+              </div>
+              <div className="flex flex-col w-full gap-2 items-center justify-center">
+                <PrimaryButton
+                  text="Book Now"
+                  onClick={() => {
+                    console.log(selectedRooms, "selectedRooms");
+                    selectedRooms.length === 0
+                      ? history.push("/booking")
+                      : displayRazorpay();
+                  }}
+                  disabled={error.length > 0}
+                  classes="w-full"
+                />
+                {error.length > 0 && (
+                  <p className="text-red-500 text-sm">*{error}</p>
+                )}
+              </div>
+            </div>
+          </section> */}
         </div>
       )}
       {loading && (
