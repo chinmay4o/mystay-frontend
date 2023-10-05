@@ -9,7 +9,7 @@ const AdultBar = ({
   setRooms,
 }) => {
   const handleDecreaseAdult = (index) => {
-    if (roomAdults[index] > 2) {
+    if (roomAdults[index] > 1) {
       setAdults(adults - 1);
       const newRoomAdults = [...roomAdults];
       newRoomAdults[index] = newRoomAdults[index] - 1;

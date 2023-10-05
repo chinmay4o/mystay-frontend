@@ -141,14 +141,14 @@ const MobileComponent = ({ userData }) => {
               Coworking
             </a>
           </div> */}
-        <div
+        {/* <div
           className="hover:text-primary cursor-pointer"
           style={{ cursor: "pointer" }}
           onClick={() => history.push(`/aboutus`)}
         >
           {" "}
           <a>About Us</a>
-        </div>
+        </div> */}
         {!userData && (
           <div
             className="hover:text-primary cursor-pointer"
@@ -163,7 +163,7 @@ const MobileComponent = ({ userData }) => {
               className="hover:text-primary cursor-pointer"
               onClick={() => history.push("/bookings")}
             >
-              User Bookings
+              Manage Bookings
             </div>
             <div
               className="hover:text-primary cursor-pointer"

@@ -22,7 +22,7 @@ import React from "react";
 import UserBooking from "./Screens/UserBooking";
 import Profile from "./Screens/Profile";
 import RefundScreen from "./Screens/RefundScreen";
-import SingleBooking from "./Screens/SingleBooking";
+import SingleBooking from "./Screens/SingleUserBooking";
 
 function App() {
   return (
@@ -37,9 +37,9 @@ function App() {
                     <HomeScreen />
                   </Route>
 
-                  <Route path="/aboutus">
+                  {/* <Route path="/aboutus">
                     <Aboutus />
-                  </Route>
+                  </Route> */}
 
                   <Route path="/hotels">
                     <HotelsCityScreen />

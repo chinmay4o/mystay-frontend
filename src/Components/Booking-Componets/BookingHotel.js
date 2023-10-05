@@ -119,33 +119,9 @@ const BookingHotel = () => {
 
       setBookingDetails({ ...bookingDetails, bookingDetails: [...b1] });
     } else {
-      // const rooms = JSON.parse(localStorage.getItem("roomConfig"));
-      // if (rooms && rooms.length > 0) {
-      //   setSelectedRooms(rooms);
-      // } else {
       console.log(history.goBack());
-      // }
     }
   }, []);
-  // let b1 = selectedRooms.map((ele, id) => {
-  //   let n = rooms.length;
-  //   let total = 0;
-  //   for (let i = 0; i < n; i++) {
-  //     total += rooms[i] > 2 ? rooms[i] - 2 : 0;
-  //   }
-
-  //   return {
-  //     roomId: ele.roomId,
-  //     hotelId: ele.hotelId,
-  //     bookingNoOfRoom: n,
-  //     checkIn: JSON.stringify(checkInDate).slice(1, 23),
-  //     // checkIn: new Date(localStorage.getItem("checkIn")),
-  //     checkOut: JSON.stringify(checkOutDate).slice(1, 23),
-  //     // checkOut: new Date(localStorage.getItem("checkOut")),
-  //     night: diffDays,
-  //     extra: total,
-  //   };
-  // });
 
   //main object to pass in Backend
 
@@ -207,6 +183,7 @@ const BookingHotel = () => {
           "https://ik.imagekit.io/k3m4pqzpmlr/coupons/1880-moon-outline_TBPed9a84.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1640773110779",
         order_id: dataR.message.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         handler: async function (response) {
+          setLoading(true);
           const data = await fetch(
             `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/roomBook`,
             {
@@ -259,6 +236,7 @@ const BookingHotel = () => {
       paymentObject.on("payment.failed", async function (response) {
         console.log(response);
         console.log(dataR.message.amount);
+        setLoading(true);
         const data = await fetch(
           `${process.env.REACT_APP_SERVER_URL}/api/v1/anonymous/payment/failure`,
           {
@@ -406,7 +384,7 @@ const BookingHotel = () => {
                     />
                   </div>
                 </div>
-                <div className="flex sm:items-center mt-4 flex-col sm:flex-row sm:gap-5 w-full">
+                <div className="flex sm:items-center mt-4 flex-col sm:flex-row sm:gap-6 w-full">
                   <p className="font-semibold text-base p-4 flex items-center">
                     Address{" "}
                   </p>{" "}
@@ -591,7 +569,7 @@ const BookingHotel = () => {
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-2 items-center justify-center">
+                <div className="flex flex-col w-full gap-2 items-center justify-center">
                   <PrimaryButton
                     text="Book Now"
                     onClick={() => {
@@ -601,6 +579,7 @@ const BookingHotel = () => {
                         : displayRazorpay();
                     }}
                     disabled={error.length > 0}
+                    classes="w-full"
                   />
                   {error.length > 0 && (
                     <p className="text-red-500 text-sm">*{error}</p>

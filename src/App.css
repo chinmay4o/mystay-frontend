@@ -15,12 +15,12 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 /* ========== navbar =========== */
 body {
-  font-family: "Montserrat";
+  font-family: "Inter";
   overflow-x: hidden;
 }
 
@@ -353,4 +353,8 @@ body {
     color: white;
     background-color: #808080;
     opacity: 1 !important;
+  }
+
+  .react-daterange-picker__inputGroup__month:disabled{
+    opacity: 1;
   }

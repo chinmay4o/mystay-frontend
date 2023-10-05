@@ -31,11 +31,11 @@ const Map = ({ lat = 18.9885983229874, lang = 72.82971196711472, address }) => {
   }, []);
 
   return (
-    <section className="" id="map">
+    <section className="w-[96%] md:w-[96%] xl:w-[1280px] mx-auto" id="map">
       <section className="max-w-screen-xl w-full mx-auto px-4 my-4">
-        <h2 className="font-bold text-2xl mb-4">Locate Us</h2>
-        <div className="flex flex-col sm:flex-row">
+        <div className="flex flex-col sm:flex-row items-center">
           <div className="w-full sm:w-1/2 sm:mr-4">
+            <h2 className="font-bold text-2xl mb-6">Locate Us</h2>
             <span className="font-medium text-text text-sm whitespace-pre-line">
               <strong>Address:</strong>
               <br />
@@ -50,7 +50,7 @@ const Map = ({ lat = 18.9885983229874, lang = 72.82971196711472, address }) => {
               </a>
             </span>
 
-            <section className="mt-4 whitespace-pre-line">
+            <div className="mt-4 whitespace-pre-line">
               <header className="p-4 border bg-light border-gray-200 rounded-lg sm:text-lg font-semibold w-96 flex items-center justify-between">
                 Directions
                 <button className="text-text leading-none focus:outline-none">
@@ -70,7 +70,7 @@ const Map = ({ lat = 18.9885983229874, lang = 72.82971196711472, address }) => {
                   </svg>
                 </button>
               </header>
-            </section>
+            </div>
             <a
               className="border border-gray-200 w-96 font-semibold bg-white py-2 px-4 mt-4 rounded-lg flex gap-2 text-primary items-center"
               href="https://www.google.com/maps/dir/?api=1&amp;destination=9.500365966939258,76.31649485652318"

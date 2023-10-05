@@ -103,7 +103,7 @@ const SingleHotel = () => {
 
   useEffect(() => {
     if (dates) {
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
       if (dates[0] !== new Date(checkIn) || dates[1] !== new Date(checkOut)) {
         const checkInDate = new Date(
           new Date(dates[0]).getTime() + 5.5 * 60 * 60 * 1000
@@ -237,7 +237,7 @@ const SingleHotel = () => {
         </div>
 
         <div className="w-[96%] xl:w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 py-6 px-4">
-          <div className="flex flex-col gap-6 lg:w-7/12">
+          <div className="flex flex-col gap-2 lg:w-7/12">
             <p className="text-2xl font-bold text-primary">
               {singleHotel.data.hotels[0].hotelName}
             </p>

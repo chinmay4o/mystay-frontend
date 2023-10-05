@@ -14,10 +14,10 @@ const SingleHotel = ({
   const history = useHistory();
   return (
     <div
-      className=" flex flex-col md:flex-row gap-6 w-full md:w-4/6 lg:w-1/2"
+      className=" flex flex-col md:flex-row gap-6 w-full md:w-4/6 mx-auto"
       key={key}
     >
-      <div className="bg-cover rounded-xl h-[270px] xl:h-96 lg:h-[420px] w-full md:w-1/2">
+      <div className="bg-cover rounded-xl h-[270px] lg:h-96  w-full md:w-1/2 lg:w-3/4 md:max-w-[672px]">
         {ele?.images ? (
           <img
             src={ele.images[0]}
@@ -29,7 +29,7 @@ const SingleHotel = ({
         )}
       </div>
 
-      <div className="md:w-1/2">
+      <div className="md:w-1/2 my-auto">
         {/* <p className="text-lg mb-4 font-bold text-[#6d6d6d]">
           Mystay Townhouse
         </p> */}
@@ -41,7 +41,7 @@ const SingleHotel = ({
 
         {ele?.description ? (
           <p className="text-base mb-4 font-semibold text-[#6d6d6d]">
-            {ele.description.slice(0, 180)}...
+            {ele.description.slice(0, 120)}...
           </p>
         ) : (
           <Skeleton count={3} />

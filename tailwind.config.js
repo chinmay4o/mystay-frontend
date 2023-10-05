@@ -17,7 +17,6 @@ module.exports = {
         xl: "1440px",
       },
       fontFamily: {
-        sans: ["Montserrat", "Open-Sans", "sans-serif"],
         inter: ["Inter", "sans-serif"],
       },
     },

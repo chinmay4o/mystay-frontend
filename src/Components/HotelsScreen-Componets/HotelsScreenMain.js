@@ -68,7 +68,7 @@ const HotelsScreenMain = () => {
   } else {
     return (
       <>
-        <div className="h-screen w-screen relative">
+        <div className="h-[calc(100vh-64px)] w-screen relative">
           {allSearchedHotels?.data?.city?.image ? (
             <img
               src={allSearchedHotels.data.city.image}
